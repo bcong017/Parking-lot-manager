@@ -23,6 +23,7 @@ namespace QLBaiDoXe
         public ThemThe()
         {
             InitializeComponent();
+            CardID.Focus();
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
