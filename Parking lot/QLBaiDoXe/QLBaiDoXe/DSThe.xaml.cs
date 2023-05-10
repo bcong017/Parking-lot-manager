@@ -35,6 +35,11 @@ namespace QLBaiDoXe
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+            if (ListThe.Items.Count == 0)
+            {
+                MessageBox.Show("Danh sách thẻ rỗng!");
+                return;
+            }    
             if (ListThe.SelectedItems == null)
             {
                 MessageBox.Show("Hãy chọn thẻ cần xóa!");

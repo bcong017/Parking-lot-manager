@@ -35,7 +35,7 @@ namespace QLBaiDoXe
                     Staffing.AddAdminInfo(txbName.Text, txbCivilID.Text, txbPhoneNumb.Text, txbAddress.Text, DateTime.Parse(mintime), txbAccName.Text, txbPassword.Text);
                 else
                     Staffing.AddAdminInfo(txbName.Text, txbCivilID.Text, txbPhoneNumb.Text, txbAddress.Text, DateTime.Parse(DatePicker.Text), txbAccName.Text, txbPassword.Text);
-                MessageBox.Show("Thêm quản trị viên thành công!");
+                
             }
             else
             {
@@ -43,7 +43,7 @@ namespace QLBaiDoXe
                     Staffing.AddStaffInfo(txbName.Text, txbCivilID.Text, txbPhoneNumb.Text, txbAddress.Text, DateTime.Parse(mintime), txbAccName.Text, txbPassword.Text);
                 else
                     Staffing.AddStaffInfo(txbName.Text, txbCivilID.Text, txbPhoneNumb.Text, txbAddress.Text, DateTime.Parse(DatePicker.Text), txbAccName.Text, txbPassword.Text);
-                MessageBox.Show("Thêm nhân viên thành công!");
+                
             }
         }
 

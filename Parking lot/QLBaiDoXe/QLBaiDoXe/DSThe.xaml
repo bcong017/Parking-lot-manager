@@ -15,6 +15,7 @@
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Mã thẻ" DisplayMemberBinding="{Binding ParkingCardID}"/>
+                        <GridViewColumn Header="Loại thẻ" DisplayMemberBinding="{Binding CardType}"/>
                         <GridViewColumn Header="Tình trạng" DisplayMemberBinding="{Binding CardState}"/>
                     </GridView>
                 </ListView.View>

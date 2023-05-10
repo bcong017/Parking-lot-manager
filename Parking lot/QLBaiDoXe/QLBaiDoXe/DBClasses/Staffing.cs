@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -55,22 +56,22 @@ namespace QLBaiDoXe.DBClasses
             role.Staffs.Add(newStaff);
             DataProvider.Ins.DB.SaveChanges();
 
-            Staff admin = DataProvider.Ins.DB.Staffs.FirstOrDefault(x => x.CivilID == civilId);
+            Staff staff = DataProvider.Ins.DB.Staffs.FirstOrDefault(x => x.CivilID == civilId);
             SHA256 sha256hash = SHA256.Create();
             string passwordhash = GetHash(sha256hash, password);
-            Account adminAccount = new Account()
+            Account staffAccount = new Account()
             {
                 AccountName = accname,
                 AccountPassword = passwordhash,
                 RoleID = 1,
-                StaffID = admin.StaffID,
-                Staff = admin,
+                StaffID = staff.StaffID,
+                Staff = staff,
                 Role = DataProvider.Ins.DB.Roles.FirstOrDefault(x => x.RoleID == 1)
             };
-            //admin.Accounts.Add(adminAccount);
-            //role.Accounts.Add(adminAccount);
-            DataProvider.Ins.DB.Accounts.Add(adminAccount);
+
+            DataProvider.Ins.DB.Accounts.Add(staffAccount);
             DataProvider.Ins.DB.SaveChanges();
+            MessageBox.Show("Thêm nhân viên thành công!");
         }
 
         public static void AddAdminInfo(string name, string civilId, string phoneNumber, string address, DateTime dob, string accname, string password)
@@ -115,10 +116,10 @@ namespace QLBaiDoXe.DBClasses
                 Staff = admin,
                 Role = DataProvider.Ins.DB.Roles.FirstOrDefault(x => x.RoleID == 2)
             };
-            //admin.Accounts.Add(adminAccount);
-            //role.Accounts.Add(adminAccount);
+
             DataProvider.Ins.DB.Accounts.Add(adminAccount);
             DataProvider.Ins.DB.SaveChanges();
+            MessageBox.Show("Thêm quản trị viên thành công!");
         }
 
         public static void ChangeStaffInfo(int staffId, string staffNewName, string civilId, string role, string phoneNumber, string address, DateTime dob, string accname, string password)
@@ -286,7 +287,26 @@ namespace QLBaiDoXe.DBClasses
         {
             return DataProvider.Ins.DB.Timekeeps.Where(x => x.LoginTime.Month == month).ToList();
         }
-
+        public static List<Timekeep> GetTimekeepForDate(DateTime sdate, DateTime edate)
+        {
+            return DataProvider.Ins.DB.Timekeeps.Where(x => x.LoginTime >= sdate && x.LogoutTime <= edate).ToList();
+        }
+        public static List<Timekeep> GetTimekeepForStartDate( DateTime sdate)
+        {
+             return DataProvider.Ins.DB.Timekeeps.Where(x => x.LoginTime >= sdate).ToList();
+        }
+        public static List<Timekeep> GetTimekeepForStartDateAndName(string name, DateTime sdate)
+        {
+            return DataProvider.Ins.DB.Timekeeps.Where(x => x.Staff.StaffName.Contains(name) && x.LoginTime >= sdate).ToList();
+        }
+        public static List<Timekeep> GetTimekeepForEndDate(DateTime edate)
+        {
+            return DataProvider.Ins.DB.Timekeeps.Where(x => x.LogoutTime <= edate).ToList();
+        }
+        public static List<Timekeep> GetTimekeepForEndDateAndName(string name, DateTime edate)
+        {
+            return DataProvider.Ins.DB.Timekeeps.Where(x => x.Staff.StaffName.Contains(name) && x.LogoutTime <= edate).ToList();
+        }
         public static List<Timekeep> GetTimekeepForStaff(string name)
         {
             return DataProvider.Ins.DB.Timekeeps.Where(x => x.Staff.StaffName.Contains(name)).ToList();

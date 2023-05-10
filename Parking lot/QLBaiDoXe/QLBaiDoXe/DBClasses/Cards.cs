@@ -9,13 +9,14 @@ namespace QLBaiDoXe.DBClasses
 {
     public class Cards
     {
-        public static bool AddCard(long cardId)
+        public static bool AddCard(long cardId, int cardtype)
         {
             if (!DataProvider.Ins.DB.ParkingCards.Any(x => x.ParkingCardID == cardId))
             {
                 ParkingCard card = new ParkingCard()
                 {
                     ParkingCardID = cardId,
+                    CardType = cardtype,
                     CardState = 0
                 };
                 DataProvider.Ins.DB.ParkingCards.Add(card);

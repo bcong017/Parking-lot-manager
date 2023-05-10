@@ -28,6 +28,10 @@ namespace QLBaiDoXe
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
+            int type = 0;
+            if (TypeCbx.SelectedIndex == 1)
+                type= 1;
+            
             if (CardID.Text.Length == 10)
             {
                 long temp = long.Parse(CardID.Text);
@@ -36,7 +40,7 @@ namespace QLBaiDoXe
                 }
                 else
                 {
-                    DBClasses.Cards.AddCard(long.Parse(CardID.Text));
+                    DBClasses.Cards.AddCard(long.Parse(CardID.Text),type);
                     MessageBox.Show("Thêm thẻ thành công");
                     CardID.Clear();
                 }

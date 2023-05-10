@@ -21,6 +21,7 @@ namespace QLBaiDoXe.ParkingLotModel
         }
     
         public long ParkingCardID { get; set; }
+        public int CardType { get; set; }
         public int CardState { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

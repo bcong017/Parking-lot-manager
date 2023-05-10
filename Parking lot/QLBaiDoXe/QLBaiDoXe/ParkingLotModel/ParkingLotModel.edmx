@@ -28,6 +28,7 @@
             <PropertyRef Name="ParkingCardID" />
           </Key>
           <Property Name="ParkingCardID" Type="bigint" Nullable="false" />
+          <Property Name="CardType" Type="int" Nullable="false" />
           <Property Name="CardState" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Receipts">
@@ -275,6 +276,7 @@
             <PropertyRef Name="ParkingCardID" />
           </Key>
           <Property Name="ParkingCardID" Type="Int64" Nullable="false" />
+          <Property Name="CardType" Type="Int32" Nullable="false" />
           <Property Name="CardState" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Vehicles" Relationship="Self.Vehicles_CardID_FK" FromRole="ParkingCards" ToRole="Vehicles" />
         </EntityType>
@@ -536,6 +538,7 @@
             <EntityTypeMapping TypeName="ParkingLotModel.ParkingCard">
               <MappingFragment StoreEntitySet="ParkingCards">
                 <ScalarProperty Name="ParkingCardID" ColumnName="ParkingCardID" />
+                <ScalarProperty Name="CardType" ColumnName="CardType" />
                 <ScalarProperty Name="CardState" ColumnName="CardState" />
               </MappingFragment>
             </EntityTypeMapping>

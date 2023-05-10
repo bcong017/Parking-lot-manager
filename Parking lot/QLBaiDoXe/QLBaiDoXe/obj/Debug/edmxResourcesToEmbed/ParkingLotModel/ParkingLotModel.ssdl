@@ -23,6 +23,7 @@
       <PropertyRef Name="ParkingCardID" />
     </Key>
     <Property Name="ParkingCardID" Type="bigint" Nullable="false" />
+    <Property Name="CardType" Type="int" Nullable="false" />
     <Property Name="CardState" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Receipts">

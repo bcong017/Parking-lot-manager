@@ -25,6 +25,7 @@
       <EntityTypeMapping TypeName="ParkingLotModel.ParkingCard">
         <MappingFragment StoreEntitySet="ParkingCards">
           <ScalarProperty Name="ParkingCardID" ColumnName="ParkingCardID" />
+          <ScalarProperty Name="CardType" ColumnName="CardType" />
           <ScalarProperty Name="CardState" ColumnName="CardState" />
         </MappingFragment>
       </EntityTypeMapping>

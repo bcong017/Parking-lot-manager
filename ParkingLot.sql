@@ -20,6 +20,7 @@ CREATE TABLE Vehicles (
 
 CREATE TABLE ParkingCards (
 	ParkingCardID	bigint PRIMARY KEY,
+	CardType		int not null, -- 0: Vang lai, 1: Thang
 	CardState		int not null -- 1: Used, 0: Unused --
 );
 
@@ -68,6 +69,7 @@ CREATE TABLE FinancialReports (
 	Income					int not null
 );
 
+SET DATEFORMAT dmy;
 ALTER TABLE Vehicles ADD CONSTRAINT Vehicles_VehicleTypeID_FK FOREIGN KEY (VehicleTypeID) REFERENCES VehicleTypes(VehicleTypeID);
 ALTER TABLE Vehicles ADD CONSTRAINT Vehicles_CardID_FK FOREIGN KEY (ParkingCardID) REFERENCES ParkingCards(ParkingCardID);
 ALTER TABLE Receipts ADD CONSTRAINT Receipts_VehicleID_FK FOREIGN KEY (VehicleID) REFERENCES Vehicles(VehicleID);
