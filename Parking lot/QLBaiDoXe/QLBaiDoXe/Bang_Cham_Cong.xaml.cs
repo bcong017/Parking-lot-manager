@@ -1,7 +1,6 @@
 ﻿using QLBaiDoXe.DBClasses;
 using QLBaiDoXe.ViewModel;
 using System;
-using System.Runtime.InteropServices.ComTypes;
 using System.Windows.Controls;
 
 namespace QLBaiDoXe

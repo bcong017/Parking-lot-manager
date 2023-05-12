@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using QLBaiDoXe.ParkingLotModel;
 
 namespace QLBaiDoXe
@@ -31,7 +21,6 @@ namespace QLBaiDoXe
             int type = 0;
             if (TypeCbx.SelectedIndex == 1)
                 type= 1;
-            
             if (CardID.Text.Length == 10)
             {
                 long temp = long.Parse(CardID.Text);

@@ -3,13 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
-using System.Web;
 using System.Windows;
-using System.Xml.Linq;
 
 namespace QLBaiDoXe.DBClasses
 {
@@ -68,7 +64,6 @@ namespace QLBaiDoXe.DBClasses
                 Staff = staff,
                 Role = DataProvider.Ins.DB.Roles.FirstOrDefault(x => x.RoleID == 1)
             };
-
             DataProvider.Ins.DB.Accounts.Add(staffAccount);
             DataProvider.Ins.DB.SaveChanges();
             MessageBox.Show("Thêm nhân viên thành công!");
@@ -116,7 +111,6 @@ namespace QLBaiDoXe.DBClasses
                 Staff = admin,
                 Role = DataProvider.Ins.DB.Roles.FirstOrDefault(x => x.RoleID == 2)
             };
-
             DataProvider.Ins.DB.Accounts.Add(adminAccount);
             DataProvider.Ins.DB.SaveChanges();
             MessageBox.Show("Thêm quản trị viên thành công!");
@@ -165,11 +159,8 @@ namespace QLBaiDoXe.DBClasses
             {
                 Account account = DataProvider.Ins.DB.Accounts.FirstOrDefault(x => x.Staff.StaffID == staffId);
                 DataProvider.Ins.DB.Accounts.Remove(account);
-                //Timekeep timekeep = DataProvider.Ins.DB.Timekeeps.FirstOrDefault(x => x.StaffID == staffId);
-                //DataProvider.Ins.DB.Timekeeps.Remove(timekeep);
                 Staff staff = DataProvider.Ins.DB.Staffs.FirstOrDefault(x => x.StaffID == staffId);
                 DataProvider.Ins.DB.Staffs.Remove(staff);
-
                 DataProvider.Ins.DB.SaveChanges();
                 return true;
             }
