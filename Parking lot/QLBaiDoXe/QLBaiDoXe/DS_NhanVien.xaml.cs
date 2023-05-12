@@ -87,12 +87,18 @@ namespace QLBaiDoXe
         }
         private void btnDel_Click(object sender, RoutedEventArgs e)
         {
+            
             if (lvNhanVien.SelectedItem == null)
             {
                 MessageBox.Show("Hãy chọn thông tin nhân viên cần xóa!");
                 return;
             }
             var selectedItem = (dynamic)lvNhanVien.SelectedItems[0];
+            if (MainWindow.currentUser.StaffID == selectedItem.StaffID)
+            {
+                MessageBox.Show("Không thể xóa nhân viên đang sử dụng ứng dụng!");
+                return;
+            }    
             Staffing.DeleteStaff(selectedItem.StaffID);
             MessageBox.Show("Xóa nhân viên thành công!");
         }

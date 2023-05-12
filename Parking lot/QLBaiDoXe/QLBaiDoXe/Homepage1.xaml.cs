@@ -240,7 +240,7 @@ namespace QLBaiDoXe
                 }
                 else
                 {
-                    try
+                    //try
                     {
                         textBox2.Clear();
 
@@ -264,10 +264,10 @@ namespace QLBaiDoXe
                         VehicleOut_num.Text = DBClasses.ParkingVehicle.GetVehicleOutNumber(date).ToString();
                         VehicleParked_num.Text = DBClasses.ParkingVehicle.GetParkedVehicleNumber().ToString();
                     }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Phần mềm bị lỗi: " + ex.Message + " Vui lòng liên hệ nhân viên bảo trì để biết thêm chi tiết", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK, MessageBoxOptions.ServiceNotification);
-                    }
+                    //catch (Exception ex)
+                    //{
+                    //    MessageBox.Show("Phần mềm bị lỗi: " + ex.Message + " Vui lòng liên hệ nhân viên bảo trì để biết thêm chi tiết", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK, MessageBoxOptions.ServiceNotification);
+                    //}
                 }
             }
         }

@@ -76,6 +76,7 @@
         <TextBlock HorizontalAlignment="Left" Height="32" Margin="43,19,0,0" TextWrapping="Wrap" Text="F1 - Đổi loại xe làn vào" VerticalAlignment="Top" Width="233" FontSize="22" FontWeight="Medium"/>
         <TextBlock x:Name="AdminWindows" HorizontalAlignment="Left" Height="31.2" Margin="507.6,18.7,0,0" TextWrapping="Wrap" Foreground="black" Text="F2 - Màn hình quản lý" VerticalAlignment="Top" Width="232.867" FontSize="22" FontWeight="Medium"/>
         <Button
+          x:Name="LogoutBtn"
           Style="{StaticResource MaterialDesignFloatingActionLightButton}"
           ToolTip="MaterialDesignFloatingActionLightButton"
           IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Margin="0,616.2,1206.667,0" Height="Auto" Width="Auto" Click="Button_Click">
