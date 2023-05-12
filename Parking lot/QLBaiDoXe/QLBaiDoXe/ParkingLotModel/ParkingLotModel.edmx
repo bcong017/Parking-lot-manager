@@ -103,7 +103,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="Accounts_StaffID_FK">
-          <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Accounts" Type="Self.Accounts" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Staff">
@@ -127,7 +129,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="Receipts_StaffID_FK">
-          <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Receipts" Type="Self.Receipts" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Staff">
@@ -163,7 +167,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="Timekeeps_StaffID_FK">
-          <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Timekeeps" Type="Self.Timekeeps" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Staff">
@@ -366,7 +372,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="Accounts_StaffID_FK">
-          <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Accounts" Type="Self.Account" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Staff">
@@ -402,7 +410,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="Receipts_StaffID_FK">
-          <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Receipts" Type="Self.Receipt" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Staff">
@@ -438,7 +448,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="Timekeeps_StaffID_FK">
-          <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Timekeeps" Type="Self.Timekeep" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Staff">

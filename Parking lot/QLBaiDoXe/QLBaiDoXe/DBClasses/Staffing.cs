@@ -165,8 +165,11 @@ namespace QLBaiDoXe.DBClasses
             {
                 Account account = DataProvider.Ins.DB.Accounts.FirstOrDefault(x => x.Staff.StaffID == staffId);
                 DataProvider.Ins.DB.Accounts.Remove(account);
+                //Timekeep timekeep = DataProvider.Ins.DB.Timekeeps.FirstOrDefault(x => x.StaffID == staffId);
+                //DataProvider.Ins.DB.Timekeeps.Remove(timekeep);
                 Staff staff = DataProvider.Ins.DB.Staffs.FirstOrDefault(x => x.StaffID == staffId);
                 DataProvider.Ins.DB.Staffs.Remove(staff);
+
                 DataProvider.Ins.DB.SaveChanges();
                 return true;
             }

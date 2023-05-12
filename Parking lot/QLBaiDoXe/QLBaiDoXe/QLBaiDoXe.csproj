@@ -155,47 +155,47 @@
       <DependentUpon>GiaGuiXe.xaml</DependentUpon>
     </Compile>
     <Compile Include="ParkingLotModel\Account.cs">
-      <DependentUpon>ParkingLotModel.tt</DependentUpon>
+      <DependentUpon>ParkinglotModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ParkingLotModel\DataProvider.cs" />
     <Compile Include="ParkingLotModel\FinancialReport.cs">
-      <DependentUpon>ParkingLotModel.tt</DependentUpon>
+      <DependentUpon>ParkinglotModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ParkingLotModel\ParkingCard.cs">
-      <DependentUpon>ParkingLotModel.tt</DependentUpon>
+      <DependentUpon>ParkinglotModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ParkingLotModel\ParkingLotModel.Context.cs">
+    <Compile Include="ParkingLotModel\ParkinglotModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ParkingLotModel.Context.tt</DependentUpon>
+      <DependentUpon>ParkinglotModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="ParkingLotModel\ParkingLotModel.cs">
+    <Compile Include="ParkingLotModel\ParkinglotModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ParkingLotModel.tt</DependentUpon>
+      <DependentUpon>ParkinglotModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ParkingLotModel\ParkingLotModel.Designer.cs">
+    <Compile Include="ParkingLotModel\ParkinglotModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ParkingLotModel.edmx</DependentUpon>
+      <DependentUpon>ParkinglotModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="ParkingLotModel\Receipt.cs">
-      <DependentUpon>ParkingLotModel.tt</DependentUpon>
+      <DependentUpon>ParkinglotModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ParkingLotModel\Role.cs">
-      <DependentUpon>ParkingLotModel.tt</DependentUpon>
+      <DependentUpon>ParkinglotModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ParkingLotModel\Staff.cs">
-      <DependentUpon>ParkingLotModel.tt</DependentUpon>
+      <DependentUpon>ParkinglotModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ParkingLotModel\Timekeep.cs">
-      <DependentUpon>ParkingLotModel.tt</DependentUpon>
+      <DependentUpon>ParkinglotModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ParkingLotModel\Vehicle.cs">
-      <DependentUpon>ParkingLotModel.tt</DependentUpon>
+      <DependentUpon>ParkinglotModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ParkingLotModel\VehicleType.cs">
-      <DependentUpon>ParkingLotModel.tt</DependentUpon>
+      <DependentUpon>ParkinglotModel.tt</DependentUpon>
     </Compile>
     <Compile Include="SuaNhanVien.xaml.cs">
       <DependentUpon>SuaNhanVien.xaml</DependentUpon>
@@ -321,12 +321,12 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
-    <EntityDeploy Include="ParkingLotModel\ParkingLotModel.edmx">
+    <EntityDeploy Include="ParkingLotModel\ParkinglotModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ParkingLotModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>ParkinglotModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="ParkingLotModel\ParkingLotModel.edmx.diagram">
-      <DependentUpon>ParkingLotModel.edmx</DependentUpon>
+    <None Include="ParkingLotModel\ParkinglotModel.edmx.diagram">
+      <DependentUpon>ParkinglotModel.edmx</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -367,15 +367,15 @@
     <Content Include="AForge lib\AForge.dll" />
     <Content Include="AForge lib\AForge.Video.DirectShow.dll" />
     <Content Include="AForge lib\AForge.Video.dll" />
-    <Content Include="ParkingLotModel\ParkingLotModel.Context.tt">
+    <Content Include="ParkingLotModel\ParkinglotModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ParkingLotModel.edmx</DependentUpon>
-      <LastGenOutput>ParkingLotModel.Context.cs</LastGenOutput>
+      <DependentUpon>ParkinglotModel.edmx</DependentUpon>
+      <LastGenOutput>ParkinglotModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="ParkingLotModel\ParkingLotModel.tt">
+    <Content Include="ParkingLotModel\ParkinglotModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ParkingLotModel.edmx</DependentUpon>
-      <LastGenOutput>ParkingLotModel.cs</LastGenOutput>
+      <DependentUpon>ParkinglotModel.edmx</DependentUpon>
+      <LastGenOutput>ParkinglotModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
