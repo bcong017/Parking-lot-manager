@@ -25,7 +25,7 @@ namespace QLBaiDoXe
     /// </summary>
     public partial class DS_NhanVien : UserControl
     {
-        
+        private bool checkfocus = false;
         public DS_NhanVien()
         {
             InitializeComponent();
@@ -98,9 +98,14 @@ namespace QLBaiDoXe
             {
                 MessageBox.Show("Không thể xóa nhân viên đang sử dụng ứng dụng!");
                 return;
+            }
+            if (MessageBox.Show("Bạn có muốn xóa nhân viên đã chọn?", "Xác nhận", MessageBoxButton.YesNo) == MessageBoxResult.No)
+            {
+                return;
             }    
             Staffing.DeleteStaff(selectedItem.StaffID);
             MessageBox.Show("Xóa nhân viên thành công!");
+            lvNhanVien.ItemsSource = Staffing.GetAllStaff();
         }
     }
 }
