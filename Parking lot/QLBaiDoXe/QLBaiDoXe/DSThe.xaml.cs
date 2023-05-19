@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using QLBaiDoXe.DBClasses;
+using QLBaiDoXe.ParkingLotModel;
 
 namespace QLBaiDoXe
 {
@@ -35,9 +36,16 @@ namespace QLBaiDoXe
             }
             else
             {
+                
+
                 if (MessageBox.Show("Bạn có muốn xóa thẻ đã chọn?", "Xác nhận", MessageBoxButton.YesNo) == MessageBoxResult.No)
                     return;
                 var selectedItems = (dynamic)ListThe.SelectedItems[0];
+                if ( Cards.CheckCardState((long)selectedItems.ParkingCardID) == 1)
+                {
+                    MessageBox.Show("Thẻ đang được sử dụng");
+                    return;
+                }
                 Cards.DeleteCard((long)selectedItems.ParkingCardID);
                 MessageBox.Show("Đã xóa thẻ thành công!");
                 ListThe.ItemsSource = null;

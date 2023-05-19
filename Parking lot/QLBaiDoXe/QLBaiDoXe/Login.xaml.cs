@@ -23,7 +23,7 @@ namespace QLBaiDoXe
             Debug.WriteLine("last log in date: " + Settings.Default.currentDate.ToString());
             if (DateTime.Now.Month != Settings.Default.currentDate.Month)
             {
-                Finance.CreateFinancialReport();
+                //Finance.CreateFinancialReport();
                 Settings.Default.todayVehicleIn = Settings.Default.todayVehicleOut = 0;
             }
             Settings.Default.currentDate = DateTime.Now;

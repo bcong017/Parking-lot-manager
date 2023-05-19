@@ -15,22 +15,15 @@ CREATE TABLE Vehicles (
 	TimeStartedParking	datetime2 not null, 
 	TimeEndedParking	datetime2,
 	VehicleState		int not null, -- 1: Parked, 0: Unparked --
-	VehicleImage		nvarchar(max) not null -- the path to the vehicle's image --
+	VehicleImage		nvarchar(max) not null, -- the path to the vehicle's image --
+	Fee					int not null,
+	StaffID				int
 );
 
 CREATE TABLE ParkingCards (
 	ParkingCardID	bigint PRIMARY KEY,
 	CardType		int not null, -- 0: Vang lai, 1: Thang
 	CardState		int not null -- 1: Used, 0: Unused --
-);
-
-CREATE TABLE Receipts (
-	ReceiptID	int IDENTITY (1, 1) PRIMARY KEY,
-	VehicleID	int not null,
-	FinancialReportID int not null,
-	StaffID		int not null,
-	TimePaid	datetime2 not null,
-	ParkingFee	int not null
 );
 
 CREATE TABLE Accounts (
@@ -63,18 +56,9 @@ CREATE TABLE Timekeeps (
 	LogoutTime datetime2
 );
 
-CREATE TABLE FinancialReports (
-	FinancialReportID		int IDENTITY (1, 1) PRIMARY KEY,
-	FinancialReportDate		datetime2 not null,
-	Income					int not null
-);
-
 SET DATEFORMAT dmy;
 ALTER TABLE Vehicles ADD CONSTRAINT Vehicles_VehicleTypeID_FK FOREIGN KEY (VehicleTypeID) REFERENCES VehicleTypes(VehicleTypeID);
-ALTER TABLE Vehicles ADD CONSTRAINT Vehicles_CardID_FK FOREIGN KEY (ParkingCardID) REFERENCES ParkingCards(ParkingCardID);
-ALTER TABLE Receipts ADD CONSTRAINT Receipts_VehicleID_FK FOREIGN KEY (VehicleID) REFERENCES Vehicles(VehicleID);
-ALTER TABLE Receipts ADD CONSTRAINT Receipts_StaffID_FK FOREIGN KEY (StaffID) REFERENCES Staff(StaffID) ON DELETE CASCADE;
-ALTER TABLE Receipts ADD CONSTRAINT Receipts_FinancialReportID_FK FOREIGN KEY (FinancialReportID) REFERENCES FinancialReports(FinancialReportID);
+ALTER TABLE Vehicles ADD CONSTRAINT Vehicles_StaffID_FK FOREIGN KEY (StaffID) REFERENCES Staff(StaffID);
 ALTER TABLE Timekeeps ADD CONSTRAINT Timekeeps_StaffID_FK FOREIGN KEY (StaffID) REFERENCES Staff(StaffID) ON DELETE CASCADE;
 ALTER TABLE Accounts ADD CONSTRAINT Accounts_StaffID_FK FOREIGN KEY (StaffID) REFERENCES Staff(StaffID) ON DELETE CASCADE;
 ALTER TABLE Accounts ADD CONSTRAINT Accounts_RoleID_FK FOREIGN KEY (RoleID) REFERENCES Roles(RoleID);

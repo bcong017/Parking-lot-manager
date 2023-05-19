@@ -26,9 +26,7 @@ namespace QLBaiDoXe.ParkingLotModel
         }
     
         public virtual DbSet<Account> Accounts { get; set; }
-        public virtual DbSet<FinancialReport> FinancialReports { get; set; }
         public virtual DbSet<ParkingCard> ParkingCards { get; set; }
-        public virtual DbSet<Receipt> Receipts { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Staff> Staffs { get; set; }
         public virtual DbSet<Timekeep> Timekeeps { get; set; }

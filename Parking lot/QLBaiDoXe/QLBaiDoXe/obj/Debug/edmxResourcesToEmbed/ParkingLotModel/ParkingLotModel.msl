@@ -12,33 +12,12 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="FinancialReports">
-      <EntityTypeMapping TypeName="ParkingLotModel.FinancialReport">
-        <MappingFragment StoreEntitySet="FinancialReports">
-          <ScalarProperty Name="FinancialReportID" ColumnName="FinancialReportID" />
-          <ScalarProperty Name="FinancialReportDate" ColumnName="FinancialReportDate" />
-          <ScalarProperty Name="Income" ColumnName="Income" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="ParkingCards">
       <EntityTypeMapping TypeName="ParkingLotModel.ParkingCard">
         <MappingFragment StoreEntitySet="ParkingCards">
           <ScalarProperty Name="ParkingCardID" ColumnName="ParkingCardID" />
           <ScalarProperty Name="CardType" ColumnName="CardType" />
           <ScalarProperty Name="CardState" ColumnName="CardState" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Receipts">
-      <EntityTypeMapping TypeName="ParkingLotModel.Receipt">
-        <MappingFragment StoreEntitySet="Receipts">
-          <ScalarProperty Name="ReceiptID" ColumnName="ReceiptID" />
-          <ScalarProperty Name="VehicleID" ColumnName="VehicleID" />
-          <ScalarProperty Name="FinancialReportID" ColumnName="FinancialReportID" />
-          <ScalarProperty Name="StaffID" ColumnName="StaffID" />
-          <ScalarProperty Name="TimePaid" ColumnName="TimePaid" />
-          <ScalarProperty Name="ParkingFee" ColumnName="ParkingFee" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -83,6 +62,8 @@
           <ScalarProperty Name="TimeEndedParking" ColumnName="TimeEndedParking" />
           <ScalarProperty Name="VehicleState" ColumnName="VehicleState" />
           <ScalarProperty Name="VehicleImage" ColumnName="VehicleImage" />
+          <ScalarProperty Name="Fee" ColumnName="Fee" />
+          <ScalarProperty Name="StaffID" ColumnName="StaffID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -145,7 +145,6 @@
     <Compile Include="Classes\BitmapImageConvert.cs" />
     <Compile Include="DBClasses\Staffing.cs" />
     <Compile Include="DBClasses\Cards.cs" />
-    <Compile Include="DBClasses\Finance.cs" />
     <Compile Include="DBClasses\ParkingVehicle.cs" />
     <Compile Include="DBClasses\Regulation.cs" />
     <Compile Include="DSThe.xaml.cs">
@@ -158,9 +157,6 @@
       <DependentUpon>ParkinglotModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ParkingLotModel\DataProvider.cs" />
-    <Compile Include="ParkingLotModel\FinancialReport.cs">
-      <DependentUpon>ParkinglotModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="ParkingLotModel\ParkingCard.cs">
       <DependentUpon>ParkinglotModel.tt</DependentUpon>
     </Compile>
@@ -178,9 +174,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ParkinglotModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="ParkingLotModel\Receipt.cs">
-      <DependentUpon>ParkinglotModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ParkingLotModel\Role.cs">
       <DependentUpon>ParkinglotModel.tt</DependentUpon>

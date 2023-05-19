@@ -18,8 +18,8 @@ namespace QLBaiDoXe.ParkingLotModel
         public Staff()
         {
             this.Accounts = new HashSet<Account>();
-            this.Receipts = new HashSet<Receipt>();
             this.Timekeeps = new HashSet<Timekeep>();
+            this.Vehicles = new HashSet<Vehicle>();
         }
     
         public int StaffID { get; set; }
@@ -32,10 +32,10 @@ namespace QLBaiDoXe.ParkingLotModel
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Account> Accounts { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Receipt> Receipts { get; set; }
         public virtual Role Role { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Timekeep> Timekeeps { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Vehicle> Vehicles { get; set; }
     }
 }

@@ -14,17 +14,8 @@ namespace QLBaiDoXe.ParkingLotModel
     
     public partial class ParkingCard
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ParkingCard()
-        {
-            this.Vehicles = new HashSet<Vehicle>();
-        }
-    
         public long ParkingCardID { get; set; }
         public int CardType { get; set; }
         public int CardState { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Vehicle> Vehicles { get; set; }
     }
 }
