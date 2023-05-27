@@ -11,12 +11,39 @@
     <Grid Background="#80FFA03F">
         <Grid Margin="10,245,10,14.332">
             <Rectangle Fill="White" HorizontalAlignment="Left" Height="464.068" Margin="0.4,-3.4,0,0" VerticalAlignment="Top" Width="1012.6" RadiusX="20" RadiusY="20"/>
-            <ListView x:Name="ListThe" HorizontalAlignment="Left" Height="389.068" VerticalAlignment="Top" Width="1012.6" Margin="0.4,10,0,0">
+            <ListView x:Name="ListThe" 
+                      HorizontalAlignment="Stretch" 
+                      Height="406" 
+                      VerticalAlignment="Top" 
+                      Width="1012.6">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Mã thẻ" DisplayMemberBinding="{Binding ParkingCardID}"/>
-                        <GridViewColumn Header="Loại thẻ" DisplayMemberBinding="{Binding CardType}"/>
-                        <GridViewColumn Header="Tình trạng" DisplayMemberBinding="{Binding CardState}"/>
+                        <GridViewColumn Header="Mã thẻ">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding ParkingCardID}" HorizontalAlignment="Center" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Loại thẻ">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding CardType}" HorizontalAlignment="Center" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Tình trạng">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding CardState}" HorizontalAlignment="Center" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                     </GridView>
                 </ListView.View>
             </ListView>

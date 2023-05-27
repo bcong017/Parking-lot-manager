@@ -87,12 +87,39 @@
         </Grid>
         <Grid Margin="10,236,16.4,31.332">
             <Rectangle Fill="White" HorizontalAlignment="Left" Height="452.668" Margin="1.5,-9,-1.5,0" VerticalAlignment="Top" Width="1012.6" RadiusX="20" RadiusY="20"/>
-            <ListView x:Name="lvResult" HorizontalAlignment="Left" Height="427.6" Margin="10,0,0,0" VerticalAlignment="Top" Width="992.6">
+            <ListView x:Name="lvResult" 
+                      HorizontalAlignment="Stretch" 
+                      Height="427.6" 
+                      VerticalAlignment="Top" 
+                      Width="992.6">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Biển số" DisplayMemberBinding="{Binding VehicleID}"/>
-                        <GridViewColumn Header="Số thẻ" DisplayMemberBinding="{Binding ParkingCardID}"/>
-                        <GridViewColumn Header="Ngày vào bãi"  DisplayMemberBinding="{Binding TimeStartedParking}"/>
+                        <GridViewColumn Header="Biển số">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding VehicleID}" HorizontalAlignment="Center" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Số thẻ">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding ParkingCardID}" HorizontalAlignment="Center" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Ngày vào bãi">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding TimeStartedParking}" HorizontalAlignment="Center" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                     </GridView>
                 </ListView.View>
             </ListView>

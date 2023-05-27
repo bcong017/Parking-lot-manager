@@ -21,14 +21,49 @@
 
         </Grid>
         <Grid Margin="10,236,16.4,31.332">
-            <Rectangle Fill="White" HorizontalAlignment="Left" Height="452.668" Margin="1.5,-9,-1.5,0" VerticalAlignment="Top" Width="1012.6" RadiusX="20" RadiusY="20"/>
-            <ListView x:Name="TimekeepLV" HorizontalAlignment="Left" Height="431.068" VerticalAlignment="Top" Width="1012.6" Margin="1.5,0,-1.5,0" HorizontalContentAlignment="Center">
+            <Rectangle Fill="White" 
+                       Height="452.668" 
+                       VerticalAlignment="Top" Width="1012.6"/>
+            <ListView x:Name="TimekeepLV" 
+                      Height="452.668" VerticalAlignment="Top" 
+                      Width="1012.6" HorizontalAlignment="Stretch">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
                 <ListView.View>
+                    
                     <GridView>
-                        <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Staff.StaffID}"/>
-                        <GridViewColumn Header="Tên nhân viên" DisplayMemberBinding="{Binding Staff.StaffName}"/>
-                        <GridViewColumn Header="Giờ đăng nhập" DisplayMemberBinding="{Binding LoginTime}"/>
-                        <GridViewColumn Header="Giờ đăng xuất" DisplayMemberBinding="{Binding LogoutTime}"/>
+                        
+                        <GridViewColumn Header="ID">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding StaffID}" HorizontalAlignment="Center" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Tên nhân viên">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Staff.StaffName}" HorizontalAlignment="Center"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Giờ đăng nhập">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding LoginTime}" HorizontalAlignment="Center"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Giờ đăng xuất">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding LogoutTime}" HorizontalAlignment="Center"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                     </GridView>
                 </ListView.View>
             </ListView>

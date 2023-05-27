@@ -8,24 +8,71 @@
         Background="{DynamicResource MaterialDesignPaper}"
         mc:Ignorable="d"
         Height="704.04" Width="1037">
+    
     <Grid Background="#80FFA03F" Width="1037" Height="704.04">
         <Grid Margin="10,245,10,14.332">
             <Rectangle Fill="White" HorizontalAlignment="Left" Height="464.068" Margin="0.4,-3.4,0,0" VerticalAlignment="Top" Width="1012.6" RadiusX="20" RadiusY="20"/>
-            <ListView x:Name="lvNhanVien" HorizontalAlignment="Stretch" Height="461" VerticalAlignment="Center" Width="1013" Grid.ColumnSpan="2" HorizontalContentAlignment="Stretch">
+            <ListView x:Name="lvNhanVien" 
+                      HorizontalContentAlignment="Stretch"
+                      Height="461" 
+                      VerticalAlignment="Center" 
+                      Width="1013" Grid.ColumnSpan="2" >
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                     </Style>
                 </ListView.ItemContainerStyle>
-                <ListView.View>
+                <ListView.View >
                     <GridView>
-                        <GridViewColumn Header="ID" DisplayMemberBinding="{Binding StaffID}"/>
-                        <GridViewColumn Header="Tên" DisplayMemberBinding="{Binding StaffName}"/>
-                        <GridViewColumn Header="Chức vụ" DisplayMemberBinding="{Binding Role.RoleName}"/>
-                        <GridViewColumn Header="Số CCCD" DisplayMemberBinding="{Binding CivilID}"/>
-                        <GridViewColumn Header="Số điện thoại"  DisplayMemberBinding="{Binding PhoneNumber}"/>
-                        <GridViewColumn Header="Địa chỉ nhà"  DisplayMemberBinding="{Binding StaffAddress}"/>
-                        <GridViewColumn Header="Ngày sinh"  DisplayMemberBinding="{Binding DateOfBirth}"/>
+                        <GridViewColumn Header="ID">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding StaffID}" HorizontalAlignment="Center" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Tên">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding StaffName}" HorizontalAlignment="Center" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Chức vụ">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Role.RoleName}" HorizontalAlignment="Center" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Số CCCD">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding CivilID}" HorizontalAlignment="Center" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Số điện thoại">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding PhoneNumber}" HorizontalAlignment="Center" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Địa chỉ nhà">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding StaffAddress}" HorizontalAlignment="Center" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Ngày sinh">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding DateOfBirth}" HorizontalAlignment="Center" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                     </GridView>
                 </ListView.View>
             </ListView>
