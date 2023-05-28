@@ -206,7 +206,7 @@ namespace QLBaiDoXe
                 {
                     Dispatcher.BeginInvoke
                             (
-                            new Action(() => MessageBox.Show("Thẻ không tồn tại"))
+                            new Action(() => MessageBox.Show("Thẻ không tồn tại", "Lỗi!"))
                             );
                     textBox1.Clear();
                 }
@@ -224,7 +224,7 @@ namespace QLBaiDoXe
                 {
                     Dispatcher.BeginInvoke
                         (
-                        new Action(() => MessageBox.Show("Thẻ chưa được sử dụng", "Lưu ý", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK, MessageBoxOptions.ServiceNotification)),
+                        new Action(() => MessageBox.Show("Thẻ chưa được sử dụng", "Lỗi!", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK, MessageBoxOptions.ServiceNotification)),
                         DispatcherPriority.ApplicationIdle
                         );
                     textBox2.Clear();

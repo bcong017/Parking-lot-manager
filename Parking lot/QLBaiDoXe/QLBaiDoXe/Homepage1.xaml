@@ -4,17 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:local="clr-namespace:QLBaiDoXe"
-         xmlns:hc="https://handyorg.github.io/handycontrol" x:Class="QLBaiDoXe.Homepage1"
-         mc:Ignorable="d"
-        Title="Homepage" Height="718" Width="1280"
+        x:Class="QLBaiDoXe.Homepage1"
+        mc:Ignorable="d"
+        Title="Bãi Đỗ Xe Thông Minh KYPS" Height="718" Width="1280"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="12"
         TextOptions.TextFormattingMode="Ideal" 
         TextOptions.TextRenderingMode="Auto"        
         Background="{DynamicResource MaterialDesignPaper}"
-        FontFamily="{DynamicResource MaterialDesignFont}" WindowStartupLocation="CenterScreen" KeyDown="Window_KeyDown">
+        FontFamily="{DynamicResource MaterialDesignFont}" WindowStartupLocation="CenterScreen" KeyDown="Window_KeyDown" Icon="Resources/Image4.ico">
     <Grid Background="#80FFA03F">
         <Grid Margin="43.2,64.8,654.3,77.2">
             <Rectangle Fill="White" RadiusX="15" RadiusY="15" Margin="0,0,0,10" d:IsLocked="True"/>
@@ -70,9 +69,9 @@
             <TextBlock x:Name="VehicleOut_num" HorizontalAlignment="Left" Height="18.8" Margin="316.834,23.2,0,0" TextWrapping="Wrap" Text="30" VerticalAlignment="Top" Width="45.067" Foreground="#DDFF0000" FontWeight="Bold" FontSize="18"/>
 
         </Grid>
-        <Image Margin="1205.6,611.2,0.8,10" Source="Image4.png" Stretch="Fill"/>
-        <TextBlock Text="CÔNG TY THNM BÃI ĐỖ XE THÔNG MINH KYPS" HorizontalAlignment="Left" Height="18.8" Margin="926.933,628.55,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="273.667" FontWeight="Bold" FontFamily="Segoe UI"/>
-        <TextBlock HorizontalAlignment="Left" Height="31.05" Margin="928.433,647.35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="268.667" TextAlignment="Right" FontSize="10"><Run Text="Điện thoại: (094).8423.014"/><LineBreak/><Run Text="Email: 20521868@gm.uit.edu.vn"/><LineBreak/></TextBlock>
+        <Image Margin="1202,617,5,4" Source="Resources/Image4.png" Stretch="Fill"/>
+        <TextBlock Text="CÔNG TY THNM BÃI ĐỖ XE THÔNG MINH KYPS" HorizontalAlignment="Left" Height="18" Margin="927,637,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="274" FontWeight="Bold" FontFamily="Segoe UI"/>
+        <TextBlock HorizontalAlignment="Left" Height="31" Margin="928,655,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="269" TextAlignment="Right" FontSize="10"><Run Text="Điện thoại: (094).8423.014"/><LineBreak/><Run Text="Email: 20520417@gm.uit.edu.vn"/><LineBreak/></TextBlock>
         <TextBlock HorizontalAlignment="Left" Height="32" Margin="43,19,0,0" TextWrapping="Wrap" Text="F1 - Đổi loại xe làn vào" VerticalAlignment="Top" Width="233" FontSize="22" FontWeight="Medium"/>
         <TextBlock x:Name="AdminWindows" HorizontalAlignment="Left" Height="31.2" Margin="507.6,18.7,0,0" TextWrapping="Wrap" Foreground="black" Text="F2 - Màn hình quản lý" VerticalAlignment="Top" Width="232.867" FontSize="22" FontWeight="Medium"/>
         <Button

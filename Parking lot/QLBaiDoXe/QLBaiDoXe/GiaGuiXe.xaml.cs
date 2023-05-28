@@ -25,11 +25,11 @@ namespace QLBaiDoXe
                 Regulation.ChangeParkingFee(MotorbikeRun.Text.Substring(0, MotorbikeRun.Text.Length - 1), motorbikeFee);
                 Regulation.ChangeParkingFee(BikeRun.Text.Substring(0, BikeRun.Text.Length - 1), bikeFee);
                 Regulation.ChangeParkingFee(CarRun.Text.Substring(0, CarRun.Text.Length - 1), carFee);
-                MessageBox.Show("Thay đổi giá gửi xe thành công");
+                MessageBox.Show("Thay đổi giá gửi xe thành công", "Thông báo!");
             }
             else
             {
-                MessageBox.Show("Dữ liệu nhập vào không hợp lệ.\nVui lòng chỉ nhập số");
+                MessageBox.Show("Dữ liệu nhập vào không hợp lệ.\nVui lòng chỉ nhập số","Lỗi!");
             }
         }
     }

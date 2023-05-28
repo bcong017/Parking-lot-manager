@@ -43,11 +43,11 @@ namespace QLBaiDoXe
                 var selectedItems = (dynamic)ListThe.SelectedItems[0];
                 if ( Cards.CheckCardState((long)selectedItems.ParkingCardID) == 1)
                 {
-                    MessageBox.Show("Thẻ đang được sử dụng");
+                    MessageBox.Show("Thẻ đang được sử dụng", "Lỗi!");
                     return;
                 }
                 Cards.DeleteCard((long)selectedItems.ParkingCardID);
-                MessageBox.Show("Đã xóa thẻ thành công!");
+                MessageBox.Show("Đã xóa thẻ thành công!", "Thông báo!");
                 ListThe.ItemsSource = null;
                 ListThe.ItemsSource = Cards.GetAllParkingCards();
             }

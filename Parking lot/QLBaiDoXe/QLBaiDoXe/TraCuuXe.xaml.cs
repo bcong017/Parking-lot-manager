@@ -44,7 +44,7 @@ namespace QLBaiDoXe
                 {
                     if (testDay > 29)
                     {
-                        MessageBox.Show("Bạn đã nhập ngày không phù hợp");
+                        MessageBox.Show("Bạn đã nhập ngày không phù hợp","Lỗi!");
                         Nullify();
                         return false;
                     }
@@ -53,7 +53,7 @@ namespace QLBaiDoXe
                 {
                     if (testDay > 28)
                     {
-                        MessageBox.Show("Bạn đã nhập ngày không phù hợp");
+                        MessageBox.Show("Bạn đã nhập ngày không phù hợp", "Lỗi!");
                         Nullify();
                         return false;
                     }
@@ -62,7 +62,7 @@ namespace QLBaiDoXe
             if (testMonth == 4 || testMonth == 6 || testMonth == 9 || testMonth == 11)
                 if (testDay > 30)
                 {
-                    MessageBox.Show("Bạn đã nhập ngày không phù hợp");
+                    MessageBox.Show("Bạn đã nhập ngày không phù hợp", "Lỗi!");
                     Nullify();
                     return false;
                 }
@@ -92,7 +92,7 @@ namespace QLBaiDoXe
               
             if (result.Count == 0)
             {
-                MessageBox.Show("Trong khoảng thời gian bạn đã nhập không có xe trong bãi!");
+                MessageBox.Show("Trong khoảng thời gian bạn đã nhập không có xe trong bãi!","Lỗi!");
             }
             lvResult.ItemsSource = null;
             lvResult.ItemsSource = result;

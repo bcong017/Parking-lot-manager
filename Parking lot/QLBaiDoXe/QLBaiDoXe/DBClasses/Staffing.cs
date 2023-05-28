@@ -26,14 +26,14 @@ namespace QLBaiDoXe.DBClasses
         {
             if (DataProvider.Ins.DB.Staffs.Any(x => x.CivilID == civilId))
             {
-                MessageBox.Show("Tồn tại nhân viên có số căn cước công dân bạn đã nhập!");
+                MessageBox.Show("Tồn tại nhân viên có số căn cước công dân bạn đã nhập!","Lỗi!");
                 return;
             }
             else
             {
                 if (DataProvider.Ins.DB.Accounts.Any(x => x.AccountName == name))
                 {
-                    MessageBox.Show("Tồn tại tài khoản có cùng tên đăng nhập mà bạn đã nhập!");
+                    MessageBox.Show("Tồn tại tài khoản có cùng tên đăng nhập mà bạn đã nhập!","Lỗi!");
                     return;
                 }
             }
@@ -66,21 +66,21 @@ namespace QLBaiDoXe.DBClasses
             };
             DataProvider.Ins.DB.Accounts.Add(staffAccount);
             DataProvider.Ins.DB.SaveChanges();
-            MessageBox.Show("Thêm nhân viên thành công!");
+            MessageBox.Show("Thêm nhân viên thành công!", "Thông báo!");
         }
 
         public static void AddAdminInfo(string name, string civilId, string phoneNumber, string address, DateTime dob, string accname, string password)
         {
             if (DataProvider.Ins.DB.Staffs.Any(x => x.CivilID == civilId))
             {
-                MessageBox.Show("Tồn tại nhân viên có số căn cước công dân bạn đã nhập!");
+                MessageBox.Show("Tồn tại nhân viên có số căn cước công dân bạn đã nhập!", "Lỗi!");
                 return;
             }
             else
             {
                 if (DataProvider.Ins.DB.Accounts.Any(x => x.AccountName == name))
                 {
-                    MessageBox.Show("Tồn tại tài khoản có cùng tên đăng nhập mà bạn đã nhập!");
+                    MessageBox.Show("Tồn tại tài khoản có cùng tên đăng nhập mà bạn đã nhập!", "Lỗi!");
                     return;
                 }
             }
@@ -113,7 +113,7 @@ namespace QLBaiDoXe.DBClasses
             };
             DataProvider.Ins.DB.Accounts.Add(adminAccount);
             DataProvider.Ins.DB.SaveChanges();
-            MessageBox.Show("Thêm quản trị viên thành công!");
+            MessageBox.Show("Thêm quản trị viên thành công!", "Thông báo!");
         }
 
         public static void ChangeStaffInfo(int staffId, string staffNewName, string civilId, string role, string phoneNumber, string address, DateTime dob, string accname, string password)
@@ -123,7 +123,7 @@ namespace QLBaiDoXe.DBClasses
             {
                 if (checkStaff.StaffID != staffId)
                 {
-                    MessageBox.Show("Tồn tại nhân viên có số căn cước công dân bạn đã nhập!");
+                    MessageBox.Show("Tồn tại nhân viên có số căn cước công dân bạn đã nhập!", "Lỗi!");
                     return;
                 }
             }
@@ -144,12 +144,12 @@ namespace QLBaiDoXe.DBClasses
                 account.AccountPassword = passwordhash;
 
                 DataProvider.Ins.DB.SaveChanges();
-                MessageBox.Show("Sửa thông tin nhân viên thành công");
+                MessageBox.Show("Sửa thông tin nhân viên thành công", "Thông báo!");
                 return;
             }
             else
             {
-                MessageBox.Show("Không tìm thấy nhân viên");
+                MessageBox.Show("Không tìm thấy nhân viên", "Lỗi!");
                 return;
             }
         }

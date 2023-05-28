@@ -37,7 +37,7 @@ namespace QLBaiDoXe
             currentUser = Staffing.LogIn(UsernameTextbox.Text, PasswordTextbox.Password);
             if (currentUser != null)
             {
-                MessageBox.Show("Đăng nhập thành công", "Thông báo");
+                MessageBox.Show("Đăng nhập thành công", "Thông báo!");
                 if (currentUser.RoleID == 2)
                 {
                     admin adminWindow = new admin();
@@ -53,7 +53,7 @@ namespace QLBaiDoXe
             }
             else
             {
-                MessageBox.Show("Sai thông tin đăng nhập", "Thông báo");
+                MessageBox.Show("Sai thông tin đăng nhập", "Thông báo!");
             }
         }
 
@@ -64,7 +64,7 @@ namespace QLBaiDoXe
                 currentUser = Staffing.LogIn(UsernameTextbox.Text, PasswordTextbox.Password);
                 if (currentUser != null)
                 {
-                    MessageBox.Show("Đăng nhập thành công", "Thông báo");
+                    MessageBox.Show("Đăng nhập thành công", "Thông báo!");
                     if (currentUser.RoleID == 2)
                     {
                         admin adminWindow = new admin();
@@ -80,7 +80,7 @@ namespace QLBaiDoXe
                 }
                 else
                 {
-                    MessageBox.Show("Sai thông tin đăng nhập", "Thông báo");
+                    MessageBox.Show("Sai thông tin đăng nhập", "Thông báo!");
                 }
             }
         }

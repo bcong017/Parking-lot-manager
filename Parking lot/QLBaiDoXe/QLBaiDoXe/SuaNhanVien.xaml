@@ -8,7 +8,7 @@
         xmlns:hc="https://handyorg.github.io/handycontrol" x:Class="QLBaiDoXe.SuaNhanVien"
         mc:Ignorable="d"
         Background="{DynamicResource MaterialDesignPaper}"    
-        Height="450" Width="800" WindowStartupLocation="CenterScreen">
+        Height="450" Width="800" WindowStartupLocation="CenterScreen" Title="Sửa nhân viên" Icon="Resources/Image4.ico">
     <Grid Background="White">
         <Grid.DataContext>
             <local:NotifyErrorViewModel2/>

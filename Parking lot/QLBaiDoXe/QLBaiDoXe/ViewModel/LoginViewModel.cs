@@ -49,7 +49,7 @@ namespace QLBaiDoXe.ViewModel
             var temp2 = password;
             if (!string.IsNullOrEmpty(temp1) || !string.IsNullOrEmpty(temp2))
             {
-                MessageBox.Show("Bạn chưa điền đủ thông tin", "Thông báo");
+                MessageBox.Show("Bạn chưa điền đủ thông tin", "Lỗi!");
                 return;
             }
             else
@@ -57,14 +57,14 @@ namespace QLBaiDoXe.ViewModel
                 MainWindow.currentUser = DBClasses.Staffing.LogIn(userName, password);
                 if (MainWindow.currentUser != null)
                 {
-                    MessageBox.Show("Đăng nhập thành công", "Thông báo");
+                    MessageBox.Show("Đăng nhập thành công", "Thông báo!");
                     admin adminScreen = new admin();
                     Application.Current.MainWindow = adminScreen;
                     Application.Current.MainWindow.Show();
                     p.Close();
                 }
                 else
-                    MessageBox.Show("Sai thông tin đăng nhập", "Thông báo");
+                    MessageBox.Show("Sai thông tin đăng nhập", "Thông báo!");
             }          
         }
     }

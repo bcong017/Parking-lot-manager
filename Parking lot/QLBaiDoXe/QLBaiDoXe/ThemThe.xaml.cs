@@ -25,12 +25,12 @@ namespace QLBaiDoXe
             {
                 long temp = long.Parse(CardID.Text);
                 if (DataProvider.Ins.DB.ParkingCards.Any(x => x.ParkingCardID == temp)) {
-                    MessageBox.Show("Mã số thẻ này đã tồn tại", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK, MessageBoxOptions.ServiceNotification);
+                    MessageBox.Show("Mã số thẻ này đã tồn tại", "Lỗi!", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK, MessageBoxOptions.ServiceNotification);
                 }
                 else
                 {
                     DBClasses.Cards.AddCard(long.Parse(CardID.Text),type);
-                    MessageBox.Show("Thêm thẻ thành công");
+                    MessageBox.Show("Thêm thẻ thành công", "Thông báo!");
                     CardID.Clear();
                 }
             }

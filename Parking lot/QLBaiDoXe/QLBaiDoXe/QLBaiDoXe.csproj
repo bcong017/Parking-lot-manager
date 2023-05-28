@@ -333,7 +333,7 @@
     <Resource Include="Resources\352c8737144c430381642831bcaecb7a %282%29.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Image4.png" />
+    <Resource Include="Resources\Image4.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\icon-g9c96c190e_1280.png" />
@@ -354,12 +354,10 @@
     <Folder Include="Model\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Image1.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="AForge lib\AForge.dll" />
     <Content Include="AForge lib\AForge.Video.DirectShow.dll" />
     <Content Include="AForge lib\AForge.Video.dll" />
+    <Resource Include="Resources\Image4.ico" />
     <Content Include="ParkingLotModel\ParkinglotModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ParkinglotModel.edmx</DependentUpon>

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:QLBaiDoXe"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:controlzex="urn:controlzex" x:Class="QLBaiDoXe.ThemThe"
         mc:Ignorable="d"
-        Title="ThemThe" Height="192" Width="422"
+        Title="Thêm Thẻ" Height="192" Width="422" Icon="Resources/Image4.ico"
         WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>

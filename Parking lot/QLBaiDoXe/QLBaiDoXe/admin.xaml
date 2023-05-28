@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:QLBaiDoXe"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="admin" Height="740" Width="1300" ResizeMode="NoResize" KeyDown="Window_KeyDown">
+        Title="Bãi Đỗ Xe Thông Minh KYPS" Height="740" Width="1300" ResizeMode="NoResize" KeyDown="Window_KeyDown" Icon="Resources/Image4.ico">
     <Grid Background="#80FFA03F" Width="1300" Margin="0,0,-6,0.4">
         <Grid Margin="10,0,1042.357,0">
             <Rectangle Fill="White" HorizontalAlignment="Left" Height="670.4" Margin="10,5.668,-10,0" VerticalAlignment="Top" Width="221.243" RadiusX="20" RadiusY="20" d:IsLocked="True"/>
@@ -22,7 +22,7 @@
             <Button Tag="NhanVien"  Command="{Binding SelectViewCommand}" CommandParameter="{Binding ElementName=DanhSachBtn}" x:Name="DanhSachBtn" Style="{StaticResource MaterialDesignFlatLightButton}"  HorizontalAlignment="Left" Height="41.624" Margin="20.343,99,0,0" VerticalAlignment="Top" Width="200.9" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="17" Padding="0,4">
                 <materialDesign:PackIcon Kind="FormatListBulletedType" Height="29.6" Width="32.067" Foreground="Black" Margin="0,0,148,0"/>
             </Button>
-            
+
             <Button Tag="ChamCong" Command="{Binding SelectViewCommand}"  CommandParameter="{Binding ElementName=ChamCongBtn}" x:Name="ChamCongBtn" Style="{StaticResource MaterialDesignFlatLightButton}"  HorizontalAlignment="Left" Height="41.624" Margin="20.343,143,0,0" VerticalAlignment="Top" Width="200.9" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="17" Padding="0.4">
                 <materialDesign:PackIcon Kind="NotebookCheck" Height="29.6" Width="32.067" Foreground="Black" Margin="0,0,148,0"/>
             </Button>
@@ -37,7 +37,7 @@
                 Style="{StaticResource MaterialDesignFlatLightButton}"  HorizontalAlignment="Left" Height="41.624" Margin="20.343,391.096,0,0" VerticalAlignment="Top" Width="200.9" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="17" Padding="0,4" Click="LogoutButton_Click">
                 <materialDesign:PackIcon Kind="LogoutVariant" Height="29.6" Width="32.067" Foreground="#FFFF6F6F" Margin="0,0,148,0"/>
             </Button>
-            <materialDesign:PackIcon Kind="Account" HorizontalAlignment="Left" Height="40" Margin="28.8,18.6,0,0" VerticalAlignment="Top" Width="40" RenderTransformOrigin="0.35,0.5"/>
+            <materialDesign:PackIcon Kind="Account" Height="40" Margin="29,27,0,0" Width="40" RenderTransformOrigin="0.35,0.5"/>
             <TextBlock HorizontalAlignment="Left" Height="27.334" Margin="70.243,194,0,0" TextWrapping="Wrap" Text="Thẻ" VerticalAlignment="Top" Width="126.8" RenderTransformOrigin="0.505,0.341" Foreground="Black" FontSize="17"/>
             <Button Tag="The" x:Name="btnThe" Command="{Binding SelectViewCommand}"  CommandParameter="{Binding ElementName=btnThe}" Style="{StaticResource MaterialDesignFlatLightButton}"  HorizontalAlignment="Left" Height="41.624" Margin="20.343,187,0,0" VerticalAlignment="Top" Width="200.9" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="17" Padding="0.4">
                 <materialDesign:PackIcon Kind="CardBulletedSettings" Height="29.6" Width="32.067" Foreground="Black" Margin="0,0,148,0"/>
