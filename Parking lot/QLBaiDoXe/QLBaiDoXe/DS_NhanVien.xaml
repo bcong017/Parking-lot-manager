@@ -23,7 +23,7 @@
                     </Style>
                 </ListView.ItemContainerStyle>
                 <ListView.View >
-                    <GridView>
+                    <GridView >
                         <GridViewColumn Header="ID">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
@@ -66,10 +66,10 @@
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="Ngày sinh">
+                        <GridViewColumn Header="Ngày sinh" >
                             <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding DateOfBirth}" HorizontalAlignment="Center" />
+                                <DataTemplate >
+                                    <TextBlock Text="{Binding DateOfBirth, StringFormat=d}" HorizontalAlignment="Center" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>

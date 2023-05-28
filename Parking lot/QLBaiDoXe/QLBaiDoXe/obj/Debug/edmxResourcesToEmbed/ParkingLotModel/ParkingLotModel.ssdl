@@ -35,7 +35,7 @@
     <Property Name="RoleID" Type="int" Nullable="false" />
     <Property Name="PhoneNumber" Type="nvarchar(max)" />
     <Property Name="StaffAddress" Type="nvarchar(max)" />
-    <Property Name="DateOfBirth" Type="datetime2" Precision="7" />
+    <Property Name="DateOfBirth" Type="date" />
   </EntityType>
   <EntityType Name="Timekeeps">
     <Key>

@@ -40,7 +40,7 @@
           <Property Name="RoleID" Type="int" Nullable="false" />
           <Property Name="PhoneNumber" Type="nvarchar(max)" />
           <Property Name="StaffAddress" Type="nvarchar(max)" />
-          <Property Name="DateOfBirth" Type="datetime2" Precision="7" />
+          <Property Name="DateOfBirth" Type="date" />
         </EntityType>
         <EntityType Name="Timekeeps">
           <Key>
@@ -226,7 +226,7 @@
           <Property Name="RoleID" Type="Int32" Nullable="false" />
           <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="StaffAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="DateOfBirth" Type="DateTime" Precision="7" />
+          <Property Name="DateOfBirth" Type="DateTime" />
           <NavigationProperty Name="Accounts" Relationship="Self.Accounts_StaffID_FK" FromRole="Staff" ToRole="Accounts" />
           <NavigationProperty Name="Role" Relationship="Self.Staff_RoleID_FK" FromRole="Staff" ToRole="Roles" />
           <NavigationProperty Name="Timekeeps" Relationship="Self.Timekeeps_StaffID_FK" FromRole="Staff" ToRole="Timekeeps" />

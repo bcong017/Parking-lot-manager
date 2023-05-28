@@ -46,7 +46,7 @@ CREATE TABLE Staff (
 	RoleID			int not null,
 	PhoneNumber		nvarchar(MAX),
 	StaffAddress	nvarchar(MAX),
-	DateOfBirth		datetime2
+	DateOfBirth		date
 );
 
 CREATE TABLE Timekeeps (
