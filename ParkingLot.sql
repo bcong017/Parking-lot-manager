@@ -65,6 +65,6 @@ ALTER TABLE Accounts ADD CONSTRAINT Accounts_RoleID_FK FOREIGN KEY (RoleID) REFE
 ALTER TABLE Staff ADD CONSTRAINT Staff_RoleID_FK FOREIGN KEY (RoleID) REFERENCES Roles(RoleID);
 
 INSERT INTO Roles VALUES ('staff'), ('admin')
-INSERT INTO VehicleTypes (VehicleTypeName, ParkingFee) VALUES ('Xe máy', 4000), ('Xe hơi', 8000), (N'Xe đạp', 1000)
+INSERT INTO VehicleTypes (VehicleTypeName, ParkingFee) VALUES (N'Xe máy', 4000), (N'Xe hơi', 8000), (N'Xe đạp', 1000)
 INSERT INTO Staff (CivilID, StaffName, RoleID, PhoneNumber, StaffAddress, DateOfBirth) VALUES ('CCCD1233466', 'admin', 2, '09123784', '221 Baker St', '1/1/1990')
 INSERT INTO Accounts (StaffID, RoleID, AccountName, AccountPassword) VALUES (1, 2, 'admin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918')

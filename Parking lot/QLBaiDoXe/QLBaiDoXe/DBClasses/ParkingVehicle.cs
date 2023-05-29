@@ -71,6 +71,24 @@ namespace QLBaiDoXe.DBClasses
                                                         && x.TimeStartedParking.Year == timeIn.Year).ToList();
         }
 
+        public static List<Vehicle> GetAllParkedOutVehicle(int timeOut, int yearOut, int vehicleType =-1)
+        {
+            var vehicleList = DataProvider.Ins.DB.Vehicles.Where(x => x.VehicleState == 0).ToList();
+            var returnList = new List<Vehicle>();
+            
+            foreach (var item in vehicleList)
+            {
+                if (item.TimeEndedParking == null)
+                    continue;
+                if (item.TimeEndedParking.Value.Month == timeOut &&
+                    item.TimeEndedParking.Value.Year == yearOut && 
+                    (item.VehicleType.VehicleTypeID == vehicleType || vehicleType == -1))
+                        
+                    returnList.Add(item);
+            }
+            return returnList;
+        }
+
         public static List<Vehicle> SearchVehicle_TimeIn_DateAndHour(DateTime timeIn)
         {
             return DataProvider.Ins.DB.Vehicles.Where(x => x.TimeStartedParking.Day == timeIn.Day && x.TimeStartedParking.Month == timeIn.Month && x.TimeStartedParking.Year == timeIn.Year

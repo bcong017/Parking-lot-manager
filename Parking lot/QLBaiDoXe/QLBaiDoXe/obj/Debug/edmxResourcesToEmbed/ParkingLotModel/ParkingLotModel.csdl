@@ -39,7 +39,7 @@
     <Property Name="RoleID" Type="Int32" Nullable="false" />
     <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="StaffAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="DateOfBirth" Type="DateTime" />
+    <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
     <NavigationProperty Name="Accounts" Relationship="Self.Accounts_StaffID_FK" FromRole="Staff" ToRole="Accounts" />
     <NavigationProperty Name="Role" Relationship="Self.Staff_RoleID_FK" FromRole="Staff" ToRole="Roles" />
     <NavigationProperty Name="Timekeeps" Relationship="Self.Timekeeps_StaffID_FK" FromRole="Staff" ToRole="Timekeeps" />

@@ -23,7 +23,8 @@ namespace QLBaiDoXe
         {
             InitializeComponent();
             SeriesCollection = new SeriesCollection();
-           
+            UpdateReport(DateTime.Now.Year);
+
 
             Labels = new[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
             YFormatter = value => value + "";
@@ -49,7 +50,11 @@ namespace QLBaiDoXe
         {
             bool isNumber = int.TryParse(YearTextbox.Text, out int year);
             if (isNumber)
-                return;
+            {
+                SeriesCollection.Clear();
+                UpdateReport(year);
+            }
+
             else
             {
                 return;
@@ -61,6 +66,56 @@ namespace QLBaiDoXe
             
         }
 
-       
+        private void UpdateReport(int year)
+        {
+            List<VehicleType> vehicleTypes = Regulation.GetAllVehicleTypes();
+            List<VehicleType> vehicleTypeTemp = Regulation.GetAllVehicleTypes();
+            List<LineSeries> lineSeries = new List<LineSeries>();
+            int total = 0;
+
+            for (int i = 0; i < vehicleTypes.Count; i++)
+            {
+                lineSeries.Add(new LineSeries()
+                {
+                    Title = vehicleTypes[i].VehicleTypeName,
+                    Values = new ChartValues<int>()
+                });
+            }
+
+            for ( int m = 1; m <= 12; m++)
+            {
+                if (ParkingVehicle.GetAllParkedOutVehicle(m,year).Count == 0)
+                {
+                    for (int j = 0; j < lineSeries.Count; j++)
+                    {
+                        lineSeries[j].Values.Add(0);
+                    }
+                }
+                else
+                {
+                    for (int j = 0;j < lineSeries.Count; j++)
+                    {
+                        int income = 0;
+                        var vehicleFee = ParkingVehicle.GetAllParkedOutVehicle(m, year);
+
+                        lineSeries[j].Values.Add(vehicleFee.Where(x => x.VehicleType.VehicleTypeName == lineSeries[j].Title).Count()); //Thêm dòng với điều kiện:   Loại xe đó giống với tên loại xe trên đồ thị (chuyển qua thành List rồi sau đó Count để đếm trong List có bao nhiêu thằng )
+
+                        for (int k = 0; k< vehicleFee.Count; k++)
+                        {
+                            if (lineSeries[j].Title == vehicleFee[k].VehicleType.VehicleTypeName)
+                            {
+                                income += vehicleFee[k].VehicleType.ParkingFee;
+                            }
+                        }
+                        total += income;
+
+                    }
+                }
+            }
+            IncomeTextbox.Text = total.ToString() + " đồng";
+            SeriesCollection.Clear();
+            SeriesCollection.AddRange(lineSeries);
+        }
+
     }
 }
