@@ -3,6 +3,7 @@ using QLBaiDoXe.DBClasses;
 using QLBaiDoXe.ParkingLotModel;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using static System.Net.Mime.MediaTypeNames;
@@ -19,16 +20,24 @@ namespace QLBaiDoXe
         public TraCuuXe()
         {
             InitializeComponent();
-            int pos = ParkingVehicle.GetLastDayThatHaveCar().IndexOf(' ');
-            LastDayThatHaveCar = new DateTime();
-            LastDayThatHaveCar = DateTime.Parse(ParkingVehicle.GetLastDayThatHaveCar().Substring(0, pos));
-            cbxDay.Text = LastDayThatHaveCar.Day.ToString();
-            cbxMonth.Text = LastDayThatHaveCar.Month.ToString();
-            cbxYear.Text = LastDayThatHaveCar.Year.ToString();
-            List<Vehicle> result = new List<Vehicle>();
-            
-            result = ParkingVehicle.SearchVehicle_TimeIn_DateOnly(LastDayThatHaveCar); 
-            lvResult.ItemsSource = result;
+            if ( DataProvider.Ins.DB.Vehicles.Where(x => x.VehicleState == 1).Count() == 0 && DataProvider.Ins.DB.Vehicles.Where(x => x.VehicleState == 0).Count() == 0)
+            {
+                var msg = "Chưa có xe trong cơ sở dữ liệu";
+                Dispatcher.BeginInvoke(new Action(() => MessageBox.Show(msg)));
+            }
+            else
+            {
+                int pos = ParkingVehicle.GetLastDayThatHaveCar().IndexOf(' ');
+                LastDayThatHaveCar = new DateTime();
+                LastDayThatHaveCar = DateTime.Parse(ParkingVehicle.GetLastDayThatHaveCar().Substring(0, pos));
+                cbxDay.Text = LastDayThatHaveCar.Day.ToString();
+                cbxMonth.Text = LastDayThatHaveCar.Month.ToString();
+                cbxYear.Text = LastDayThatHaveCar.Year.ToString();
+                List<Vehicle> result = new List<Vehicle>();
+
+                result = ParkingVehicle.SearchVehicle_TimeIn_DateOnly(LastDayThatHaveCar);
+                lvResult.ItemsSource = result;
+            }
         }
         private void Nullify()
         {

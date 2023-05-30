@@ -94,7 +94,7 @@ namespace QLBaiDoXe.DBClasses
             return DataProvider.Ins.DB.Vehicles.Where(x => x.TimeStartedParking.Day == timeIn.Day && x.TimeStartedParking.Month == timeIn.Month && x.TimeStartedParking.Year == timeIn.Year
                                                         && x.TimeStartedParking.Hour == timeIn.Hour).ToList();
         }
-        public static string GetLastDayThatHaveCar ()
+        public static string GetLastDayThatHaveCar()
         {
             return DataProvider.Ins.DB.Vehicles.OrderByDescending(x => x.TimeStartedParking).Select(x =>x.TimeStartedParking).First().ToString();
         }
