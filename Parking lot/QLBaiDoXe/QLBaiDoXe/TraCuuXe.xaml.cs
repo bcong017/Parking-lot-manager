@@ -23,7 +23,7 @@ namespace QLBaiDoXe
             if ( DataProvider.Ins.DB.Vehicles.Where(x => x.VehicleState == 1).Count() == 0 && DataProvider.Ins.DB.Vehicles.Where(x => x.VehicleState == 0).Count() == 0)
             {
                 var msg = "Chưa có xe trong cơ sở dữ liệu";
-                Dispatcher.BeginInvoke(new Action(() => MessageBox.Show(msg)));
+                Dispatcher.BeginInvoke(new Action(() => MessageBox.Show(msg,"Lỗi")));
             }
             else
             {
