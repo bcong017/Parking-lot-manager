@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.ExceptionServices;
 using System.Windows;
 using System.Windows.Controls;
 using LiveCharts;
@@ -19,13 +20,15 @@ namespace QLBaiDoXe
         public string[] Labels { get; set; }
         public Func<double, string> YFormatter { get; set; }
 
+        public bool first = true;
+
         public BaoCaoDoanhThu()
         {
             InitializeComponent();
             SeriesCollection = new SeriesCollection();
             UpdateReport(DateTime.Now.Year);
 
-
+            YearTextbox.Text = DateTime.Now.Year.ToString();
             Labels = new[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
             YFormatter = value => value + "";
 
@@ -48,8 +51,13 @@ namespace QLBaiDoXe
 
         private void YearTextbox_TextChanged(object sender, TextChangedEventArgs e)
         {
+            if (first)
+            {
+                first = false; return;
+            }
+            
             bool isNumber = int.TryParse(YearTextbox.Text, out int year);
-            if (isNumber)
+            if (isNumber && year >= (DateTime.Now.Year-10) && year <= (DateTime.Now.Year))
             {
                 SeriesCollection.Clear();
                 UpdateReport(year);

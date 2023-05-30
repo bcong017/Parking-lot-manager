@@ -1,9 +1,11 @@
-﻿using QLBaiDoXe.DBClasses;
+﻿using ControlzEx.Standard;
+using QLBaiDoXe.DBClasses;
 using QLBaiDoXe.ParkingLotModel;
 using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using static System.Net.Mime.MediaTypeNames;
 
 
 namespace QLBaiDoXe
@@ -13,9 +15,20 @@ namespace QLBaiDoXe
     /// </summary>
     public partial class TraCuuXe : UserControl
     {
+        public DateTime LastDayThatHaveCar;
         public TraCuuXe()
         {
             InitializeComponent();
+            int pos = ParkingVehicle.GetLastDayThatHaveCar().IndexOf(' ');
+            LastDayThatHaveCar = new DateTime();
+            LastDayThatHaveCar = DateTime.Parse(ParkingVehicle.GetLastDayThatHaveCar().Substring(0, pos));
+            cbxDay.Text = LastDayThatHaveCar.Day.ToString();
+            cbxMonth.Text = LastDayThatHaveCar.Month.ToString();
+            cbxYear.Text = LastDayThatHaveCar.Year.ToString();
+            List<Vehicle> result = new List<Vehicle>();
+            
+            result = ParkingVehicle.SearchVehicle_TimeIn_DateOnly(LastDayThatHaveCar); 
+            lvResult.ItemsSource = result;
         }
         private void Nullify()
         {
