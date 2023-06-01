@@ -97,7 +97,7 @@
                 </ListView.ItemContainerStyle>
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Biển số">
+                        <GridViewColumn Header="Mã xe">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding VehicleID}" HorizontalAlignment="Center" />
@@ -111,10 +111,10 @@
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="Ngày vào bãi">
+                        <GridViewColumn Header="Thời điểm vào bãi">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding TimeStartedParking}" HorizontalAlignment="Center" />
+                                    <TextBlock Text="{Binding TimeStartedParking, StringFormat='{}{0:dd/MM/yyyy HH:mm:ss}'}" HorizontalAlignment="Center" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>

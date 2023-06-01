@@ -35,5 +35,10 @@ namespace QLBaiDoXe
                 }
             }
         }
+
+        private void TextBlock_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

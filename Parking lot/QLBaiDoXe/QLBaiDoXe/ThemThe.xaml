@@ -42,7 +42,7 @@
           Content="{materialDesign:PackIcon Kind=Check}"
           ToolTip="Icon"
           IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Margin="166.792,12.155,12.934,7.972" Grid.Column="1" Grid.Row="1" Padding="0" Foreground="White" />
-        <TextBlock HorizontalAlignment="Left" Height="24.933" Margin="10,10,0,0" TextWrapping="Wrap" Text="Huỷ nhập thẻ" VerticalAlignment="Top" Width="86.667" TextDecorations="Underline" Foreground="#FFFFA03F"/>
+        <TextBlock HorizontalAlignment="Left" Height="24.933" Margin="10,10,0,0" TextWrapping="Wrap" Text="Huỷ nhập thẻ" VerticalAlignment="Top" Width="86.667" TextDecorations="Underline" Foreground="#FFFFA03F" MouseLeftButtonUp="TextBlock_MouseLeftButtonUp"/>
         <Grid x:Name="Failed" Grid.ColumnSpan="2" d:IsHidden="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="102*"/>

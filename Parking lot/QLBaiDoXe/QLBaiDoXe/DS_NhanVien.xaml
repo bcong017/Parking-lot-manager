@@ -69,7 +69,7 @@
                         <GridViewColumn Header="Ngày sinh" >
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate >
-                                    <TextBlock Text="{Binding DateOfBirth, StringFormat=d}" HorizontalAlignment="Center" />
+                                    <TextBlock Text="{Binding DateOfBirth,StringFormat='{}{0:dd/MM/yyyy}'}" HorizontalAlignment="Center" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>

@@ -33,9 +33,7 @@
                     </Style>
                 </ListView.ItemContainerStyle>
                 <ListView.View>
-                    
                     <GridView>
-                        
                         <GridViewColumn Header="ID">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
@@ -50,17 +48,17 @@
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="Giờ đăng nhập">
+                        <GridViewColumn Header="Thời điểm đăng nhập">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding LoginTime}" HorizontalAlignment="Left"/>
+                                    <TextBlock Text="{Binding LoginTime, StringFormat='{}{0:dd/MM/yyyy HH:mm:ss}'}" HorizontalAlignment="Center"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="Giờ đăng xuất">
+                        <GridViewColumn Header="Thời điểm đăng xuất">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding LogoutTime}" HorizontalAlignment="Left"/>
+                                    <TextBlock Text="{Binding LogoutTime, StringFormat='{}{0:dd/MM/yyyy HH:mm:ss}'}" HorizontalAlignment="Center"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
