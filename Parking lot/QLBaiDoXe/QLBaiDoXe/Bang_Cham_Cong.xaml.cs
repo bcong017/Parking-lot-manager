@@ -15,6 +15,7 @@ namespace QLBaiDoXe
             InitializeComponent();
             this.DataContext = new BangChamCongViewModel();
             TimekeepLV.ItemsSource = Staffing.GetTimekeepForMonth(DateTime.Now.Month);
+            StartDateDP.Text = EndDateDP.Text = DateTime.Now.Date.ToString();
         }
 
         private void StaffNameTxb_TextChanged(object sender, TextChangedEventArgs e)
@@ -24,11 +25,11 @@ namespace QLBaiDoXe
                 TimekeepLV.ItemsSource = Staffing.GetTimekeepForStaff(StaffNameTxb.Text);
             else
             {
-                string sdMonth = StartDateDP.Text.Split('/')[0];
-                string sdDay = StartDateDP.Text.Split('/')[1];
+                string sdMonth = StartDateDP.Text.Split('/')[1];
+                string sdDay = StartDateDP.Text.Split('/')[0];
                 string sdYear = StartDateDP.Text.Split('/')[2];
-                string edMonth = EndDateDP.Text.Split('/')[0];
-                string edDay = EndDateDP.Text.Split('/')[1];
+                string edMonth = EndDateDP.Text.Split('/')[1];
+                string edDay = EndDateDP.Text.Split('/')[0];
                 string edYear = EndDateDP.Text.Split('/')[2];
                 if (int.TryParse(sdYear, out int sdYearNum) && int.TryParse(sdMonth, out int sdMonthNum) && int.TryParse(sdDay, out int sdDayNum)
                     && int.TryParse(edYear, out int edYearNum) && int.TryParse(edMonth, out int edMonthNum) && int.TryParse(edDay, out int edDayNum))
@@ -43,13 +44,13 @@ namespace QLBaiDoXe
 
         private void StartDateDP_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         { 
-                string sdMonth = StartDateDP.Text.Split('/')[0];
-                string sdDay = StartDateDP.Text.Split('/')[1];
+                string sdMonth = StartDateDP.Text.Split('/')[1];
+                string sdDay = StartDateDP.Text.Split('/')[0];
                 string sdYear = StartDateDP.Text.Split('/')[2];
             if (!string.IsNullOrEmpty(EndDateDP.Text))
             {
-                string edMonth = EndDateDP.Text.Split('/')[0];
-                string edDay = EndDateDP.Text.Split('/')[1];
+                string edMonth = EndDateDP.Text.Split('/')[1];
+                string edDay = EndDateDP.Text.Split('/')[0];
                 string edYear = EndDateDP.Text.Split('/')[2];
 
                 if (int.TryParse(sdYear, out int sdYearNum) && int.TryParse(sdMonth, out int sdMonthNum) && int.TryParse(sdDay, out int sdDayNum)
@@ -80,13 +81,13 @@ namespace QLBaiDoXe
         private void EndDateDP_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
                 
-                string edMonth = EndDateDP.Text.Split('/')[0];
-                string edDay = EndDateDP.Text.Split('/')[1];
+                string edMonth = EndDateDP.Text.Split('/')[1];
+                string edDay = EndDateDP.Text.Split('/')[0];
                 string edYear = EndDateDP.Text.Split('/')[2];
             if (!string.IsNullOrEmpty(StartDateDP.Text))
             {
-                string sdMonth = StartDateDP.Text.Split('/')[0];
-                string sdDay = StartDateDP.Text.Split('/')[1];
+                string sdMonth = StartDateDP.Text.Split('/')[1];
+                string sdDay = StartDateDP.Text.Split('/')[0];
                 string sdYear = StartDateDP.Text.Split('/')[2];
 
                 if (int.TryParse(sdYear, out int sdYearNum) && int.TryParse(sdMonth, out int sdMonthNum) && int.TryParse(sdDay, out int sdDayNum)
