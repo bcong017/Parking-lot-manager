@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using static QLBaiDoXe.DBClasses.ParkingVehicle;
 using static System.Net.Mime.MediaTypeNames;
 
 
@@ -33,7 +34,7 @@ namespace QLBaiDoXe
                 cbxDay.Text = LastDayThatHaveCar.Day.ToString();
                 cbxMonth.Text = LastDayThatHaveCar.Month.ToString();
                 cbxYear.Text = LastDayThatHaveCar.Year.ToString();
-                List<Vehicle> result = new List<Vehicle>();
+                List<TempParkingVehicle> result = new List<TempParkingVehicle>();
 
                 result = ParkingVehicle.SearchVehicle_TimeIn_DateOnly(LastDayThatHaveCar);
                 lvResult.ItemsSource = result;
@@ -93,7 +94,7 @@ namespace QLBaiDoXe
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             
-            List<Vehicle> result = new List<Vehicle>();
+            List<TempParkingVehicle> result = new List<TempParkingVehicle>();
             string hour = string.Empty;
             if (TimePicker.Text != null)
             {

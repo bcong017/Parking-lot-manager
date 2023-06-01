@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using static QLBaiDoXe.DBClasses.Cards;
 
 namespace QLBaiDoXe.DBClasses
 {
@@ -65,11 +66,7 @@ namespace QLBaiDoXe.DBClasses
             return DataProvider.Ins.DB.Vehicles.Where(x => x.VehicleState == 1).ToList();
         }
 
-        public static List<Vehicle> SearchVehicle_TimeIn_DateOnly(DateTime timeIn)
-        {
-            return DataProvider.Ins.DB.Vehicles.Where(x => x.TimeStartedParking.Day == timeIn.Day && x.TimeStartedParking.Month == timeIn.Month
-                                                        && x.TimeStartedParking.Year == timeIn.Year).ToList();
-        }
+        
 
         public static List<Vehicle> GetAllParkedOutVehicle(int timeOut, int yearOut, int vehicleType =-1)
         {
@@ -89,11 +86,54 @@ namespace QLBaiDoXe.DBClasses
             return returnList;
         }
 
-        public static List<Vehicle> SearchVehicle_TimeIn_DateAndHour(DateTime timeIn)
+        public class TempParkingVehicle: Vehicle
         {
-            return DataProvider.Ins.DB.Vehicles.Where(x => x.TimeStartedParking.Day == timeIn.Day && x.TimeStartedParking.Month == timeIn.Month && x.TimeStartedParking.Year == timeIn.Year
-                                                        && x.TimeStartedParking.Hour == timeIn.Hour).ToList();
+            public int STT { get; set; }
+            public TempParkingVehicle(Vehicle a, int b) 
+            {
+                this.STT = b;
+                this.VehicleID = a.VehicleID;
+                this.VehicleType = a.VehicleType;
+                this.VehicleTypeID = a.VehicleTypeID;
+                this.Staff = a.Staff;
+                this.StaffID = a.StaffID;
+                this.Fee = a.Fee;
+                this.ParkingCardID = a.ParkingCardID;
+                this.TimeStartedParking = a.TimeStartedParking;
+                this.TimeEndedParking = a.TimeEndedParking;
+                this.VehicleState = a.VehicleState;
+                this.VehicleImage = a.VehicleImage;
+            }
         }
+
+        public static List<TempParkingVehicle> SearchVehicle_TimeIn_DateAndHour(DateTime timeIn)
+        {
+            var list = new List<TempParkingVehicle>();
+            int counter = 0;
+            foreach (var item in DataProvider.Ins.DB.Vehicles.Where(x => x.TimeStartedParking.Day == timeIn.Day && x.TimeStartedParking.Month == timeIn.Month && x.TimeStartedParking.Year == timeIn.Year
+                                                        && x.TimeStartedParking.Hour == timeIn.Hour).ToList())
+            {
+                counter++;
+                var temp = new TempParkingVehicle(item, counter);
+                list.Add(temp);
+            }
+            return list;
+        }
+
+        public static List<TempParkingVehicle> SearchVehicle_TimeIn_DateOnly(DateTime timeIn)
+        {
+            var list = new List<TempParkingVehicle>();
+            int counter = 0;
+            foreach (var item in DataProvider.Ins.DB.Vehicles.Where(x => x.TimeStartedParking.Day == timeIn.Day && x.TimeStartedParking.Month == timeIn.Month
+                                                        && x.TimeStartedParking.Year == timeIn.Year).ToList())
+            {
+                counter++;
+                var temp = new TempParkingVehicle(item, counter);
+                list.Add(temp);
+            }
+            return list;
+        }
+
         public static string GetLastDayThatHaveCar()
         {
             return DataProvider.Ins.DB.Vehicles.OrderByDescending(x => x.TimeStartedParking).Select(x =>x.TimeStartedParking).First().ToString();

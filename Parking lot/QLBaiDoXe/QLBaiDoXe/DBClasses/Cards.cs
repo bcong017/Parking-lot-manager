@@ -1,6 +1,7 @@
 ﻿using QLBaiDoXe.ParkingLotModel;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.ModelConfiguration.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,9 +40,29 @@ namespace QLBaiDoXe.DBClasses
                 return false;
         }
 
-        public static List<ParkingCard> GetAllParkingCards()
+        public class TempParkingCard : ParkingCard
         {
-            return DataProvider.Ins.DB.ParkingCards.ToList();
+            public int STT { get; set; }
+            public TempParkingCard(ParkingCard a, int b)
+            {
+                this.STT = b;
+                this.ParkingCardID = a.ParkingCardID;
+                this.CardState = a.CardState;
+                this.CardType = a.CardType;
+            }
+        }
+
+        public static List<TempParkingCard> GetAllParkingCards()
+        {
+            var list = new List<TempParkingCard>();
+            int counter = 0;
+            foreach(var item in DataProvider.Ins.DB.ParkingCards.ToList())
+            {
+                counter++;
+                var temp = new TempParkingCard(item,counter);
+                list.Add(temp);
+            }
+            return list;
         }
 
         /// <summary>
