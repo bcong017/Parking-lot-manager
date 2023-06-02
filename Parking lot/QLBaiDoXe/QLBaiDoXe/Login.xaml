@@ -7,7 +7,8 @@
         xmlns:local="clr-namespace:QLBaiDoXe"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="Chào mừng" Icon="Resources/Image4.ico" Height="450" Width="600" WindowStartupLocation="CenterScreen" KeyDown="LoginWindow_KeyDown">
+        Title="Chào mừng" Icon="Resources/Image4.ico" Height="450" Width="600" WindowStartupLocation="CenterScreen" KeyDown="LoginWindow_KeyDown"
+        ResizeMode="NoResize">
     <Window.Resources>
         <Storyboard x:Key="CW_LoToFo">
             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="Forget_Password">

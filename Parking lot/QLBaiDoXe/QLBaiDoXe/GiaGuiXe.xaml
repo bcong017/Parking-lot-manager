@@ -12,8 +12,8 @@
          Background="{DynamicResource MaterialDesignPaper}"    
         Height="720" Width="1039" >
     <Grid Background="#80FFA03F">
-        <Grid Margin="10,110,16.4,31.332">
-            <Rectangle Fill="White" HorizontalAlignment="Left" Height="568.668" Margin="1.5,10,-1.5,0" VerticalAlignment="Top" Width="1012.6" RadiusX="20" RadiusY="20" Grid.ColumnSpan="2" Grid.RowSpan="3"/>
+        <Grid Margin="10,108,16.4,31.332">
+            <Rectangle Fill="White" HorizontalAlignment="Left" Height="560" Margin="1.5,10,-1.5,0" VerticalAlignment="Top" Width="1012.6" RadiusX="20" RadiusY="20" Grid.ColumnSpan="2" Grid.RowSpan="3"/>
             <Grid Margin="0,0,0,76.4">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="424*"/>

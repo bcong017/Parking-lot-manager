@@ -9,8 +9,8 @@
         mc:Ignorable="d"
         Height="720" Width="1039">
     <Grid Background="#80FFA03F">
-        <Grid Margin="10,245,10,14.332">
-            <Rectangle Fill="White" HorizontalAlignment="Left" Height="464.068" Margin="0.4,-3.4,0,0" VerticalAlignment="Top" Width="1012.6" RadiusX="20" RadiusY="20"/>
+        <Grid Margin="10,225,10,14.332">
+            <Rectangle Fill="White" HorizontalAlignment="Left" Height="454.068" Margin="0.4,-3.4,0,0" VerticalAlignment="Top" Width="1012.6" RadiusX="20" RadiusY="20"/>
             <ListView x:Name="ListThe" 
                       HorizontalAlignment="Stretch" 
                       Height="406" 

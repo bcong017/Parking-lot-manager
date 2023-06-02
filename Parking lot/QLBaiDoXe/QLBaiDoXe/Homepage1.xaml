@@ -58,7 +58,7 @@
             </Border>
             <TextBox x:Name="textBox2" HorizontalAlignment="Left" Height="30" Margin="48,353,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" TextChanged="textBox2_TextChanged"/>
         </Grid>
-        <Grid Margin="149,625,0,-23">
+        <Grid Margin="335,625,0,-23">
             <Rectangle Fill="White" HorizontalAlignment="Left" Height="72.8" RadiusY="15" RadiusX="15" VerticalAlignment="Top" Width="554.933"/>
 
             <TextBlock x:Name="dateIn_Copy1" HorizontalAlignment="Left" Height="18.8" Margin="30.4,23.7,0,0" TextWrapping="Wrap" Text="Số lượt xe vào: " VerticalAlignment="Top" Width="127.067" FontSize="16"/>
@@ -72,8 +72,8 @@
         <Image Margin="1202,617,5,4" Source="Resources/Image4.png" Stretch="Fill"/>
         <TextBlock Text="CÔNG TY THNM BÃI ĐỖ XE THÔNG MINH KYPS" HorizontalAlignment="Left" Height="18" Margin="927,637,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="274" FontWeight="Bold" FontFamily="Segoe UI"/>
         <TextBlock HorizontalAlignment="Left" Height="31" Margin="928,655,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="269" TextAlignment="Right" FontSize="10"><Run Text="Điện thoại: (094).8423.014"/><LineBreak/><Run Text="Email: 20520417@gm.uit.edu.vn"/><LineBreak/></TextBlock>
-        <TextBlock HorizontalAlignment="Left" Height="32" Margin="43,19,0,0" TextWrapping="Wrap" Text="F1 - Đổi loại xe làn vào" VerticalAlignment="Top" Width="233" FontSize="22" FontWeight="Medium"/>
-        <TextBlock x:Name="AdminWindows" HorizontalAlignment="Left" Height="31.2" Margin="507.6,18.7,0,0" TextWrapping="Wrap" Foreground="black" Text="F2 - Màn hình quản lý" VerticalAlignment="Top" Width="232.867" FontSize="22" FontWeight="Medium"/>
+        <TextBlock HorizontalAlignment="Left" Height="32" Margin="80,19,0,0" TextWrapping="Wrap" Text="F1 - Đổi loại xe làn vào" VerticalAlignment="Top" Width="233" FontSize="22" FontWeight="Medium"/>
+        
         <Button
           x:Name="LogoutBtn"
           Style="{StaticResource MaterialDesignFloatingActionLightButton}"
