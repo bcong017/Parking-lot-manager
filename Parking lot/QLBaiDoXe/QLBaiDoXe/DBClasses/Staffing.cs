@@ -360,7 +360,7 @@ namespace QLBaiDoXe.DBClasses
             return list;
         }
 
-        public class TempTimekeep: Timekeep
+        public class TempTimekeep: Timekeep   // Tạo class tạm để chứa dữ liệu
         {
             public int STT { get; set; }
             public TempTimekeep(Timekeep a, int b) {
