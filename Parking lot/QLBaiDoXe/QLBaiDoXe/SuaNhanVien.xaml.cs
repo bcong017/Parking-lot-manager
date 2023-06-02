@@ -26,7 +26,8 @@ namespace QLBaiDoXe
             { 
                 civilID = value; 
                 staff = new Staff();
-                List<Staff> list = new List<Staff>();  
+                List<Staff> list = new List<Staff>(); 
+                
                 list =  Staffing.FindStaffByCivilID(civilID); 
                 staff = list[0];
             }

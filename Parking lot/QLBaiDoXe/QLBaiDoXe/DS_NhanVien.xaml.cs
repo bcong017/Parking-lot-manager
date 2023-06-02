@@ -7,6 +7,7 @@ using QLBaiDoXe.ParkingLotModel;
 using System.Windows.Data;
 using System;
 using System.Globalization;
+using static QLBaiDoXe.DBClasses.Staffing;
 
 namespace QLBaiDoXe
 {
@@ -30,7 +31,7 @@ namespace QLBaiDoXe
         }
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            List<Staff> result = new List<Staff>();
+            List<TempStaff> result = new List<TempStaff>();
             lvNhanVien.ItemsSource = null;
             switch (cbxItem.Text)
             {
@@ -41,7 +42,7 @@ namespace QLBaiDoXe
                     result = Staffing.FindStaffByPhoneNumber(txbSearch.Text);
                     break;
                 case "Số CCCD":
-                    result = Staffing.FindStaffByCivilID(txbSearch.Text);
+                    result = Staffing.FindTempStaffByCivilID(txbSearch.Text);
                     break;
                 case "Chức vụ":
                     result = Staffing.FindStaffByRoleID(txbSearch.Text);

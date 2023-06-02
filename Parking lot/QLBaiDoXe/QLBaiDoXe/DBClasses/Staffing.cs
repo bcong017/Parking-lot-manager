@@ -6,6 +6,8 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Windows;
+using System.Windows.Automation.Peers;
+using System.Xml.Linq;
 
 namespace QLBaiDoXe.DBClasses
 {
@@ -239,14 +241,48 @@ namespace QLBaiDoXe.DBClasses
                 return false;
         }
 
-        public static List<Staff> GetAllStaff()
+        public class TempStaff: Staff
         {
-            return DataProvider.Ins.DB.Staffs.ToList();
+            public int STT { get; set; }
+            public TempStaff(Staff a, int b) {
+                this.STT = b;
+                this.StaffID = a.StaffID;
+                this.CivilID = a.CivilID;
+                this.StaffName = a.StaffName;
+                this.Role = a.Role;
+                this.RoleID = a.RoleID;
+                this.PhoneNumber = a.PhoneNumber;
+                this.StaffAddress = a.StaffAddress;
+                this.DateOfBirth = a.DateOfBirth;
+            }
         }
 
-        public static List<Staff> FindStaffByName(string name)
+        public static List<TempStaff> GetAllStaff()
         {
-            return DataProvider.Ins.DB.Staffs.Where(x => x.StaffName.Contains(name)).ToList();
+            var list = new List<TempStaff>();
+            int counter = 0;
+            foreach(var item in DataProvider.Ins.DB.Staffs.ToList())
+            {
+                counter++;
+                var temp = new TempStaff(item, counter);
+                list.Add(temp);
+            }
+
+            return list;
+        }
+
+        public static List<TempStaff> FindStaffByName(string name)
+        {
+            var list = new List<TempStaff>();
+            int counter = 0;
+            foreach (var item in DataProvider.Ins.DB.Staffs.Where(x => x.StaffName.Contains(name)).ToList())
+            {
+                counter++;
+                var temp = new TempStaff(item, counter);
+                list.Add(temp);
+            }
+
+            return list;
         }
 
         public static List<Staff> FindStaffByCivilID(string CivilID)
@@ -254,62 +290,208 @@ namespace QLBaiDoXe.DBClasses
             return DataProvider.Ins.DB.Staffs.Where(x => x.CivilID.Contains(CivilID)).ToList();
         }
 
-        public static List<Staff> FindStaffByRoleID(string Role)
+            public static List<TempStaff> FindTempStaffByCivilID(string CivilID)
         {
+            var list = new List<TempStaff>();
+            int counter = 0;
+            foreach (var item in DataProvider.Ins.DB.Staffs.Where(x => x.CivilID.Contains(CivilID)).ToList())
+            {
+                counter++;
+                var temp = new TempStaff(item, counter);
+                list.Add(temp);
+            }
+
+            return list;
+        }
+
+        public static List<TempStaff> FindStaffByRoleID(string Role)
+        {
+            var list = new List<TempStaff>();
+            int counter = 0;
             if (Role == "admin")
-                return DataProvider.Ins.DB.Staffs.Where(x => x.RoleID == 2).ToList();
-            if (Role == "staff")
-                return DataProvider.Ins.DB.Staffs.Where(x => x.RoleID == 1).ToList();
+            {
+                foreach (var item in DataProvider.Ins.DB.Staffs.Where(x => x.RoleID == 2).ToList())
+                {
+                    counter++;
+                    var temp = new TempStaff(item, counter);
+                    list.Add(temp);
+                }
+
+                return list;
+            }
+            else if (Role == "staff")
+            {
+                foreach (var item in DataProvider.Ins.DB.Staffs.Where(x => x.RoleID == 1).ToList())
+                {
+                    counter++;
+                    var temp = new TempStaff(item, counter);
+                    list.Add(temp);
+                }
+
+                return list;
+            }
             return null;
         }
 
-        public static List<Staff> FindStaffByPhoneNumber(string PhoneNumber)
+        public static List<TempStaff> FindStaffByPhoneNumber(string PhoneNumber)
         {
-            return DataProvider.Ins.DB.Staffs.Where(x => x.PhoneNumber.Contains(PhoneNumber)).ToList();
+            var list = new List<TempStaff>();
+            int counter = 0;
+            foreach (var item in DataProvider.Ins.DB.Staffs.Where(x => x.PhoneNumber.Contains(PhoneNumber)).ToList())
+            {
+                counter++;
+                var temp = new TempStaff(item, counter);
+                list.Add(temp);
+            }
+
+            return list;
         }
-        public static List<Staff> FindStaffByStaffAddress(string StaffAddress)
+        public static List<TempStaff> FindStaffByStaffAddress(string StaffAddress)
         {
-            return DataProvider.Ins.DB.Staffs.Where(x => x.StaffAddress.Contains(StaffAddress)).ToList();
+            var list = new List<TempStaff>();
+            int counter = 0;
+            foreach (var item in DataProvider.Ins.DB.Staffs.Where(x => x.StaffAddress.Contains(StaffAddress)).ToList())
+            {
+                counter++;
+                var temp = new TempStaff(item, counter);
+                list.Add(temp);
+            }
+
+            return list;
         }
 
-        public static List<Timekeep> GetAllTimekeeps()
+        public class TempTimekeep: Timekeep
         {
-            return DataProvider.Ins.DB.Timekeeps.ToList();
+            public int STT { get; set; }
+            public TempTimekeep(Timekeep a, int b) {
+                this.STT = b;
+                this.TimekeepID = a.TimekeepID;
+                this.StaffID = a.StaffID;
+                this.Staff = a.Staff;
+                this.LoginTime = a.LoginTime;
+                this.LogoutTime = a.LogoutTime;
+            }
         }
 
-        public static List<Timekeep> GetTimekeepForMonth(int month)
+        public static List<TempTimekeep> GetAllTimekeeps()
         {
-            return DataProvider.Ins.DB.Timekeeps.Where(x => x.LoginTime.Month == month).ToList();
-        }
-        public static List<Timekeep> GetTimekeepForDate(DateTime sdate, DateTime edate)
-        {
-            return DataProvider.Ins.DB.Timekeeps.Where(x => x.LoginTime >= sdate && x.LogoutTime <= edate).ToList();
-        }
-        public static List<Timekeep> GetTimekeepForStartDate( DateTime sdate)
-        {
-             return DataProvider.Ins.DB.Timekeeps.Where(x => x.LoginTime >= sdate).ToList();
-        }
-        public static List<Timekeep> GetTimekeepForStartDateAndName(string name, DateTime sdate)
-        {
-            return DataProvider.Ins.DB.Timekeeps.Where(x => x.Staff.StaffName.Contains(name) && x.LoginTime >= sdate).ToList();
-        }
-        public static List<Timekeep> GetTimekeepForEndDate(DateTime edate)
-        {
-            return DataProvider.Ins.DB.Timekeeps.Where(x => x.LogoutTime <= edate).ToList();
-        }
-        public static List<Timekeep> GetTimekeepForEndDateAndName(string name, DateTime edate)
-        {
-            return DataProvider.Ins.DB.Timekeeps.Where(x => x.Staff.StaffName.Contains(name) && x.LogoutTime <= edate).ToList();
-        }
-        public static List<Timekeep> GetTimekeepForStaff(string name)
-        {
-            return DataProvider.Ins.DB.Timekeeps.Where(x => x.Staff.StaffName.Contains(name)).ToList();
+            var list = new List<TempTimekeep>();
+            int counter = 0;
+            foreach(var item in DataProvider.Ins.DB.Timekeeps.ToList())
+            {
+                counter++;
+                var temp =new TempTimekeep(item, counter);
+                list.Add(temp);
+            }
+
+            return list;
         }
 
-        public static List<Timekeep> GetSpecificTimekeeps(string name, DateTime startDate, DateTime endDate)
+        public static List<TempTimekeep> GetTimekeepForMonth(int month)
         {
-            return DataProvider.Ins.DB.Timekeeps.Where(x => x.Staff.StaffName.Contains(name)
-                                                    && x.LoginTime >= startDate && x.LogoutTime <= endDate).ToList();
+            var list = new List<TempTimekeep>();
+            int counter = 0;
+            foreach (var item in DataProvider.Ins.DB.Timekeeps.Where(x => x.LoginTime.Month == month).ToList())
+            {
+                counter++;
+                var temp = new TempTimekeep(item, counter);
+                list.Add(temp);
+            }
+
+            return list;
+        }
+        public static List<TempTimekeep> GetTimekeepForDate(DateTime sdate, DateTime edate)
+        {
+            var list = new List<TempTimekeep>();
+            int counter = 0;
+            foreach (var item in DataProvider.Ins.DB.Timekeeps.Where(x => x.LoginTime >= sdate && x.LogoutTime <= edate).ToList())
+            {
+                counter++;
+                var temp = new TempTimekeep(item, counter);
+                list.Add(temp);
+            }
+
+            return list;
+        }
+        public static List<TempTimekeep> GetTimekeepForStartDate( DateTime sdate)
+        {
+            var list = new List<TempTimekeep>();
+            int counter = 0;
+            foreach (var item in DataProvider.Ins.DB.Timekeeps.Where(x => x.LoginTime >= sdate).ToList())
+            {
+                counter++;
+                var temp = new TempTimekeep(item, counter);
+                list.Add(temp);
+            }
+
+            return list;
+        }
+        public static List<TempTimekeep> GetTimekeepForStartDateAndName(string name, DateTime sdate)
+        {
+            var list = new List<TempTimekeep>();
+            int counter = 0;
+            foreach (var item in DataProvider.Ins.DB.Timekeeps.Where(x => x.Staff.StaffName.Contains(name) && x.LoginTime >= sdate).ToList())
+            {
+                counter++;
+                var temp = new TempTimekeep(item, counter);
+                list.Add(temp);
+            }
+
+            return list;
+        }
+        public static List<TempTimekeep> GetTimekeepForEndDate(DateTime edate)
+        {
+            var list = new List<TempTimekeep>();
+            int counter = 0;
+            foreach (var item in DataProvider.Ins.DB.Timekeeps.Where(x => x.LogoutTime <= edate).ToList())
+            {
+                counter++;
+                var temp = new TempTimekeep(item, counter);
+                list.Add(temp);
+            }
+
+            return list;
+        }
+        public static List<TempTimekeep> GetTimekeepForEndDateAndName(string name, DateTime edate)
+        {
+            var list = new List<TempTimekeep>();
+            int counter = 0;
+            foreach (var item in DataProvider.Ins.DB.Timekeeps.Where(x => x.Staff.StaffName.Contains(name) && x.LogoutTime <= edate).ToList())
+            {
+                counter++;
+                var temp = new TempTimekeep(item, counter);
+                list.Add(temp);
+            }
+
+            return list;
+        }
+        public static List<TempTimekeep> GetTimekeepForStaff(string name)
+        {
+            var list = new List<TempTimekeep>();
+            int counter = 0;
+            foreach (var item in DataProvider.Ins.DB.Timekeeps.Where(x => x.Staff.StaffName.Contains(name)).ToList())
+            {
+                counter++;
+                var temp = new TempTimekeep(item, counter);
+                list.Add(temp);
+            }
+
+            return list;
+        }
+
+        public static List<TempTimekeep> GetSpecificTimekeeps(string name, DateTime startDate, DateTime endDate)
+        {
+            var list = new List<TempTimekeep>();
+            int counter = 0;
+            foreach (var item in DataProvider.Ins.DB.Timekeeps.Where(x => x.Staff.StaffName.Contains(name)
+                                                    && x.LoginTime >= startDate && x.LogoutTime <= endDate).ToList())
+            {
+                counter++;
+                var temp = new TempTimekeep(item, counter);
+                list.Add(temp);
+            }
+
+            return list;
         }
 
         public static string GetAccountNameFromStaff(Staff staff)

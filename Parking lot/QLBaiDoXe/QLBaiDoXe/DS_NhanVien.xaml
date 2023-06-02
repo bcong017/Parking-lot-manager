@@ -24,6 +24,13 @@
                 </ListView.ItemContainerStyle>
                 <ListView.View >
                     <GridView >
+                        <GridViewColumn Header="STT">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding STT}" HorizontalAlignment="Center" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                         <GridViewColumn Header="ID">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
@@ -101,7 +108,7 @@
         <TextBlock Text="CÔNG TY THNM BÃI ĐỖ XE THÔNG MINH KYPS" HorizontalAlignment="Left" Height="18.8" Margin="661.853,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="273.667" FontWeight="Bold" FontFamily="Segoe UI"/>
         <Image Margin="940.52,2.8,3.813,620.4" Source="Resources/Image4.png" Height="96.8" Stretch="Fill"/>
         <TextBlock HorizontalAlignment="Left" Height="31.05" Margin="663.353,43.8,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="268.667" TextAlignment="Right" FontSize="10"><Run Text="Điện thoại: (094).8423.014"/><LineBreak/><Run Text="Email: 20520417@gm.uit.edu.vn"/><LineBreak/></TextBlock>
-        <Button Content="Làm mới" HorizontalAlignment="Left" Height="36" Margin="854,250,0,0" VerticalAlignment="Top" Width="131" Foreground="White" FontSize="16" Click="btnUpdate_Click"/>
+        
 
     </Grid>
 </UserControl>
