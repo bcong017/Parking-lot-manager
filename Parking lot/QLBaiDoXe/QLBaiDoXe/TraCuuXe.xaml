@@ -83,7 +83,7 @@
             </ComboBox>
 
         </Grid>
-        <Grid Margin="10,236,16.4,31.332">
+        <Grid Margin="10,225,16.4,45">
             <Rectangle Fill="White" RadiusX="20" RadiusY="20"/>
             <ListView x:Name="lvResult" 
                       ScrollViewer.HorizontalScrollBarVisibility="Visible" >
