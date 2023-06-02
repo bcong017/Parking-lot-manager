@@ -9,13 +9,9 @@
         mc:Ignorable="d"
         Height="720" Width="1039">
     <Grid Background="#80FFA03F">
-        <Grid Margin="10,225,10,14.332">
-            <Rectangle Fill="White" HorizontalAlignment="Left" Height="454.068" Margin="0.4,-3.4,0,0" VerticalAlignment="Top" Width="1012.6" RadiusX="20" RadiusY="20"/>
-            <ListView x:Name="ListThe" 
-                      HorizontalAlignment="Stretch" 
-                      Height="406" 
-                      VerticalAlignment="Top" 
-                      Width="1012.6">
+        <Grid Margin="10,225,10,43">
+            <Rectangle Fill="White" RadiusX="20" RadiusY="20"/>
+            <ListView x:Name="ListThe" ScrollViewer.HorizontalScrollBarVisibility="Visible">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -54,7 +50,7 @@
                     </GridView>
                 </ListView.View>
             </ListView>
-            <Button Content="Xoá" HorizontalAlignment="Left" Height="35.474" Margin="829,415.194,0,0" VerticalAlignment="Top" Width="127.6" Foreground="White" FontSize="16" Background="#FFFF3F3F" Click="Button_Click_1"/>
+            <Button Content="Xoá" HorizontalAlignment="Left" Height="36" Margin="829,403,0,0" VerticalAlignment="Top" Width="128" Foreground="White" FontSize="16" Background="#FFFF3F3F" Click="Button_Click_1"/>
 
 
         </Grid>
