@@ -47,6 +47,11 @@ namespace QLBaiDoXe
                 else
                 {
                     Homepage1 homepage = new Homepage1();
+                    foreach ( var item in DataProvider.Ins.DB.Vehicles.Where(x => x.VehicleState == 1).ToList())
+                    {
+                        item.StaffID = MainWindow.currentUser.StaffID;
+                    }
+                    DataProvider.Ins.DB.SaveChanges();
                     homepage.Show();
                     this.Close();
                 }
@@ -74,7 +79,12 @@ namespace QLBaiDoXe
                     else
                     {
                         Homepage1 homepage = new Homepage1();
+                        foreach (var item in DataProvider.Ins.DB.Vehicles.Where(x => x.VehicleState == 1).ToList())
+                        {
+                            item.StaffID = MainWindow.currentUser.StaffID;
+                        }
                         homepage.Show();
+                        DataProvider.Ins.DB.SaveChanges();
                         this.Close();
                     }
                 }

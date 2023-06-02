@@ -24,7 +24,7 @@ namespace QLBaiDoXe.DBClasses
                     VehicleImage = imagePath,
                     VehicleState = 1,
                     TimeStartedParking = DateTime.Now,
-                    //ParkingCard = DataProvider.Ins.DB.ParkingCards.FirstOrDefault(x => x.ParkingCardID == cardId),
+                    StaffID = MainWindow.currentUser.StaffID,
                     VehicleType = type,
                     VehicleTypeID = type.VehicleTypeID
                 };
