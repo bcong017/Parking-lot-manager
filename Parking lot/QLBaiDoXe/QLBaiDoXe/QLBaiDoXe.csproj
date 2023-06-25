@@ -89,7 +89,9 @@
     <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.19\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
     </Reference>
-    <Reference Include="System" />
+    <Reference Include="System">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.dll</HintPath>
+    </Reference>
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
     </Reference>
@@ -143,6 +145,8 @@
     </Compile>
     <Compile Include="Classes\BitmapHelper.cs" />
     <Compile Include="Classes\BitmapImageConvert.cs" />
+    <Compile Include="Classes\BoolToValueConverter.cs" />
+    <Compile Include="Classes\Validation.cs" />
     <Compile Include="DBClasses\Staffing.cs" />
     <Compile Include="DBClasses\Cards.cs" />
     <Compile Include="DBClasses\ParkingVehicle.cs" />
@@ -193,6 +197,9 @@
     <Compile Include="SuaNhanVien.xaml.cs">
       <DependentUpon>SuaNhanVien.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ThayDoiMatKhau.xaml.cs">
+      <DependentUpon>ThayDoiMatKhau.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ThemNhanVien.xaml.cs">
       <DependentUpon>ThemNhanVien.xaml</DependentUpon>
     </Compile>
@@ -203,13 +210,10 @@
       <DependentUpon>TraCuuXe.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\AdminViewModel.cs" />
-    <Compile Include="ViewModel\BangChamCongViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
-    <Compile Include="ViewModel\DSNhanVienViewModel.cs" />
-    <Compile Include="ViewModel\HomePage1ViewModel.cs" />
-    <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\NotifyErrorInfoViewModel.cs" />
+    <Compile Include="ViewModel\NotifyErrorPasswordChange.cs" />
     <Compile Include="ViewModel\NotifyErrorVewModel1.cs" />
     <Compile Include="ViewModel\NotifyErrorViewModel2.cs" />
     <Compile Include="ViewUserControl\SwitchViewClass\SwichViewXe.cs" />
@@ -282,6 +286,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ThayDoiMatKhau.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ThemNhanVien.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -351,7 +359,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Model\" />
+    <Folder Include="CarPic\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AForge lib\AForge.dll" />

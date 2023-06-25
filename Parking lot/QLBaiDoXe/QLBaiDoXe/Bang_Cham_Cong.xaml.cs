@@ -1,6 +1,8 @@
-﻿using QLBaiDoXe.DBClasses;
+﻿using Microsoft.SqlServer.Server;
+using QLBaiDoXe.DBClasses;
 using QLBaiDoXe.ViewModel;
 using System;
+using System.Globalization;
 using System.Windows.Controls;
 
 namespace QLBaiDoXe
@@ -13,104 +15,63 @@ namespace QLBaiDoXe
         public Bang_Cham_Cong()
         {
             InitializeComponent();
-            this.DataContext = new BangChamCongViewModel();
-            TimekeepLV.ItemsSource = Staffing.GetTimekeepForMonth(DateTime.Now.Month);
-            StartDateDP.Text = EndDateDP.Text = DateTime.Now.Date.ToString();
+            dpStartDate.Text = dpEndDate.Text = DateTime.Now.Date.ToString();
+            dpStartDate.DisplayDateStart = Staffing.GetFirstLogin();
+            dpStartDate.DisplayDateEnd = Staffing.GetLastLogin();
+            dpEndDate.DisplayDateEnd = dpStartDate.DisplayDateEnd;
         }
 
         private void StaffNameTxb_TextChanged(object sender, TextChangedEventArgs e)
         {
-            
-            if (string.IsNullOrEmpty(StartDateDP.Text) || string.IsNullOrEmpty(EndDateDP.Text))
-                TimekeepLV.ItemsSource = Staffing.GetTimekeepForStaff(StaffNameTxb.Text);
-            else
+
+            if (string.IsNullOrEmpty(dpStartDate.Text) || string.IsNullOrEmpty(dpEndDate.Text))
+                lvTimekeep.ItemsSource = Staffing.GetTimekeepForStaff(txbStaffName.Text);
+            else if (DateTime.TryParseExact(dpStartDate.Text + " 00:00:00", "d/M/yyyy HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime startDate)
+                && DateTime.TryParseExact(dpEndDate.Text + " 23:59:59", "d/M/yyyy HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime endDate))
             {
-                string sdMonth = StartDateDP.Text.Split('/')[1];
-                string sdDay = StartDateDP.Text.Split('/')[0];
-                string sdYear = StartDateDP.Text.Split('/')[2];
-                string edMonth = EndDateDP.Text.Split('/')[1];
-                string edDay = EndDateDP.Text.Split('/')[0];
-                string edYear = EndDateDP.Text.Split('/')[2];
-                if (int.TryParse(sdYear, out int sdYearNum) && int.TryParse(sdMonth, out int sdMonthNum) && int.TryParse(sdDay, out int sdDayNum)
-                    && int.TryParse(edYear, out int edYearNum) && int.TryParse(edMonth, out int edMonthNum) && int.TryParse(edDay, out int edDayNum))
-                {
-                    DateTime startDate = new DateTime(sdYearNum, sdMonthNum, sdDayNum, 0, 0, 0);
-                    DateTime endDate = new DateTime(edYearNum, edMonthNum, edDayNum, 0, 0, 0);
-                    TimekeepLV.ItemsSource = Staffing.GetSpecificTimekeeps(StaffNameTxb.Text, startDate, endDate);
-                }
-                
+                lvTimekeep.ItemsSource = Staffing.GetSpecificTimekeeps(txbStaffName.Text, startDate, endDate);
             }
         }
 
         private void StartDateDP_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
-        { 
-                string sdMonth = StartDateDP.Text.Split('/')[1];
-                string sdDay = StartDateDP.Text.Split('/')[0];
-                string sdYear = StartDateDP.Text.Split('/')[2];
-            if (!string.IsNullOrEmpty(EndDateDP.Text))
+        {
+            if (string.IsNullOrWhiteSpace(dpStartDate.Text) == false
+                && DateTime.TryParseExact(dpStartDate.Text + " 00:00:00", "d/M/yyyy HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime startDate))
             {
-                string edMonth = EndDateDP.Text.Split('/')[1];
-                string edDay = EndDateDP.Text.Split('/')[0];
-                string edYear = EndDateDP.Text.Split('/')[2];
-
-                if (int.TryParse(sdYear, out int sdYearNum) && int.TryParse(sdMonth, out int sdMonthNum) && int.TryParse(sdDay, out int sdDayNum)
-                    && int.TryParse(edYear, out int edYearNum) && int.TryParse(edMonth, out int edMonthNum) && int.TryParse(edDay, out int edDayNum))
+                dpEndDate.DisplayDateStart = startDate;
+                if (dpEndDate.SelectedDate?.CompareTo(startDate) < 0)
                 {
-                    DateTime startDate = new DateTime(sdYearNum, sdMonthNum, sdDayNum, 0, 0, 0);
-                    DateTime endDate = new DateTime(edYearNum, edMonthNum, edDayNum, 23, 59, 59);
-                    if (!string.IsNullOrEmpty(StaffNameTxb.Text))
-                        TimekeepLV.ItemsSource = Staffing.GetSpecificTimekeeps(StaffNameTxb.Text, startDate, endDate);
-                    else
-                        TimekeepLV.ItemsSource = Staffing.GetTimekeepForDate(startDate, endDate);
+                    dpEndDate.SelectedDate = startDate.Date;
                 }
-            }
-            else
-            {
-                if (int.TryParse(sdYear, out int sdYearNum) && int.TryParse(sdMonth, out int sdMonthNum) && int.TryParse(sdDay, out int sdDayNum))
+                DateTime endDate = DateTime.MinValue;
+                bool hasEndDate = string.IsNullOrWhiteSpace(dpEndDate.Text) == false
+                    && DateTime.TryParseExact(dpEndDate.Text + " 23:59:59", "d/M/yyyy HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out endDate);
+                if (string.IsNullOrWhiteSpace(txbStaffName.Text) == false)
                 {
-                    DateTime startDate = new DateTime(sdYearNum, sdMonthNum, sdDayNum, 0, 0, 0);
-
-                    if (!string.IsNullOrEmpty(StaffNameTxb.Text))
-                        TimekeepLV.ItemsSource = Staffing.GetTimekeepForStartDate(startDate);
-                    else
-                        TimekeepLV.ItemsSource = Staffing.GetTimekeepForStartDateAndName(StaffNameTxb.Text,startDate);
+                    lvTimekeep.ItemsSource = hasEndDate ? Staffing.GetSpecificTimekeeps(txbStaffName.Text, startDate, endDate) : Staffing.GetTimekeepForStartDateAndName(txbStaffName.Text, startDate);
+                }
+                else
+                {
+                    lvTimekeep.ItemsSource = hasEndDate ? Staffing.GetTimekeepForDate(startDate, endDate) : Staffing.GetTimekeepForStartDate(startDate);
                 }
             }
         }
 
         private void EndDateDP_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-                
-                string edMonth = EndDateDP.Text.Split('/')[1];
-                string edDay = EndDateDP.Text.Split('/')[0];
-                string edYear = EndDateDP.Text.Split('/')[2];
-            if (!string.IsNullOrEmpty(StartDateDP.Text))
+            if (string.IsNullOrWhiteSpace(dpEndDate.Text) == false
+                && DateTime.TryParseExact(dpEndDate.Text + " 23:59:59", "d/M/yyyy HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime endDate))
             {
-                string sdMonth = StartDateDP.Text.Split('/')[1];
-                string sdDay = StartDateDP.Text.Split('/')[0];
-                string sdYear = StartDateDP.Text.Split('/')[2];
-
-                if (int.TryParse(sdYear, out int sdYearNum) && int.TryParse(sdMonth, out int sdMonthNum) && int.TryParse(sdDay, out int sdDayNum)
-                    && int.TryParse(edYear, out int edYearNum) && int.TryParse(edMonth, out int edMonthNum) && int.TryParse(edDay, out int edDayNum))
+                DateTime startDate = DateTime.MinValue;
+                bool hasStartDate = string.IsNullOrWhiteSpace(dpStartDate.Text) == false
+                    && DateTime.TryParseExact(dpStartDate.Text + " 00:00:00", "d/M/yyyy HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out startDate);
+                if (string.IsNullOrWhiteSpace(txbStaffName.Text) == false)
                 {
-                    DateTime startDate = new DateTime(sdYearNum, sdMonthNum, sdDayNum, 0, 0, 0);
-                    DateTime endDate = new DateTime(edYearNum, edMonthNum, edDayNum, 23, 59, 59);
-                    if (!string.IsNullOrEmpty(StaffNameTxb.Text))
-                        TimekeepLV.ItemsSource = Staffing.GetSpecificTimekeeps(StaffNameTxb.Text, startDate, endDate);
-                    else
-                        TimekeepLV.ItemsSource = Staffing.GetTimekeepForDate(startDate, endDate);
+                    lvTimekeep.ItemsSource = hasStartDate ? Staffing.GetSpecificTimekeeps(txbStaffName.Text, startDate, endDate) : Staffing.GetTimekeepForEndDateAndName(txbStaffName.Text, endDate);
                 }
-            }
-            else
-            {
-                if (int.TryParse(edYear, out int edYearNum) && int.TryParse(edMonth, out int edMonthNum) && int.TryParse(edDay, out int edDayNum))
+                else
                 {
-                    DateTime endDate = new DateTime(edYearNum, edMonthNum, edDayNum, 23, 59, 59);
-
-                    if (!string.IsNullOrEmpty(StaffNameTxb.Text))
-                        TimekeepLV.ItemsSource = Staffing.GetTimekeepForEndDate(endDate);
-                    else
-                        TimekeepLV.ItemsSource = Staffing.GetTimekeepForEndDateAndName(StaffNameTxb.Text, endDate);
+                    lvTimekeep.ItemsSource = hasStartDate ? Staffing.GetTimekeepForDate(startDate, endDate) : Staffing.GetTimekeepForEndDate(endDate);
                 }
             }
         }

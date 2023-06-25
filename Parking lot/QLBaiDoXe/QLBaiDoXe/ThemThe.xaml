@@ -25,24 +25,22 @@
             </Grid.ColumnDefinitions>
             <TextBlock HorizontalAlignment="Left" Height="44.8" Margin="6.8,55.472,0,0" TextWrapping="Wrap" Text="Hãy quét thẻ vào để thêm:" VerticalAlignment="Top" Width="259.2" FontSize="22" RenderTransformOrigin="0.522,0.429" Grid.ColumnSpan="2"/>
             <materialDesign:PackIcon Kind="CreditCardSwipeOutline" HorizontalAlignment="Left" Height="53.6" Margin="30.161,46.672,0,0" VerticalAlignment="Top" Width="53.6" RenderTransformOrigin="0.91,0.164" Grid.Column="2"/>
-            <ComboBox x:Name="TypeCbx" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="75,10,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1" SelectedIndex="0">
+            <ComboBox x:Name="cbxType" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="75,10,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1" SelectedIndex="0">
                 <ComboBoxItem Content="Thẻ vãng lai" />
                 <ComboBoxItem Content="Thẻ tháng" />
             </ComboBox>
             <TextBlock Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="25" Margin="23,14,0,0" TextWrapping="Wrap" Text="Loại thẻ:" VerticalAlignment="Top" Width="109" Grid.Column="1" />
         </Grid>
         <TextBlock HorizontalAlignment="Left" Height="44.8" Margin="10,12.156,0,-4.828" TextWrapping="Wrap" FontWeight="Light" Text="Hoặc nhập trực tiếp ở đây:" VerticalAlignment="Top" Width="213.775" FontSize="16" RenderTransformOrigin="0.522,0.429" Grid.Row="1" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="CardID" materialDesign:HintAssist.Hint="Nhập mã thẻ" 
+        <TextBox x:Name="txbCardID" materialDesign:HintAssist.Hint="Nhập mã thẻ" 
                  HorizontalAlignment="Left" Height="39.946" Margin="0,8.156,0,0" 
                  TextWrapping="Wrap" VerticalAlignment="Top" Width="152.092" FontSize="16" 
                  Grid.Column="1" Grid.Row="1" Foreground="#FFE27200" 
                  TextChanged="TextBox_TextChanged"
+                 PreviewTextInput="CardID_PreviewTextInput"
+                 PreviewKeyDown="CardID_PreviewKeyDown"
                  />
-        <Button
-          Content="{materialDesign:PackIcon Kind=Check}"
-          ToolTip="Icon"
-          IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Margin="166.792,12.155,12.934,7.972" Grid.Column="1" Grid.Row="1" Padding="0" Foreground="White" />
-        <TextBlock HorizontalAlignment="Left" Height="24.933" Margin="10,10,0,0" TextWrapping="Wrap" Text="Huỷ nhập thẻ" VerticalAlignment="Top" Width="86.667" TextDecorations="Underline" Foreground="#FFFFA03F" MouseLeftButtonUp="TextBlock_MouseLeftButtonUp"/>
+        <TextBlock x:Name="txblCancel" HorizontalAlignment="Left" Height="24.933" Margin="10,10,0,0" TextWrapping="Wrap" Text="Huỷ nhập thẻ" VerticalAlignment="Top" Width="86.667" TextDecorations="Underline" Foreground="#FFFFA03F" MouseLeftButtonUp="TextBlock_MouseLeftButtonUp"/>
         <Grid x:Name="Failed" Grid.ColumnSpan="2" d:IsHidden="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="102*"/>

@@ -41,12 +41,12 @@ namespace QLBaiDoXe
             set => SetProperty(ref taiKhoan, value);
         }
 
-        private string matKhau;
-        public string MatKhau
-        {
-            get => matKhau;
-            set => SetProperty(ref matKhau, value);
-        }
+        //private string matKhau;
+        //public string MatKhau
+        //{
+        //    get => matKhau;
+        //    set => SetProperty(ref matKhau, value);
+        //}
 
 
         public RelayCommand SubmitCommand { get; }
@@ -59,7 +59,6 @@ namespace QLBaiDoXe
             Validate(nameof(CCCD));
             Validate(nameof(ChucVu));
             Validate(nameof(TaiKhoan));
-            Validate(nameof(MatKhau));
 
         }
 
@@ -135,19 +134,6 @@ namespace QLBaiDoXe
                         ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(nameof(TaiKhoan)));
                     }
                     break;
-
-                case nameof(MatKhau):
-                    if (string.IsNullOrWhiteSpace(MatKhau))
-                    {
-                        _ValidationErrorsByProperty[nameof(MatKhau)] = new List<object> { " Trường dữ liệu bắt buộc." };
-                        ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(nameof(MatKhau)));
-                    }
-                    else if (_ValidationErrorsByProperty.Remove(nameof(MatKhau)))
-                    {
-                        ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(nameof(MatKhau)));
-                    }
-                    break;
-
 
             }
             SubmitCommand.NotifyCanExecuteChanged();

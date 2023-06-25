@@ -9,12 +9,12 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
-using QLBaiDoXe.ViewModel;
 using QLBaiDoXe.Classes;
 using AForge.Video;
 using AForge.Video.DirectShow;
 using QLBaiDoXe.ParkingLotModel;
 using QLBaiDoXe.DBClasses;
+using System.IO;
 
 namespace QLBaiDoXe
 {
@@ -27,13 +27,12 @@ namespace QLBaiDoXe
         public Homepage1()
         {
             InitializeComponent();
-            this.DataContext = new HomePage1ViewModel();
             GetVideoDevices();
             StartCamera();
             this.Closing += Homepage1_Closing;
-            VehicleIn_num.Text = DBClasses.ParkingVehicle.GetVehicleInNumber(date).ToString();
-            VehicleOut_num.Text = DBClasses.ParkingVehicle.GetVehicleOutNumber(date).ToString();
-            VehicleParked_num.Text = DBClasses.ParkingVehicle.GetParkedVehicleNumber().ToString();
+            txblAmoutIn.Text = ParkingVehicle.GetVehicleInNumber(date).ToString();
+            txblAmountOut.Text = ParkingVehicle.GetVehicleOutNumber(date).ToString();
+            txblAmountParked.Text = ParkingVehicle.GetParkedVehicleNumber().ToString();
         }
 
         private void Homepage1_Closing(object sender, CancelEventArgs e)
@@ -110,7 +109,7 @@ namespace QLBaiDoXe
                     bi = bitmap.ToBitmapImage();
                 }
                 bi.Freeze(); // avoid cross thread operations and prevents leaks
-                Dispatcher.BeginInvoke(new ThreadStart(delegate { videoPlayer.Source = bi; }));
+                Dispatcher.BeginInvoke(new ThreadStart(delegate { imgCarIn.Source = bi; }));
             }
             catch (Exception exc)
             {
@@ -127,7 +126,7 @@ namespace QLBaiDoXe
                     bi = bitmap.ToBitmapImage();
                 }
                 bi.Freeze(); // avoid cross thread operations and prevents leaks
-                Dispatcher.BeginInvoke(new ThreadStart(delegate { videoPlayer1.Source = bi; }));
+                Dispatcher.BeginInvoke(new ThreadStart(delegate { imgCarOut.Source = bi; }));
             }
             catch (Exception exc)
             {
@@ -154,10 +153,10 @@ namespace QLBaiDoXe
 
         private void textBox1_TextChanged(object sender, TextChangedEventArgs e)
         {
-            image2.Source = null;
-            if (textBox1.Text.Length == 10)
+            imgCarOutPlate.Source = null;
+            if (txbCardIn.Text.Length == 10)
             {
-                string ID = (textBox1.Text).Trim();
+                string ID = (txbCardIn.Text).Trim();
                 long ID_temp = long.Parse(ID);
                 if (DataProvider.Ins.DB.ParkingCards.Any(x => x.ParkingCardID == ID_temp))
                 {
@@ -168,33 +167,39 @@ namespace QLBaiDoXe
                             new Action(() => MessageBox.Show("Thẻ đã được sử dụng", "Lưu ý",
                             MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK, MessageBoxOptions.ServiceNotification)), DispatcherPriority.ApplicationIdle
                             );
-                        textBox1.Clear();
+                        txbCardIn.Clear();
                     }
                     else
                     {
                         try
                         {
-                            textBox1.Clear();
+                            txbCardIn.Clear();
 
-                            image1.Source = videoPlayer.Source;
-                            BitmapImage temp = (BitmapImage)image1.Source;
+                            imgCarInPlate.Source = imgCarIn.Source;
+                            BitmapImage temp = (BitmapImage)imgCarInPlate.Source;
                             Bitmap temp1 = BitmapImageConvert.BitmapImage2Bitmap(temp);
 
-                            dateIn.Text = DateTime.Now.Day.ToString() + "/" + DateTime.Now.Month.ToString() + "/" + DateTime.Now.Year.ToString();
-                            timeIn.Text = DateTime.Now.Hour.ToString() + ":" + DateTime.Now.Minute.ToString() + ":" + DateTime.Now.Second.ToString(); dateOut_Copy.Text = DateTime.Now.Day.ToString() + "/" + DateTime.Now.Month.ToString() + "/" + DateTime.Now.Year.ToString();
-                            dateOut_Copy.Text = "--/--/----";
-                            timeOut_Copy.Text = "00:00:00";
-                            dateIn_Copy.Text = "--/--/----";
-                            timeIn_Copy.Text = "00:00:00";
-                            vehiclePlate_Copy2.Text = "------";
-                            priceTag_Copy.Text = "------" + " đồng";
+                            txblDateIn.Text = DateTime.Now.Day.ToString() + "/" + DateTime.Now.Month.ToString() + "/" + DateTime.Now.Year.ToString();
+                            txblTimeIn.Text = DateTime.Now.Hour.ToString() + ":" + DateTime.Now.Minute.ToString() + ":" + DateTime.Now.Second.ToString(); txblDateOut.Text = DateTime.Now.Day.ToString() + "/" + DateTime.Now.Month.ToString() + "/" + DateTime.Now.Year.ToString();
+                            txblDateOut.Text = "--/--/----";
+                            txblTimeOut.Text = "00:00:00";
+                            txblDateInCheckOut.Text = "--/--/----";
+                            txblTimeInCheckOut.Text = "00:00:00";
+                            txblTypeOut.Text = "------";
+                            txblPriceTagOut.Text = "------" + " đồng";
 
-                            string path = @"C:\Users\Admin\Pictures\DA" + DateTime.Now.ToString().Replace(':', '_').Replace('/', '_') + ".jpg";
-                            DBClasses.ParkingVehicle.VehicleIn(vehiclePlate_Copy.Text.ToString().Trim(), long.Parse(ID), path);
+                            string projectDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
+                            string carPicFolderPath = Path.Combine(projectDirectory, "CarPic");
+
+                            //string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Pictures", $"DA{DateTime.Now.ToString("dd_MM_yyyy HH_mm_ss tt")}.jpg");
+                            string fileName = $"DA{DateTime.Now.ToString("dd_MM_yyyy HH_mm_ss tt")}.jpg";
+                            string path = Path.Combine(carPicFolderPath, fileName);
+
+                            DBClasses.ParkingVehicle.VehicleIn(txblTypeIn.Text.ToString().Trim(), long.Parse(ID), fileName);
                             temp1.Save(path);
 
-                            VehicleIn_num.Text = DBClasses.ParkingVehicle.GetVehicleInNumber(date).ToString();
-                            VehicleParked_num.Text = DBClasses.ParkingVehicle.GetParkedVehicleNumber().ToString();
+                            txblAmoutIn.Text = ParkingVehicle.GetVehicleInNumber(date).ToString();
+                            txblAmountParked.Text = ParkingVehicle.GetParkedVehicleNumber().ToString();
                         }
                         catch (Exception ex)
                         {
@@ -206,9 +211,10 @@ namespace QLBaiDoXe
                 {
                     Dispatcher.BeginInvoke
                             (
-                            new Action(() => MessageBox.Show("Thẻ không tồn tại", "Lỗi!"))
+                            new Action(() => MessageBox.Show("Thẻ không tồn tại", "Lỗi!", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK, MessageBoxOptions.ServiceNotification)),
+                            DispatcherPriority.ApplicationIdle
                             );
-                    textBox1.Clear();
+                    txbCardIn.Clear();
                 }
 
             }
@@ -216,49 +222,56 @@ namespace QLBaiDoXe
 
         private void textBox2_TextChanged(object sender, TextChangedEventArgs e)
         {
-            image1.Source = null;
-            if (textBox2.Text.Length == 10)
+            imgCarInPlate.Source = null;
+            if (txbCardOut.Text.Length == 10)
             {
-                string ID = (textBox2.Text).Trim();
-                if (DBClasses.Cards.CheckCardState(long.Parse(ID)) == 0)
+                string ID = (txbCardOut.Text).Trim();
+                long ID_temp = long.Parse(ID);
+                if (DataProvider.Ins.DB.ParkingCards.Any(x => x.ParkingCardID == ID_temp))
                 {
-                    Dispatcher.BeginInvoke
-                        (
-                        new Action(() => MessageBox.Show("Thẻ chưa được sử dụng", "Lỗi!", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK, MessageBoxOptions.ServiceNotification)),
-                        DispatcherPriority.ApplicationIdle
-                        );
-                    textBox2.Clear();
-                }
-                else
-                {
-                    //try
+                    if (DBClasses.Cards.CheckCardState(long.Parse(ID)) == 0)
                     {
-                        textBox2.Clear();
-
-                        long ID_temp = long.Parse(ID);
-                        var vehicle = DataProvider.Ins.DB.Vehicles.FirstOrDefault(x => x.ParkingCardID == ID_temp && x.VehicleState == 1);
-                        string path = vehicle.VehicleImage;
-                        Uri imgDir = new Uri(path);
-                        image2.Source = new BitmapImage(imgDir);
-
-                        dateOut_Copy.Text = DateTime.Now.Day.ToString() + "/" + DateTime.Now.Month.ToString() + "/" + DateTime.Now.Year.ToString();
-                        timeOut_Copy.Text = DateTime.Now.Hour.ToString() + ":" + DateTime.Now.Minute.ToString() + ":" + DateTime.Now.Second.ToString();
-                        dateIn_Copy.Text = vehicle.TimeStartedParking.Day.ToString() + "/" + vehicle.TimeStartedParking.Month.ToString() + "/" + vehicle.TimeStartedParking.Year.ToString();
-                        timeIn_Copy.Text = vehicle.TimeStartedParking.Hour.ToString() + ":" + vehicle.TimeStartedParking.Minute.ToString() + ":" + vehicle.TimeStartedParking.Second.ToString();
-                        dateIn.Text = "--/--/----";
-                        timeIn.Text = "00:00:00";
-                        vehiclePlate_Copy2.Text = vehicle.VehicleType.VehicleTypeName;
-                        priceTag_Copy.Text = vehicle.VehicleType.ParkingFee.ToString() + " đồng";
-
-                        DBClasses.ParkingVehicle.VehicleOut(long.Parse(ID), MainWindow.currentUser.StaffID);
-
-                        VehicleOut_num.Text = DBClasses.ParkingVehicle.GetVehicleOutNumber(date).ToString();
-                        VehicleParked_num.Text = DBClasses.ParkingVehicle.GetParkedVehicleNumber().ToString();
+                        Dispatcher.BeginInvoke
+                            (
+                            new Action(() => MessageBox.Show("Thẻ chưa được sử dụng", "Lỗi!", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK, MessageBoxOptions.ServiceNotification)),
+                            DispatcherPriority.ApplicationIdle
+                            );
+                        txbCardOut.Clear();
                     }
-                    //catch (Exception ex)
-                    //{
-                    //    MessageBox.Show("Phần mềm bị lỗi: " + ex.Message + " Vui lòng liên hệ nhân viên bảo trì để biết thêm chi tiết", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK, MessageBoxOptions.ServiceNotification);
-                    //}
+                    else
+                    {
+                        //try
+                        {
+                            txbCardOut.Clear();
+
+                            
+                            var vehicle = DataProvider.Ins.DB.Vehicles.FirstOrDefault(x => x.ParkingCardID == ID_temp && x.VehicleState == 1);
+                            string fileName = vehicle.VehicleImage;
+                            string projectDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
+                            string path = Path.Combine(projectDirectory, "CarPic");
+                            string pathWithName = Path.Combine(path, fileName);
+                            Uri imgDir = new Uri(pathWithName);
+                            imgCarOutPlate.Source = new BitmapImage(imgDir);
+
+                            txblDateOut.Text = DateTime.Now.Day.ToString() + "/" + DateTime.Now.Month.ToString() + "/" + DateTime.Now.Year.ToString();
+                            txblTimeOut.Text = DateTime.Now.Hour.ToString() + ":" + DateTime.Now.Minute.ToString() + ":" + DateTime.Now.Second.ToString();
+                            txblDateInCheckOut.Text = vehicle.TimeStartedParking.Day.ToString() + "/" + vehicle.TimeStartedParking.Month.ToString() + "/" + vehicle.TimeStartedParking.Year.ToString();
+                            txblTimeInCheckOut.Text = vehicle.TimeStartedParking.Hour.ToString() + ":" + vehicle.TimeStartedParking.Minute.ToString() + ":" + vehicle.TimeStartedParking.Second.ToString();
+                            txblDateIn.Text = "--/--/----";
+                            txblTimeIn.Text = "00:00:00";
+                            txblTypeOut.Text = vehicle.VehicleType.VehicleTypeName;
+                            txblPriceTagOut.Text = vehicle.VehicleType.ParkingFee.ToString() + " đồng";
+
+                            DBClasses.ParkingVehicle.VehicleOut(long.Parse(ID), MainWindow.currentUser.StaffID);
+
+                            txblAmountOut.Text = ParkingVehicle.GetVehicleOutNumber(date).ToString();
+                            txblAmountParked.Text = ParkingVehicle.GetParkedVehicleNumber().ToString();
+                        }
+                        //catch (Exception ex)
+                        //{
+                        //    MessageBox.Show("Phần mềm bị lỗi: " + ex.Message + " Vui lòng liên hệ nhân viên bảo trì để biết thêm chi tiết", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK, MessageBoxOptions.ServiceNotification);
+                        //}
+                    }
                 }
             }
         }
@@ -267,35 +280,51 @@ namespace QLBaiDoXe
         {
             if (e.Key == Key.F1)
             {
-                if (vehiclePlate_Copy.Text == "Xe máy")
+                if (txblTypeIn.Text == "Xe máy")
                 {
-                    Dispatcher.BeginInvoke(new Action(() => vehiclePlate_Copy.Text = "Xe hơi"));
+                    Dispatcher.BeginInvoke(new Action(() => txblTypeIn.Text = "Xe hơi"));
                 }
-                else if (vehiclePlate_Copy.Text == "Xe hơi")
+                else if (txblTypeIn.Text == "Xe hơi")
                 {
-                    Dispatcher.BeginInvoke(new Action(() => vehiclePlate_Copy.Text = "Xe đạp"));
+                    Dispatcher.BeginInvoke(new Action(() => txblTypeIn.Text = "Xe đạp"));
                 }
-                else if (vehiclePlate_Copy.Text == "Xe đạp")
+                else if (txblTypeIn .Text == "Xe đạp")
                 {
-                    Dispatcher.BeginInvoke(new Action(() => vehiclePlate_Copy.Text = "Xe máy"));
+                    Dispatcher.BeginInvoke(new Action(() => txblTypeIn.Text = "Xe máy"));
                 }
-            }
-            if (e.Key == Key.F2 && MainWindow.currentUser.RoleID == 2)
-            {
-                admin add = new admin();
-                add.Show();
-                this.Close();
             }
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Staffing.LogOut(MainWindow.currentUser.AccountName);
+            Staffing.LogOut(MainWindow.currentAccount.AccountName);
             MainWindow.currentUser = null;
+            MainWindow.currentAccount = null;
             MainWindow loginWindow = new MainWindow();
             loginWindow.Show();
             this.Close();
         }
         #endregion
 
+        private void ChangePasswordlink_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            ThayDoiMatKhau tdmk = new ThayDoiMatKhau();
+            tdmk.ShowDialog();
+        }
+
+        private void ChangePasswordlink_MouseEnter(object sender, MouseEventArgs e)
+        {
+            txblChangePassword.Cursor = Cursors.Hand;
+        }
+
+        private void textBox1_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !Classes.Validation.isNumber.IsMatch(e.Text);
+        }
+
+        private void textBox1_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Space)
+                e.Handled = true;
+        }
     }
 }

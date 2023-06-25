@@ -1,13 +1,12 @@
-﻿using ControlzEx.Standard;
-using QLBaiDoXe.DBClasses;
-using QLBaiDoXe.ParkingLotModel;
+﻿using QLBaiDoXe.ParkingLotModel;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using static QLBaiDoXe.DBClasses.ParkingVehicle;
-using static System.Net.Mime.MediaTypeNames;
+
 
 
 namespace QLBaiDoXe
@@ -21,105 +20,59 @@ namespace QLBaiDoXe
         public TraCuuXe()
         {
             InitializeComponent();
-            if ( DataProvider.Ins.DB.Vehicles.Where(x => x.VehicleState == 1).Count() == 0 && DataProvider.Ins.DB.Vehicles.Where(x => x.VehicleState == 0).Count() == 0)
+            if (DataProvider.Ins.DB.Vehicles.Where(x => x.VehicleState == 1).Count() == 0 && DataProvider.Ins.DB.Vehicles.Where(x => x.VehicleState == 0).Count() == 0)
             {
-                var msg = "Chưa có xe trong cơ sở dữ liệu";
-                Dispatcher.BeginInvoke(new Action(() => MessageBox.Show(msg,"Lỗi")));
+                var msg = "Bãi xe trống";
+                Dispatcher.BeginInvoke(new Action(() => MessageBox.Show(msg, "Thông báo")));
             }
             else
             {
-                int pos = ParkingVehicle.GetLastDayThatHaveCar().IndexOf(' ');
-                LastDayThatHaveCar = new DateTime();
-                LastDayThatHaveCar = DateTime.Parse(ParkingVehicle.GetLastDayThatHaveCar().Substring(0, pos));
+                LastDayThatHaveCar = GetLastDayThatHaveCar();
                 cbxDay.Text = LastDayThatHaveCar.Day.ToString();
                 cbxMonth.Text = LastDayThatHaveCar.Month.ToString();
                 cbxYear.Text = LastDayThatHaveCar.Year.ToString();
-                List<TempParkingVehicle> result = new List<TempParkingVehicle>();
-
-                result = ParkingVehicle.SearchVehicle_TimeIn_DateOnly(LastDayThatHaveCar);
-                lvResult.ItemsSource = result;
+                Button_Click(null, null);
             }
         }
+
         private void Nullify()
         {
             cbxDay.Text = null;
             cbxMonth.Text = null;
             cbxYear.Text = null;
         }
-        private bool CheckInput()
+
+        private DateTime? CheckInput()
         {
-
-            int testDay;
-            int.TryParse(cbxDay.Text, out testDay);
-
-
-            int testMonth;
-            int.TryParse(cbxMonth.Text, out testMonth);
-
-
-            int testYear;
-            int.TryParse(cbxYear.Text, out testYear);
-
-
-            if (testMonth == 2)
+            string format = string.IsNullOrWhiteSpace(tpTime.Text) == true ? "d/M/yyyy" : "d/M/yyyy H:mm";
+            string parse = string.Format("{0}/{1}/{2}{3}", cbxDay.Text, cbxMonth.Text, cbxYear.Text, string.IsNullOrWhiteSpace(tpTime.Text) == true ? string.Empty : $" {tpTime.Text}");
+            if (DateTime.TryParseExact(parse, format, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime date))
             {
-                if (DateTime.IsLeapYear(testYear))
-                {
-                    if (testDay > 29)
-                    {
-                        MessageBox.Show("Bạn đã nhập ngày không phù hợp","Lỗi!");
-                        Nullify();
-                        return false;
-                    }
-                }
-                else
-                {
-                    if (testDay > 28)
-                    {
-                        MessageBox.Show("Bạn đã nhập ngày không phù hợp", "Lỗi!");
-                        Nullify();
-                        return false;
-                    }
-                }
+                return date;
             }
-            if (testMonth == 4 || testMonth == 6 || testMonth == 9 || testMonth == 11)
-                if (testDay > 30)
-                {
-                    MessageBox.Show("Bạn đã nhập ngày không phù hợp", "Lỗi!");
-                    Nullify();
-                    return false;
-                }
-            return true;
+            return null;
         }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            
             List<TempParkingVehicle> result = new List<TempParkingVehicle>();
-            string hour = string.Empty;
-            if (TimePicker.Text != null)
+            DateTime? checkDate = CheckInput();
+            if (checkDate == null) { return; }
+            if (string.IsNullOrWhiteSpace(tpTime.Text) == false)
             {
-                if (TimePicker.Text.Length == 4)
-                    hour = TimePicker.Text.Substring(0, 1);
-                else
-                    hour = TimePicker.Text.Substring(0, 2);
-                DateTime datesearch = new DateTime(int.Parse(cbxYear.Text), int.Parse(cbxMonth.Text), int.Parse(cbxDay.Text), int.Parse(hour), 0, 0);
-                result = ParkingVehicle.SearchVehicle_TimeIn_DateAndHour(datesearch);
+                result = SearchVehicle_TimeIn_DateAndHour(checkDate.Value);
             }
             else
             {
-                DateTime datesearch = new DateTime(int.Parse(cbxYear.Text), int.Parse(cbxMonth.Text), int.Parse(cbxDay.Text));
-                result = ParkingVehicle.SearchVehicle_TimeIn_DateOnly(datesearch);
-
+                result = SearchVehicle_TimeIn_DateOnly(checkDate.Value);
             }
-            if (CheckInput() == false) { return; }
-              
+
             if (result.Count == 0)
             {
-                MessageBox.Show("Trong khoảng thời gian bạn đã nhập không có xe trong bãi!","Lỗi!");
+                MessageBox.Show("Trong khoảng thời gian bạn đã nhập không có xe trong bãi!", "Lỗi!");
             }
             lvResult.ItemsSource = null;
             lvResult.ItemsSource = result;
-
         }
     }
 }

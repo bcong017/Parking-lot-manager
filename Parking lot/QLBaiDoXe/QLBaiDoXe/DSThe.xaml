@@ -11,7 +11,7 @@
     <Grid Background="#80FFA03F">
         <Grid Margin="10,225,10,43">
             <Rectangle Fill="White" RadiusX="20" RadiusY="20"/>
-            <ListView x:Name="ListThe" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+            <ListView x:Name="ListThe" ScrollViewer.HorizontalScrollBarVisibility="Visible" SelectionMode="Single">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -29,7 +29,7 @@
                         <GridViewColumn Header="Mã thẻ">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding ParkingCardID}" HorizontalAlignment="Center" />
+                                    <TextBlock Text="{Binding ParkingCardID, StringFormat={}{0:D10}}" HorizontalAlignment="Center" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
@@ -50,7 +50,7 @@
                     </GridView>
                 </ListView.View>
             </ListView>
-            <Button Content="Xoá" HorizontalAlignment="Left" Height="36" Margin="829,403,0,0" VerticalAlignment="Top" Width="128" Foreground="White" FontSize="16" Background="#FFFF3F3F" Click="Button_Click_1"/>
+            <Button x:Name="btnDel" Content="Xoá" HorizontalAlignment="Left" Height="36" Margin="829,403,0,0" VerticalAlignment="Top" Width="128" Foreground="White" FontSize="16" Background="#FFFF3F3F" Click="Button_Click_1"/>
 
 
         </Grid>
@@ -60,12 +60,13 @@
             <materialDesign:PackIcon
                 Kind="Search"
                 Opacity=".56" Margin="437.054,30.528,0,0" Height="32.946" Width="32.946" RenderTransformOrigin="-0.152,0.591" />
-            <TextBox x:Name="CardSearchTxb" materialDesign:HintAssist.Hint="Tìm kiếm thẻ" HorizontalAlignment="Left" Height="39.946" Margin="46.559,30.528,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="423.441" FontSize="20" TextChanged="CardSearchTxb_TextChanged"/>
-            <ComboBox x:Name="StateCbx" materialDesign:HintAssist.Hint="Tình trạng" HorizontalAlignment="Left" Height="35.474" Margin="500,35,0,0" VerticalAlignment="Top" Width="210" FontSize="20">
-                <ComboBoxItem Content="Đang dùng" />
-                <ComboBoxItem Content="Chưa dùng" />
+            <TextBox x:Name="txbCardSearch" materialDesign:HintAssist.Hint="Tìm kiếm thẻ" HorizontalAlignment="Left" Height="39.946" Margin="46.559,30.528,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="423.441" FontSize="20" TextChanged="CardSearchTxb_TextChanged" PreviewTextInput="CardSearchTxb_PreviewTextInput" PreviewKeyDown="CardSearchTxb_PreviewKeyDown"/>
+            <ComboBox x:Name="cbxState" materialDesign:HintAssist.Hint="Tình trạng" HorizontalAlignment="Left" Height="35.474" Margin="500,35,0,0" VerticalAlignment="Top" Width="210" FontSize="20" SelectionChanged="StateCbx_SelectionChanged" >
+                <ComboBoxItem Content="Chưa dùng (0)"/>
+                <ComboBoxItem Content="Đang dùng (1)"/>
+                <ComboBoxItem Content="Tất cả"/>
             </ComboBox>
-            <Button Content="Thêm" HorizontalAlignment="Left" Height="35.474" Margin="807,35,0,0" VerticalAlignment="Top" Width="140.933" Foreground="White" FontSize="16" Background="#FF2BA342" BorderBrush="{x:Null}" Click="Button_Click"/>
+            <Button x:Name="btnAdd" Content="Thêm" HorizontalAlignment="Left" Height="35.474" Margin="807,35,0,0" VerticalAlignment="Top" Width="140.933" Foreground="White" FontSize="16" Background="#FF2BA342" BorderBrush="{x:Null}" Click="Button_Click"/>
         </Grid>
         <TextBlock FontWeight="Bold" HorizontalAlignment="Left" Height="80" Margin="35,25,0,0" TextWrapping="Wrap" Text="Danh sách thẻ" VerticalAlignment="Top" Width="485" FontSize="42"/>
         <Image Margin="940.52,2.8,3.813,620.4" Source="Resources/Image4.png" Stretch="Fill"/>

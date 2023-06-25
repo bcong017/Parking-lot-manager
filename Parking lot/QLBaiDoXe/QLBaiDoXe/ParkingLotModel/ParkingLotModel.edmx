@@ -11,7 +11,6 @@
           </Key>
           <Property Name="AccountID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="StaffID" Type="int" Nullable="false" />
-          <Property Name="RoleID" Type="int" Nullable="false" />
           <Property Name="AccountName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="AccountPassword" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
@@ -41,6 +40,7 @@
           <Property Name="PhoneNumber" Type="nvarchar(max)" />
           <Property Name="StaffAddress" Type="nvarchar(max)" />
           <Property Name="DateOfBirth" Type="date" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Timekeeps">
           <Key>
@@ -63,7 +63,7 @@
           <Property Name="VehicleState" Type="int" Nullable="false" />
           <Property Name="VehicleImage" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Fee" Type="int" Nullable="false" />
-          <Property Name="StaffID" Type="int" />
+          <Property Name="StaffID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="VehicleTypes">
           <Key>
@@ -73,18 +73,6 @@
           <Property Name="VehicleTypeName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="ParkingFee" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="Accounts_RoleID_FK">
-          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
-          <End Role="Accounts" Type="Self.Accounts" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Roles">
-              <PropertyRef Name="RoleID" />
-            </Principal>
-            <Dependent Role="Accounts">
-              <PropertyRef Name="RoleID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="Accounts_StaffID_FK">
           <End Role="Staff" Type="Self.Staff" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -126,7 +114,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="Vehicles_StaffID_FK">
-          <End Role="Staff" Type="Self.Staff" Multiplicity="0..1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
           <End Role="Vehicles" Type="Self.Vehicles" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Staff">
@@ -157,10 +145,6 @@
           <EntitySet Name="Timekeeps" EntityType="Self.Timekeeps" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vehicles" EntityType="Self.Vehicles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VehicleTypes" EntityType="Self.VehicleTypes" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="Accounts_RoleID_FK" Association="Self.Accounts_RoleID_FK">
-            <End Role="Roles" EntitySet="Roles" />
-            <End Role="Accounts" EntitySet="Accounts" />
-          </AssociationSet>
           <AssociationSet Name="Accounts_StaffID_FK" Association="Self.Accounts_StaffID_FK">
             <End Role="Staff" EntitySet="Staff" />
             <End Role="Accounts" EntitySet="Accounts" />
@@ -193,10 +177,8 @@
           </Key>
           <Property Name="AccountID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="StaffID" Type="Int32" Nullable="false" />
-          <Property Name="RoleID" Type="Int32" Nullable="false" />
           <Property Name="AccountName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="AccountPassword" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Role" Relationship="Self.Accounts_RoleID_FK" FromRole="Accounts" ToRole="Roles" />
           <NavigationProperty Name="Staff" Relationship="Self.Accounts_StaffID_FK" FromRole="Accounts" ToRole="Staff" />
         </EntityType>
         <EntityType Name="ParkingCard">
@@ -213,7 +195,6 @@
           </Key>
           <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="RoleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Accounts" Relationship="Self.Accounts_RoleID_FK" FromRole="Roles" ToRole="Accounts" />
           <NavigationProperty Name="Staffs" Relationship="Self.Staff_RoleID_FK" FromRole="Roles" ToRole="Staff" />
         </EntityType>
         <EntityType Name="Staff">
@@ -227,6 +208,7 @@
           <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="StaffAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Accounts" Relationship="Self.Accounts_StaffID_FK" FromRole="Staff" ToRole="Accounts" />
           <NavigationProperty Name="Role" Relationship="Self.Staff_RoleID_FK" FromRole="Staff" ToRole="Roles" />
           <NavigationProperty Name="Timekeeps" Relationship="Self.Timekeeps_StaffID_FK" FromRole="Staff" ToRole="Timekeeps" />
@@ -254,7 +236,7 @@
           <Property Name="VehicleState" Type="Int32" Nullable="false" />
           <Property Name="VehicleImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Fee" Type="Int32" Nullable="false" />
-          <Property Name="StaffID" Type="Int32" />
+          <Property Name="StaffID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Staff" Relationship="Self.Vehicles_StaffID_FK" FromRole="Vehicles" ToRole="Staff" />
           <NavigationProperty Name="VehicleType" Relationship="Self.Vehicles_VehicleTypeID_FK" FromRole="Vehicles" ToRole="VehicleTypes" />
         </EntityType>
@@ -267,18 +249,6 @@
           <Property Name="ParkingFee" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Vehicles" Relationship="Self.Vehicles_VehicleTypeID_FK" FromRole="VehicleTypes" ToRole="Vehicles" />
         </EntityType>
-        <Association Name="Accounts_RoleID_FK">
-          <End Role="Roles" Type="Self.Role" Multiplicity="1" />
-          <End Role="Accounts" Type="Self.Account" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Roles">
-              <PropertyRef Name="RoleID" />
-            </Principal>
-            <Dependent Role="Accounts">
-              <PropertyRef Name="RoleID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="Accounts_StaffID_FK">
           <End Role="Staff" Type="Self.Staff" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -320,7 +290,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="Vehicles_StaffID_FK">
-          <End Role="Staff" Type="Self.Staff" Multiplicity="0..1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
           <End Role="Vehicles" Type="Self.Vehicle" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Staff">
@@ -351,10 +321,6 @@
           <EntitySet Name="Timekeeps" EntityType="Self.Timekeep" />
           <EntitySet Name="Vehicles" EntityType="Self.Vehicle" />
           <EntitySet Name="VehicleTypes" EntityType="Self.VehicleType" />
-          <AssociationSet Name="Accounts_RoleID_FK" Association="Self.Accounts_RoleID_FK">
-            <End Role="Roles" EntitySet="Roles" />
-            <End Role="Accounts" EntitySet="Accounts" />
-          </AssociationSet>
           <AssociationSet Name="Accounts_StaffID_FK" Association="Self.Accounts_StaffID_FK">
             <End Role="Staff" EntitySet="Staffs" />
             <End Role="Accounts" EntitySet="Accounts" />
@@ -387,7 +353,6 @@
               <MappingFragment StoreEntitySet="Accounts">
                 <ScalarProperty Name="AccountID" ColumnName="AccountID" />
                 <ScalarProperty Name="StaffID" ColumnName="StaffID" />
-                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
                 <ScalarProperty Name="AccountName" ColumnName="AccountName" />
                 <ScalarProperty Name="AccountPassword" ColumnName="AccountPassword" />
               </MappingFragment>
@@ -420,6 +385,7 @@
                 <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
                 <ScalarProperty Name="StaffAddress" ColumnName="StaffAddress" />
                 <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

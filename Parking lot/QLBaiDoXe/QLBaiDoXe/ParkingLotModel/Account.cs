@@ -16,11 +16,9 @@ namespace QLBaiDoXe.ParkingLotModel
     {
         public int AccountID { get; set; }
         public int StaffID { get; set; }
-        public int RoleID { get; set; }
         public string AccountName { get; set; }
         public string AccountPassword { get; set; }
     
-        public virtual Role Role { get; set; }
         public virtual Staff Staff { get; set; }
     }
 }

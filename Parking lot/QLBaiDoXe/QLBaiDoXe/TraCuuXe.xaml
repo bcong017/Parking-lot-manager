@@ -18,8 +18,8 @@
             <materialDesign:PackIcon
                 Kind="Search"
                 Opacity=".56" Margin="31.8,27.654,0,0" Height="32.946" Width="32.946" />
-            <Button Content="Tìm kiếm" HorizontalAlignment="Left" Height="Auto" Margin="745.2,29.322,0,37.732" Width="131.2" Foreground="White" Command="{Binding SubmitCommand}" Click="Button_Click"/>
-            <materialDesign:TimePicker Is24Hours="True" x:Name="TimePicker" HorizontalAlignment="Left" Height="40" Margin="555.733,25.6,0,0" VerticalAlignment="Top" Width="141.6" FontSize="20"/>
+            <Button x:Name="btnSearch" Content="Tìm kiếm" HorizontalAlignment="Left" Height="Auto" Margin="745.2,29.322,0,37.732" Width="131.2" Foreground="White" Command="{Binding SubmitCommand}" Click="Button_Click"/>
+            <materialDesign:TimePicker x:Name="tpTime" Is24Hours="True"  HorizontalAlignment="Left" Height="40" Margin="555.733,25.6,0,0" VerticalAlignment="Top" Width="141.6" FontSize="20"/>
             <ComboBox x:Name="cbxDay" materialDesign:HintAssist.Hint="Ngày" HorizontalAlignment="Left" Height="40" Margin="82.7,25.6,0,0" VerticalAlignment="Top" Width="120" FontSize="20" Text="{Binding Ngay, UpdateSourceTrigger=PropertyChanged}">
                 <ComboBoxItem Content="1" />
                 <ComboBoxItem Content="2" />
@@ -111,7 +111,7 @@
                         <GridViewColumn Header="Số thẻ">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding ParkingCardID}" HorizontalAlignment="Center" />
+                                    <TextBlock Text="{Binding ParkingCardID, StringFormat={}{0:D10}}" HorizontalAlignment="Center" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
@@ -119,6 +119,27 @@
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding TimeStartedParking, StringFormat='{}{0:dd/MM/yyyy HH:mm:ss}'}" HorizontalAlignment="Center" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Thời điểm ra bãi">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding TimeEndedParking, StringFormat='{}{0:dd/MM/yyyy HH:mm:ss}'}" HorizontalAlignment="Center" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Số tiền thu">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Fee}" HorizontalAlignment="Center" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Nhân viên phụ trách bãi">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding BindingView}" HorizontalAlignment="Center" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>

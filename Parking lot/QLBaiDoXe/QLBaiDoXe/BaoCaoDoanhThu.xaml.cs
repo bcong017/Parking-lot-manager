@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.ExceptionServices;
 using System.Windows;
 using System.Windows.Controls;
 using LiveCharts;
@@ -27,25 +26,9 @@ namespace QLBaiDoXe
             InitializeComponent();
             SeriesCollection = new SeriesCollection();
             UpdateReport(DateTime.Now.Year);
-
-            YearTextbox.Text = DateTime.Now.Year.ToString();
-            Labels = new[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
-            YFormatter = value => value + "";
-
-            //modifying the series collection will animate and update the chart
-            /*SeriesCollection.Add(new LineSeries
-            {
-                Title = "Series 4",
-                Values = new ChartValues<double> { 5, 3, 2, 4 },
-                LineSmoothness = 0, //0: straight lines, 1: really smooth lines
-                PointGeometry = Geometry.Parse("m 25 70.36218 20 -28 -20 22 -8 -6 z"),
-                PointGeometrySize = 50,
-                PointForeground = Brushes.Gray
-            });*/
-
-            //modifying any series values will also animate and update the chart
-            //SeriesCollection[3].Values.Add(5d);
-
+            txbYear.Text = DateTime.Now.Year.ToString();
+            Labels = new[] { "Thg 1", "Thg 2", "Thg 3", "Thg 4", "Thg 5", "Thg 6", "Thg 7", "Thg 8", "Thg 9", "Thg 10", "Thg 11", "Thg 12" };
+            YFormatter = value => value.ToString("N0");
             DataContext = this;
         }
 
@@ -56,7 +39,7 @@ namespace QLBaiDoXe
                 first = false; return;
             }
             
-            bool isNumber = int.TryParse(YearTextbox.Text, out int year);
+            bool isNumber = int.TryParse(txbYear.Text, out int year);
             if (isNumber && year >= (DateTime.Now.Year-10) && year <= (DateTime.Now.Year))
             {
                 SeriesCollection.Clear();
@@ -112,7 +95,7 @@ namespace QLBaiDoXe
                         {
                             if (lineSeries[j].Title == vehicleFee[k].VehicleType.VehicleTypeName)
                             {
-                                income += vehicleFee[k].VehicleType.ParkingFee;
+                                income += vehicleFee[k].Fee;
                             }
                         }
                         total += income;
@@ -120,10 +103,20 @@ namespace QLBaiDoXe
                     }
                 }
             }
-            IncomeTextbox.Text = total.ToString() + " đồng";
+            txbIncome.Text = total.ToString() + " đồng";
             SeriesCollection.Clear();
             SeriesCollection.AddRange(lineSeries);
         }
 
+        private void YearTextbox_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+            e.Handled = !Classes.Validation.isNumber.IsMatch(e.Text);
+        }
+
+        private void YearTextbox_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Space)
+                e.Handled = true;
+        }
     }
 }

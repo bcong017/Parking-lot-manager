@@ -22,7 +22,7 @@ namespace QLBaiDoXe.ParkingLotModel
         public int VehicleState { get; set; }
         public string VehicleImage { get; set; }
         public int Fee { get; set; }
-        public Nullable<int> StaffID { get; set; }
+        public int StaffID { get; set; }
     
         public virtual Staff Staff { get; set; }
         public virtual VehicleType VehicleType { get; set; }

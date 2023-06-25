@@ -34,20 +34,6 @@ namespace QLBaiDoXe
             set => SetProperty(ref chucVu, value);
         }
 
-        private string taiKhoan;
-        public string TaiKhoan
-        {
-            get => taiKhoan;
-            set => SetProperty(ref taiKhoan, value);
-        }
-
-        private string matKhau;
-        public string MatKhau
-        {
-            get => matKhau;
-            set => SetProperty(ref matKhau, value);
-        }
-
 
         public RelayCommand SubmitCommand { get; }
 
@@ -58,8 +44,6 @@ namespace QLBaiDoXe
             Validate(nameof(TenNguoiDung));
             Validate(nameof(CCCD));
             Validate(nameof(ChucVu));
-            Validate(nameof(TaiKhoan));
-            Validate(nameof(MatKhau));
 
         }
 
@@ -124,29 +108,7 @@ namespace QLBaiDoXe
                     break;
 
 
-                case nameof(TaiKhoan):
-                    if (string.IsNullOrWhiteSpace(TaiKhoan))
-                    {
-                        _ValidationErrorsByProperty[nameof(TaiKhoan)] = new List<object> { " Trường dữ liệu bắt buộc." };
-                        ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(nameof(TaiKhoan)));
-                    }
-                    else if (_ValidationErrorsByProperty.Remove(nameof(TaiKhoan)))
-                    {
-                        ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(nameof(TaiKhoan)));
-                    }
-                    break;
-
-                case nameof(MatKhau):
-                    if (string.IsNullOrWhiteSpace(MatKhau))
-                    {
-                        _ValidationErrorsByProperty[nameof(MatKhau)] = new List<object> { " Trường dữ liệu bắt buộc." };
-                        ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(nameof(MatKhau)));
-                    }
-                    else if (_ValidationErrorsByProperty.Remove(nameof(MatKhau)))
-                    {
-                        ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(nameof(MatKhau)));
-                    }
-                    break;
+                
 
 
             }

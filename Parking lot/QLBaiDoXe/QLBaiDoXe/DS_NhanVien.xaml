@@ -3,18 +3,21 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:QLBaiDoXe"
+        xmlns:local="clr-namespace:QLBaiDoXe.Classes"
+   
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="QLBaiDoXe.DS_NhanVien"
         Background="{DynamicResource MaterialDesignPaper}"
         mc:Ignorable="d"
         Height="720" Width="1039">
-
+    <UserControl.Resources>
+        <local:BoolToStringConverter x:Key="BooleanToStringConverter" FalseValue="Đang làm việc" TrueValue="Đã nghỉ làm" />
+    </UserControl.Resources>
     <Grid Background="#80FFA03F" >
-        <Grid Margin="10,225,10,45">
+        <Grid Margin="10,225,5,45">
             <Rectangle Fill="White" RadiusX="20" RadiusY="20"/>
             <ListView x:Name="lvNhanVien" 
-                      Margin="0,0,0,36"
-                      ScrollViewer.HorizontalScrollBarVisibility="Visible" >
+                      Margin="0,0,0,50"
+                      ScrollViewer.HorizontalScrollBarVisibility="Visible" SelectionChanged="lvNhanVien_SelectionChanged" SelectionMode="Single">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -78,29 +81,40 @@
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
+                        <GridViewColumn Header="Tình trạng" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate >
+                                    <TextBlock Text="{Binding IsDeleted, Converter={StaticResource BooleanToStringConverter}}" HorizontalAlignment="Center" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                     </GridView>
                 </ListView.View>
             </ListView>
-            <Button Content="Sửa" HorizontalAlignment="Left" Height="36" Margin="684,402,0,0" VerticalAlignment="Top" Width="131" Foreground="White" FontSize="16" Click="btnFix_Click"/>
-            <Button Content="Xoá" HorizontalAlignment="Left" Height="36" Margin="860,402,0,0" VerticalAlignment="Top" Width="128" Foreground="White" FontSize="16" Click="btnDel_Click" Background="#FFFF3F3F"/>
+            <Button x:Name="btnEdit" Content="Sửa" HorizontalAlignment="Left" Height="36" Margin="684,408,0,0" VerticalAlignment="Top" Width="131" Foreground="White" FontSize="16" Click="btnFix_Click"/>
+            <Button x:Name="btnDel" Content="Thôi việc" HorizontalAlignment="Left" Height="36" Margin="860,408,0,0" VerticalAlignment="Top" Width="128" Foreground="White" FontSize="16" Click="btnDel_Click" Background="#FFFF3F3F"/>
 
 
         </Grid>
         <Grid Margin="10,105,10,480.4">
-
             <Rectangle Fill="White" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="1012.6" RadiusX="20" RadiusY="20"/>
             <materialDesign:PackIcon
                 Kind="Search"
                 Opacity=".56" Margin="437.054,30.528,0,0" Height="32.946" Width="32.946" RenderTransformOrigin="-0.152,0.591" />
             <TextBox x:Name="txbSearch" materialDesign:HintAssist.Hint="Tìm kiếm nhân viên" HorizontalAlignment="Left" Height="39.946" Margin="46.559,30.528,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="423.441" FontSize="20" TextChanged="TextBox_TextChanged"/>
-            <ComboBox x:Name="cbxItem" SelectedIndex="0" HorizontalAlignment="Left" Height="35.474" Margin="500,35,0,0" VerticalAlignment="Top" Width="210" FontSize="20">
+            <ComboBox x:Name="cbxItem" SelectedIndex="0" HorizontalAlignment="Left" Height="35" Margin="500,35,0,0" VerticalAlignment="Top" Width="138" FontSize="20" SelectionChanged="cbxItem_SelectionChanged" >
                 <ComboBoxItem Content="Tên" />
                 <ComboBoxItem Content="Số điện thoại" />
                 <ComboBoxItem Content="Số CCCD" />
                 <ComboBoxItem Content="Chức vụ" />
                 <ComboBoxItem Content="Địa chỉ" />
             </ComboBox>
-            <Button Click="Button_Click" Content="Thêm" HorizontalAlignment="Left" Height="35.474" Margin="807,35,0,0" VerticalAlignment="Top" Width="140.933" Foreground="White" FontSize="16" Background="#FF2BA342" BorderBrush="{x:Null}"/>
+            <ComboBox x:Name="cbxState" materialDesign:HintAssist.Hint="Tình trạng" HorizontalAlignment="Left" Height="35" Margin="670,35,0,0" VerticalAlignment="Top" Width="145" FontSize="20" SelectedIndex="0" SelectionChanged="StateCbx_SelectionChanged">
+                <ComboBoxItem Content="Đang làm việc"/>
+                <ComboBoxItem Content="Đã nghỉ làm"/>
+                <ComboBoxItem Content="Tất cả"/>
+            </ComboBox>
+            <Button x:Name="btnAdd" Click="Button_Click" Content="Thêm" HorizontalAlignment="Left" Height="35" Margin="852,35,0,0" VerticalAlignment="Top" Width="141" Foreground="White" FontSize="16" Background="#FF2BA342" BorderBrush="{x:Null}"/>
         </Grid>
         <TextBlock FontWeight="Bold" HorizontalAlignment="Left" Height="80" Margin="35,25,0,0" TextWrapping="Wrap" Text="Danh sách nhân viên" VerticalAlignment="Top" Width="485" FontSize="42"/>
         <TextBlock Text="CÔNG TY THNM BÃI ĐỖ XE THÔNG MINH KYPS" HorizontalAlignment="Left" Height="18.8" Margin="661.853,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="273.667" FontWeight="Bold" FontFamily="Segoe UI"/>
