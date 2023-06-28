@@ -10,38 +10,71 @@
         Title="Chào mừng" Icon="Resources/Image4.ico" Height="450" Width="600" WindowStartupLocation="CenterScreen" KeyDown="LoginWindow_KeyDown"
         ResizeMode="NoResize">
     <Window.Resources>
-        <Storyboard x:Key="CW_LoToFo">
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="Forget_Password">
-                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
-                <DiscreteObjectKeyFrame KeyTime="0:0:0.1" Value="{x:Static Visibility.Visible}"/>
-            </ObjectAnimationUsingKeyFrames>
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="Login">
-                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
-                <DiscreteObjectKeyFrame KeyTime="0:0:0.1" Value="{x:Static Visibility.Hidden}"/>
-            </ObjectAnimationUsingKeyFrames>
-        </Storyboard>
-        <Storyboard x:Key="CW_FoToLo">
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="Login">
-                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
-                <DiscreteObjectKeyFrame KeyTime="0:0:0.1" Value="{x:Static Visibility.Visible}"/>
-            </ObjectAnimationUsingKeyFrames>
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="Forget_Password">
-                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
-                <DiscreteObjectKeyFrame KeyTime="0:0:0.1" Value="{x:Static Visibility.Hidden}"/>
-            </ObjectAnimationUsingKeyFrames>
-        </Storyboard>
+        
     </Window.Resources>
-    
+
     <Grid Margin="0,0,0,0">
-        <Grid x:Name="Login" HorizontalAlignment="Left" Margin="-37,0,0,0" VerticalAlignment="Center" Width="601" Visibility="Visible">
-            <Rectangle HorizontalAlignment="Left" Height="420.4" VerticalAlignment="Center" Width="292.2" Fill="#FFFFA03F" Opacity="0.5" RadiusX="10" RadiusY="10"/>
-            <TextBlock HorizontalAlignment="Left" Height="72" Text="Đăng nhập" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="40" Foreground="#FFFFA03F" Margin="335,65,0,0"/>
-            <Button x:Name="btnLogin" Margin="337,313,0,0"
-                Content="Đăng nhập" HorizontalAlignment="Left" VerticalAlignment="Top" Width="261" BorderBrush="{x:Null}" Background="#FFFFA03F" Foreground="White" FontSize="14" Height="42" Click="LoginButton_Click"/>
-            <TextBox x:Name="txbUsername" materialDesign:HintAssist.Hint="Tên đăng nhập" HorizontalAlignment="Left" Height="36" Margin="337.8,146.8,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="253.2" FontSize="16"/>
-            <PasswordBox x:Name="txbPassword" Style="{StaticResource MaterialDesignRevealPasswordBox}" materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="Mật khẩu" HorizontalAlignment="Left" Height="36" Margin="337.8,201.733,0,0" VerticalAlignment="Top" Width="253.2" FontSize="16"/>
-            <Image HorizontalAlignment="Left" Height="100" Margin="112,147,0,0" VerticalAlignment="Top" Width="100" Source="Resources/Image4.png"/>
-            <TextBlock x:Name="lbReset_Password" TextDecorations="Underline" Text="Đặt lại mật khẩu"  FontSize="15"  Foreground="#FFFFA03F" Margin="480,249,0,160" MouseLeftButtonUp="lbReset_Password_MouseLeftButtonUp" MouseEnter="lbReset_Password_MouseEnter" />
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Rectangle 
+                   Fill="#FFFFA03F" 
+                   Opacity="0.5" RadiusX="10" RadiusY="10"/>
+        <Image 
+                Height="100" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center"
+                Width="100" 
+                Source="Resources/Image4.png"/>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="7*"/>
+                <RowDefinition Height="15*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row ="0" 
+                   HorizontalAlignment="Center" 
+                   Text="Đăng nhập" 
+                   TextWrapping="Wrap" 
+                   VerticalAlignment="Center" 
+                   FontSize="50" 
+                   Foreground="#FFFFA03F" />
+            <TextBox Grid.Row="1" 
+                     x:Name="txbUsername" 
+                     materialDesign:HintAssist.Hint="Tên đăng nhập" 
+                     TextWrapping="Wrap" 
+                     Width="220"
+                     FontSize="16"/>
+            <PasswordBox Grid.Row="3"
+                         x:Name="txbPassword" 
+                         Style="{StaticResource MaterialDesignRevealPasswordBox}" 
+                         materialDesign:TextFieldAssist.HasClearButton="True" 
+                         materialDesign:HintAssist.Hint="Mật khẩu" 
+                         HorizontalAlignment="Center" 
+                         Width="220"
+                         FontSize="16"/>
+            <TextBlock Grid.Row="4"
+                       x:Name="lbReset_Password" 
+                       TextDecorations="Underline" 
+                       Text="Đặt lại mật khẩu" 
+                       FontSize="15"  
+                       Margin="0,10,35,0"
+                       HorizontalAlignment="Right"
+                       Foreground="#FFFFA03F" 
+                       MouseLeftButtonUp="lbReset_Password_MouseLeftButtonUp" 
+                       MouseEnter="lbReset_Password_MouseEnter" />
+            <Button Grid.Row="5" 
+                x:Name="btnLogin"
+                Content="Đăng nhập" 
+                HorizontalAlignment="Center" 
+                Width="220" 
+                VerticalAlignment="Top"
+                Background="#FFFFA03F" 
+                Foreground="White" FontSize="14" Height="42" Click="LoginButton_Click"/>
 
         </Grid>
         
