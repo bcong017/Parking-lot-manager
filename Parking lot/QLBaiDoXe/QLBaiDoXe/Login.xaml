@@ -41,33 +41,9 @@
             <TextBox x:Name="txbUsername" materialDesign:HintAssist.Hint="Tên đăng nhập" HorizontalAlignment="Left" Height="36" Margin="337.8,146.8,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="253.2" FontSize="16"/>
             <PasswordBox x:Name="txbPassword" Style="{StaticResource MaterialDesignRevealPasswordBox}" materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="Mật khẩu" HorizontalAlignment="Left" Height="36" Margin="337.8,201.733,0,0" VerticalAlignment="Top" Width="253.2" FontSize="16"/>
             <Image HorizontalAlignment="Left" Height="100" Margin="112,147,0,0" VerticalAlignment="Top" Width="100" Source="Resources/Image4.png"/>
-          
-        </Grid>
-        <Grid x:Name="Forget_Password" HorizontalAlignment="Left" Margin="-37,0,0,0" VerticalAlignment="Center" Width="601" Visibility="Hidden">
-            <Rectangle HorizontalAlignment="Left" Height="434" VerticalAlignment="Center" Width="294" Fill="#FFFFA03F" Opacity="0.5" RadiusX="10" RadiusY="10"/>
-            <TextBlock HorizontalAlignment="Left" Height="72" Text="Quên mật khẩu" TextWrapping="Wrap" VerticalAlignment="Top" Width="296" FontSize="36" Foreground="#FFFFA03F" Margin="335,65,0,0"/>
-            <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Height="23" Text="&lt; Quay lại đăng nhập" TextWrapping="Wrap" VerticalAlignment="Top" Width="128" Margin="337,256,0,0" Foreground="#FFFFA03F" FontWeight="SemiBold">
-                <TextBlock.Style>
-                    <Style TargetType="{x:Type TextBlock}">
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Opacity" Value="0.6"/>
-                                <Setter Property="Cursor" Value="Hand"/>
-                            </Trigger>
-                            <Trigger Property="IsMouseOver" Value="False">
-                                <Setter Property="Opacity" Value="1"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </TextBlock.Style>
-            </TextBlock>
-            <Button  Margin="337,313,0,0"
-                Content="Lấy lại mật khẩu" HorizontalAlignment="Left" VerticalAlignment="Top" Width="261" BorderBrush="{x:Null}" Background="#FFFFA03F" Foreground="White" FontSize="14" Height="42"/>
-            <TextBlock HorizontalAlignment="Left" Height="29" Text="Để lấy lại mật khẩu, bạn vui lòng điền lại email đã liên kết với username" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" Margin="337,122,0,0" Opacity="0.5"/>
-            <TextBox materialDesign:HintAssist.Hint="Email" HorizontalAlignment="Left" Height="38.4" Margin="337,177.1,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="261" FontSize="16"/>
-           
-        </Grid>
-        <TextBlock x:Name="lbReset_Password" TextDecorations="Underline" Text="Đặt lại mật khẩu"  FontSize="15" Foreground="#FFFFA03F" Margin="446,249,45,160" MouseLeftButtonUp="lbReset_Password_MouseLeftButtonUp" MouseEnter="lbReset_Password_MouseEnter" />
+            <TextBlock x:Name="lbReset_Password" TextDecorations="Underline" Text="Đặt lại mật khẩu"  FontSize="15"  Foreground="#FFFFA03F" Margin="480,249,0,160" MouseLeftButtonUp="lbReset_Password_MouseLeftButtonUp" MouseEnter="lbReset_Password_MouseEnter" />
 
+        </Grid>
+        
     </Grid>
 </Window>
