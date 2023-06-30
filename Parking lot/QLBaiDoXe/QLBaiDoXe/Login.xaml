@@ -20,7 +20,7 @@
         </Grid.ColumnDefinitions>
         <Rectangle 
                    Fill="#FFFFA03F" 
-                   Opacity="0.5" RadiusX="10" RadiusY="10"/>
+                   Opacity="0.5"/>
         <Image 
                 Height="100" 
                 HorizontalAlignment="Center" 
