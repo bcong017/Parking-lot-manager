@@ -2,6 +2,7 @@
 using MaterialDesignThemes.Wpf;
 using QLBaiDoXe.ParkingLotModel;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -303,13 +304,6 @@ namespace QLBaiDoXe.DBClasses
                         .ToList()
                         .Select((item, index) => new TempStaff(item, index + 1))
                         .ToList();
-                //case "Chức vụ":
-                //    return DataProvider.Ins.DB.Staffs.Where(item =>
-                //        (item.Role.ToString().Contains(text))
-                //        && (state == null ? true : item.IsDeleted == state))
-                //        .ToList()
-                //        .Select((item, index) => new TempStaff(item, index + 1))
-                //        .ToList();
                 case "Địa chỉ":
                     return DataProvider.Ins.DB.Staffs.Where(item =>
                         (item.StaffAddress.ToString().Contains(text))
@@ -317,6 +311,28 @@ namespace QLBaiDoXe.DBClasses
                         .ToList()
                         .Select((item, index) => new TempStaff(item, index + 1))
                         .ToList();
+                case "Chức vụ":
+                    Role roles = DataProvider.Ins.DB.Roles.FirstOrDefault(item => (item.RoleName.ToString().Contains(text)));
+                    if (roles.RoleName == "staff")
+                    {
+                        return DataProvider.Ins.DB.Staffs.Where(item =>
+                        (item.RoleID == 1)
+                        && (state == null ? true : item.IsDeleted == state))
+                        .ToList()
+                        .Select((item, index) => new TempStaff(item, index + 1))
+                        .ToList();
+                    }
+                    if (roles.RoleName == "admin")
+                    {
+                        return DataProvider.Ins.DB.Staffs.Where(item =>
+                        (item.RoleID == 2)
+                        && (state == null ? true : item.IsDeleted == state))
+                        .ToList()
+                        .Select((item, index) => new TempStaff(item, index + 1))
+                        .ToList();
+                    }
+
+                    return null;
                 default: 
                     return null;
             }    
