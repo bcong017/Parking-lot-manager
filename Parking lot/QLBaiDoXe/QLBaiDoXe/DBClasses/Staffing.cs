@@ -299,7 +299,7 @@ namespace QLBaiDoXe.DBClasses
                         .ToList();
                 case "Số CCCD":
                     return DataProvider.Ins.DB.Staffs.Where(item =>
-                        (item.StaffID.ToString().Contains(text))
+                        (item.CivilID.ToString().Contains(text))
                         && (state == null ? true : item.IsDeleted == state))
                         .ToList()
                         .Select((item, index) => new TempStaff(item, index + 1))
