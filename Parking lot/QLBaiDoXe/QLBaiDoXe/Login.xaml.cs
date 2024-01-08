@@ -1,4 +1,5 @@
 ﻿using QLBaiDoXe.DBClasses;
+using QLBaiDoXe.Interfaces;
 using QLBaiDoXe.ParkingLotModel;
 using QLBaiDoXe.Properties;
 using System;
@@ -6,6 +7,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using QLBaiDoXe.Interfaces.Command;
+using System.Web.UI.WebControls;
+using QLBaiDoXe.Interfaces.Singleton;
 
 namespace QLBaiDoXe
 {
@@ -16,8 +20,11 @@ namespace QLBaiDoXe
     {
         public static Staff currentUser;
         public static Account currentAccount;
+        public static MainWindow ins;
+        
         public MainWindow()
         {
+            ins = this;
             InitializeComponent();
             Debug.WriteLine(DataProvider.Ins.DB.Accounts.FirstOrDefault(x => x.AccountName == "admin").AccountName);
             Debug.WriteLine("last log in date: " + Settings.Default.currentDate.ToString());
@@ -32,39 +39,9 @@ namespace QLBaiDoXe
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            if (Staffing.LogIn(txbUsername.Text, txbPassword.Password) != null )
-            {
-                currentUser = Staffing.LogIn(txbUsername.Text, txbPassword.Password);
-                currentAccount = DataProvider.Ins.DB.Accounts.Where(x => x.StaffID == currentUser.StaffID).FirstOrDefault();
-                if (currentUser.IsDeleted == true)
-                {
-                    MessageBox.Show("Tài khoản của bạn đã bị vô hiệu hóa!", "Thông báo!");
-                    return;
-                }
-                MessageBox.Show("Đăng nhập thành công", "Thông báo!");
-                if (currentUser.RoleID == 2)
-                {
-                    admin adminWindow = new admin();
-                    adminWindow.Show();
-                    this.Close();
-                }
-                else
-                {
-                    Homepage1 homepage = new Homepage1();
-                    foreach ( var item in DataProvider.Ins.DB.Vehicles.Where(x => x.VehicleState == 1).ToList())
-                    {
-                        item.StaffID = MainWindow.currentUser.StaffID;
-                    }
-                    DataProvider.Ins.DB.SaveChanges();
-                    homepage.Show();
-                    this.Close();
-                }
-            }
-            else
-            {
-                
-                MessageBox.Show("Sai thông tin đăng nhập", "Thông báo!");
-            }
+            IUserCommand login = new LoginCommand(txbUsername.Text, txbPassword.Password);
+            CommandOptions menu = new CommandOptions(login, "login");
+            menu.Login();
         }
 
         private void LoginWindow_KeyDown(object sender, KeyEventArgs e)

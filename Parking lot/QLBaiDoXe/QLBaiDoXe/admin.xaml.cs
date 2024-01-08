@@ -4,8 +4,11 @@ using System.Security.Principal;
 using System.Windows;
 using System.Windows.Input;
 using QLBaiDoXe.DBClasses;
+using QLBaiDoXe.Interfaces.Command;
+using QLBaiDoXe.Interfaces;
 using QLBaiDoXe.ParkingLotModel;
 using QLBaiDoXe.ViewModel;
+using QLBaiDoXe.Interfaces.Singleton;
 namespace QLBaiDoXe
 {
     /// <summary>
@@ -20,17 +23,15 @@ namespace QLBaiDoXe
             InitializeComponent();
             this.DataContext = new AdminViewModel();
             LoginTime = DateTime.Now;
-            txtbStaffName.Text = MainWindow.currentUser.StaffName;
-            txtbStaffAccount.Text = MainWindow.currentAccount.AccountName;
+            txtbStaffName.Text = UserProvider.Ins.currentUser.StaffName;
+            txtbStaffAccount.Text = UserProvider.Ins.currentAccount.AccountName;
         }
 
         private void LogoutButton_Click(object sender, RoutedEventArgs e)
         {
-            Staffing.LogOut(MainWindow.currentAccount.AccountName);
-            MainWindow.currentUser = null;
-            MainWindow.currentAccount = null;
-            MainWindow loginWindow = new MainWindow();
-            loginWindow.Show();
+            IUserCommand logout = new LogoutCommand();
+            CommandOptions menu = new CommandOptions(logout, "logout");
+            menu.Logout();
             this.Close();
         }
 
