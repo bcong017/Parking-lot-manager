@@ -1,4 +1,6 @@
-﻿using System;
+﻿using QLBaiDoXe.DBClasses;
+using QLBaiDoXe.Design_patterns.Observer;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +15,5 @@ namespace QLBaiDoXe
     /// </summary>
     public partial class App : Application
     {
-    }
+	}
 }

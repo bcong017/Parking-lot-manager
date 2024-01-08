@@ -121,6 +121,5 @@
         <Image Margin="940.52,2.8,3.813,620.4" Source="Resources/Image4.png" Height="96.8" Stretch="Fill"/>
         <TextBlock HorizontalAlignment="Left" Height="31.05" Margin="663.353,43.8,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="268.667" TextAlignment="Right" FontSize="10"><Run Text="Điện thoại: (094).8423.014"/><LineBreak/><Run Text="Email: 20520417@gm.uit.edu.vn"/><LineBreak/></TextBlock>
 
-
     </Grid>
 </UserControl>

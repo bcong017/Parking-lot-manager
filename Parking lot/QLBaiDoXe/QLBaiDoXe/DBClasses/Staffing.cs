@@ -1,5 +1,6 @@
 ﻿using ControlzEx.Standard;
 using MaterialDesignThemes.Wpf;
+using QLBaiDoXe.Design_patterns.Observer;
 using QLBaiDoXe.ParkingLotModel;
 using System;
 using System.Collections;
@@ -192,7 +193,8 @@ namespace QLBaiDoXe.DBClasses
                 if (account.AccountPassword == passwordhash)
                 {
                     Staff staff = DataProvider.Ins.DB.Staffs.Where(x=>x.StaffID == account.StaffID).FirstOrDefault();
-                    return staff;
+                   
+					return staff;
                 }    
                     
                 else
@@ -216,13 +218,45 @@ namespace QLBaiDoXe.DBClasses
                 };
                 DataProvider.Ins.DB.Timekeeps.Add(timekeep);
                 DataProvider.Ins.DB.SaveChanges();
-                return true;
+
+                LogoutLogger logoutLogger = new LogoutLogger();
+				LogoutSubject logoutSubject = new LogoutSubject();
+                logoutSubject.AddObserver(logoutLogger);
+				logoutSubject.NotifyLogoutObservers(username);
+				return true;
             }
             else
                 return false;
         }
 
-        public static void ChangePassword(string username, string newPassword, string currentPassword)
+		public static bool LogOutTest(string username, LogoutSubject logoutSubject)
+		{
+			if (DataProvider.Ins.DB.Accounts.Any(x => x.AccountName == username))
+			{
+				Account account = DataProvider.Ins.DB.Accounts.FirstOrDefault(x => x.AccountName == username);
+				Timekeep timekeep = new Timekeep()
+				{
+					StaffID = account.StaffID,
+					LoginTime = admin.LoginTime,
+					LogoutTime = DateTime.Now,
+					Staff = DataProvider.Ins.DB.Staffs.FirstOrDefault(x => x.StaffID == account.StaffID)
+				};
+				DataProvider.Ins.DB.Timekeeps.Add(timekeep);
+				DataProvider.Ins.DB.SaveChanges();
+
+				// Use the existing instance of LogoutSubject to notify observers
+				logoutSubject.NotifyLogoutObservers(username);
+
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+
+		public static void ChangePassword(string username, string newPassword, string currentPassword)
         {
             if (DataProvider.Ins.DB.Accounts.Any(x => x.AccountName == username))
             {
