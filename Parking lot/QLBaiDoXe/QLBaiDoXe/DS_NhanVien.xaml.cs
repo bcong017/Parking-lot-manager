@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using QLBaiDoXe.DBClasses;
 using QLBaiDoXe.ParkingLotModel;
@@ -12,7 +13,56 @@ namespace QLBaiDoXe
     /// </summary>
     public partial class DS_NhanVien : UserControl
     {
-        public DS_NhanVien()
+		public interface IStaffOperationStrategy
+		{
+			void ExecuteStrategy(dynamic selectedItem);
+		}
+
+		public class ThoiViecStrategy : IStaffOperationStrategy
+		{
+			private readonly DS_NhanVien _dsNhanVien;
+
+			public ThoiViecStrategy(DS_NhanVien dsNhanVien)
+			{
+				_dsNhanVien = dsNhanVien;
+			}
+
+			public void ExecuteStrategy(dynamic selectedItem)
+			{
+				if (MessageBox.Show("Bạn có muốn thôi việc nhân viên đã chọn?", "Xác nhận", MessageBoxButton.YesNo) == MessageBoxResult.No)
+				{
+					return;
+				}
+				Staffing.DeleteStaff(selectedItem.StaffID);
+				MessageBox.Show("Thôi việc nhân viên thành công!", "Thông báo!");
+				_dsNhanVien.StateCbx_SelectionChanged(null, null);
+			}
+		}
+
+		public class KhoiPhucStrategy : IStaffOperationStrategy
+		{
+			private readonly DS_NhanVien _dsNhanVien;
+
+			public KhoiPhucStrategy(DS_NhanVien dsNhanVien)
+			{
+				_dsNhanVien = dsNhanVien;
+			}
+
+			public void ExecuteStrategy(dynamic selectedItem)
+			{
+				if (MessageBox.Show("Bạn có muốn khôi phục nhân viên đã chọn?", "Xác nhận", MessageBoxButton.YesNo) == MessageBoxResult.No)
+				{
+					return;
+				}
+				Staffing.RestoreStaff(selectedItem.StaffID);
+				MessageBox.Show("Khôi phục nhân viên thành công!", "Thông báo!");
+				_dsNhanVien.StateCbx_SelectionChanged(null, null);
+			}
+		}
+
+		private IStaffOperationStrategy _staffOperationStrategy;
+
+		public DS_NhanVien()
         {
             InitializeComponent();
             cbxState.SelectedIndex = 0;
@@ -53,48 +103,35 @@ namespace QLBaiDoXe
             snv.ShowDialog();
             StateCbx_SelectionChanged(null, null);
         }
-        private void btnDel_Click(object sender, RoutedEventArgs e)
-        {
-            if (lvNhanVien == null)
-                return;
-            
+		private void btnDel_Click(object sender, RoutedEventArgs e)
+		{
+			if (lvNhanVien == null)
+				return;
+
+			if (lvNhanVien.SelectedItem == null || lvNhanVien.SelectedItems.Count == 0)
+			{
+				MessageBox.Show("Hãy chọn thông tin nhân viên!", "Lỗi!");
+				return;
+			}
+
+			var selectedItem = (dynamic)lvNhanVien.SelectedItems[0];
+
+			// Decide which strategy to use based on the operation
             if (btnDel.Content.ToString() == "Thôi việc")
             {
-                if (lvNhanVien.SelectedItem == null || lvNhanVien.SelectedItems.Count == 0)
-                {
-                    MessageBox.Show("Hãy chọn thông tin nhân viên cần thôi việc!", "Lỗi!");
-                    return;
-                }
-                var selectedItem = (dynamic)lvNhanVien.SelectedItems[0];
-                if (MainWindow.currentUser.StaffID == selectedItem.StaffID)
-                {
-                    MessageBox.Show("Không thể thôi việc nhân viên đang sử dụng ứng dụng!", "Lỗi!");
-                    return;
-                }
-                if (MessageBox.Show("Bạn có muốn thôi việc nhân viên đã chọn?", "Xác nhận", MessageBoxButton.YesNo) == MessageBoxResult.No)
-                {
-                    return;
-                }
-                Staffing.DeleteStaff(selectedItem.StaffID);
-                MessageBox.Show("Thôi việc nhân viên thành công!", "Thông báo!");
-                StateCbx_SelectionChanged(null, null);
+                _staffOperationStrategy = new ThoiViecStrategy(this);
 
-            }
+			}
             else
             {
-                if (MessageBox.Show("Bạn có muốn khôi phục nhân viên đã chọn?", "Xác nhận", MessageBoxButton.YesNo) == MessageBoxResult.No)
-                {
-                    return;
-                }
-                var selectedItem = (dynamic)lvNhanVien.SelectedItems[0];
-                Staffing.RestoreStaff(selectedItem.StaffID);
-                MessageBox.Show("khôi phục nhân viên thành công!", "Thông báo!");
-                StateCbx_SelectionChanged(null, null);
-            }
-            
-        }
+				_staffOperationStrategy = new KhoiPhucStrategy(this);
+			}
 
-        private void StateCbx_SelectionChanged(object sender, SelectionChangedEventArgs e)
+			// Execute the selected strategy
+			_staffOperationStrategy.ExecuteStrategy(selectedItem);
+		}
+
+		private void StateCbx_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cbxState == null)
             {
@@ -137,5 +174,5 @@ namespace QLBaiDoXe
                 btnDel.Content = "Thôi việc";
             }    
         }
-    }
+	}
 }
