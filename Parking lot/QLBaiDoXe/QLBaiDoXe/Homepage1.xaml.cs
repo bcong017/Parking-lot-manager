@@ -15,6 +15,8 @@ using AForge.Video.DirectShow;
 using QLBaiDoXe.ParkingLotModel;
 using QLBaiDoXe.DBClasses;
 using System.IO;
+using QLBaiDoXe.Interfaces;
+using QLBaiDoXe.Interfaces.Interpreter;
 
 namespace QLBaiDoXe
 {
@@ -180,7 +182,8 @@ namespace QLBaiDoXe
                             Bitmap temp1 = BitmapImageConvert.BitmapImage2Bitmap(temp);
 
                             txblDateIn.Text = DateTime.Now.Day.ToString() + "/" + DateTime.Now.Month.ToString() + "/" + DateTime.Now.Year.ToString();
-                            txblTimeIn.Text = DateTime.Now.Hour.ToString() + ":" + DateTime.Now.Minute.ToString() + ":" + DateTime.Now.Second.ToString(); txblDateOut.Text = DateTime.Now.Day.ToString() + "/" + DateTime.Now.Month.ToString() + "/" + DateTime.Now.Year.ToString();
+                            txblTimeIn.Text = DateTime.Now.Hour.ToString() + ":" + DateTime.Now.Minute.ToString() + ":" + DateTime.Now.Second.ToString(); 
+                            txblDateOut.Text = DateTime.Now.Day.ToString() + "/" + DateTime.Now.Month.ToString() + "/" + DateTime.Now.Year.ToString();
                             txblDateOut.Text = "--/--/----";
                             txblTimeOut.Text = "00:00:00";
                             txblDateInCheckOut.Text = "--/--/----";

@@ -1,0 +1,8 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Parking lot/QLBaiDoXe/QLBaiDoXe/QLBaiDoXe.csproj
+/Parking lot/QLBaiDoXe/QLBaiDoXe/App.config
+/Parking lot/QLBaiDoXe/QLBaiDoXe/ParkingLotModel/ParkingLotModel.Designer.cs
+/Parking lot/QLBaiDoXe/QLBaiDoXe/ParkingLotModel/ParkingLotModel.edmx.diagram

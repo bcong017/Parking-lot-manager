@@ -9,6 +9,7 @@ using QLBaiDoXe.DBClasses;
 using QLBaiDoXe.Interfaces.Command;
 using QLBaiDoXe.ParkingLotModel;
 using QLBaiDoXe.Interfaces.Singleton;
+using QLBaiDoXe.Interfaces.Strategy;
 using System.Windows.Controls;
 
 namespace QLBaiDoXe.Interfaces.Command
@@ -27,10 +28,14 @@ namespace QLBaiDoXe.Interfaces.Command
         {
             if (Staffing.LogIn(this.username, this.password) != null)
             {
+                //Lưu trữ thông tin người dùng lại
                 UserProvider.Ins.currentUser = Staffing.LogIn(this.username, this.password);
                 UserProvider.Ins.currentAccount = DataProvider.Ins.DB.Accounts.Where(x => x.StaffID == UserProvider.Ins.currentUser.StaffID).FirstOrDefault();
                 MainWindow.currentUser = Staffing.LogIn(this.username, this.password);
                 MainWindow.currentAccount = DataProvider.Ins.DB.Accounts.Where(x => x.StaffID == UserProvider.Ins.currentUser.StaffID).FirstOrDefault();
+                
+                //Tạo strategy
+                LoginContext ctx = new LoginContext();
 
                 if (UserProvider.Ins.currentUser.IsDeleted == true)
                 {
@@ -40,20 +45,13 @@ namespace QLBaiDoXe.Interfaces.Command
                 MessageBox.Show("Đăng nhập thành công", "Thông báo!");
                 if (UserProvider.Ins.currentUser.RoleID == 2)
                 {
-                    admin adminWindow = new admin();
-                    adminWindow.Show();
-                    MainWindow.ins.Close();
+                    ctx.SetStrategy(new AdminLogin());
+                    ctx.DispatchLogin();
                 }
                 else
                 {
-                    Homepage1 homepage = new Homepage1();
-                    foreach (var item in DataProvider.Ins.DB.Vehicles.Where(x => x.VehicleState == 1).ToList())
-                    {
-                        item.StaffID = UserProvider.Ins.currentUser.RoleID;
-                    }
-                    DataProvider.Ins.DB.SaveChanges();
-                    homepage.Show();
-                    MainWindow.ins.Close();
+                    ctx.SetStrategy(new StaffLogin());
+                    ctx.DispatchLogin();
                 }
             }
             else
