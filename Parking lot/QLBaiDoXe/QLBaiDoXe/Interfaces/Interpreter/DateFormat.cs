@@ -9,7 +9,7 @@ namespace QLBaiDoXe.Interfaces.Interpreter
 {
     internal class DateFormat
     {
-        public static string DateTimeFormat (DateTime dateTime, string format)
+        public static string DateTimeFormat (DateTime dateTime, string format) //DD MM YYYY , YYYY MM DD , .....
         {
             List<AbstractExpression> objExpressions = new List<AbstractExpression>();
             DateContext context = new DateContext(dateTime);
